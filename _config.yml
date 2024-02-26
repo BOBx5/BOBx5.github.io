@@ -304,7 +304,7 @@ prism:
         #- bro
         #- bsl
         #- c
-        #- csharp
+        - csharp
         #- cpp
         #- cfscript
         #- chaiscript
@@ -443,7 +443,7 @@ prism:
         #- php-extras
         #- plsql
         #- powerquery
-        #- powershell
+        - powershell
         #- processing
         #- prolog
         #- promql

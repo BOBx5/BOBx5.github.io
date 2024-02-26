@@ -22,8 +22,6 @@ order: 502
 
 ---
 
-[](https://www.putty.org/)
-
 [Putty](https://www.putty.org/)를 설치하게 되면 설치 폴더(기본: *C:\Program Files\PuTTY*)에 `plink.exe` 가 설치되게 되는데
 별도의 GUI가 없는 커맨드 기반의 콘솔 프로그램이다.
 해당 폴더를 실행폴더로 잡아 파워쉘을 실행 후 아래의 코드를 실행하면
@@ -85,9 +83,9 @@ $port.Close()
 1. `SerialPort` 핸들링하는 클래스에서 최초에 이니셜라이징 되기 전에
 기존 `SerialPort`에 버퍼에 있는 데이터를 모두 비우기 위해 
 아래를 전부 실행해보았음.
-    1. `SerialPort.**DiscardInBuffer**();`
-    2. `SerialPort.**DiscardOutBuffer**();`
-    3. `SerialPort.**BaseStream**.**Flush**();`
+    1. `SerialPort.DiscardInBuffer();`
+    2. `SerialPort.DiscardOutBuffer();`
+    3. `SerialPort.BaseStream.Flush();`
 2. `SerialPort`를 `Open()` 하기 전에 해당 포트에 데이터를 Write 해놓음.
 3. `SerialPort`를 `Open()` 후 `ReadExisting()` 를 실행하면 공백데이터(`""`)만 추출됨.
 4. 그러나 `SerialPort.ReadLine()` 을 실행하면 기존 버퍼에 있는 데이터가 나옴

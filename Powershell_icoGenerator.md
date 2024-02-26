@@ -33,7 +33,7 @@ order: 501
 
 근데 `.ico` 를 VisualStudio로 열어보자.
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/97cb07c9-9682-4083-b32c-c19a552d56d0/Untitled.png)
+![Untitled](/assets/powershell/Powershell_icoGenerator/ico_open_by_vs--WebP.webp)
 
 왼쪽 탭에 여러 사이즈의 이미지를 가지고 있는 것이 보이는가?
 

@@ -7,13 +7,9 @@ layout: libdoc/page
 category: Utilities
 order: 602
 ---
-* 
 {:.toc}
-
-## 마크다운 다이어그램 비교
-
+## 마크다운 다이어그램 비교 사이트
 ---
-
 [Text-to-Diagram](https://text-to-diagram.com/)
 
 ### 비교 가능 라이브러리

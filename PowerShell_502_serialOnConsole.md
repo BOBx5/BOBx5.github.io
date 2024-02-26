@@ -10,6 +10,8 @@ order: 502
 * 
 {:toc}
 
+<img src="https://img.shields.io/badge/PowerShell-5391FE?style=flat&logo=powershell&logoColor=white"/>
+
 ## 계기
 
 ---

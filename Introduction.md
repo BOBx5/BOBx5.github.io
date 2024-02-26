@@ -8,11 +8,10 @@ category: 자기소개
 order: 80
 ---
 * 
-{:toc}
+{:.toc}
 
-## 반갑습니다.
-
-![header](https://capsule-render.vercel.app/api?type=cylinder&height=200&color=gradient&text=BOBx5%20Github&descAlign=78)
+<a href="https://github.com/BOBx5"> ![header](https://capsule-render.vercel.app/api?type=cylinder&height=200&color=gradient&text=BOBx5%20GitHub&descAlign=78)
+</a>
 <div align="left">
     <img src="https://img.shields.io/badge/C%23-512BD4?style=flat&logo=csharp&logoColor=white"/>
     <img src="https://img.shields.io/badge/WPF-512BD4?style=flat&logo=.NET&logoColor=white"/>

@@ -1,0 +1,11 @@
+# MacOS
+.DS_Store
+
+# Jekyll
+/_site
+/.sass-cache
+/_site
+/_config-ip.yml
+/.jekyll-cache
+.jekyll-metadata
+.vscode

@@ -6,10 +6,6 @@ layout: libdoc/page
 #LibDoc specific below
 category: PowerShell
 order: 501
-assets: 
-   path_from_root: /assets/powershell/Powershell_501_icoGenerator
-   extensions_enabled: 
-      - webp
 ---
 * 
 {:toc}
@@ -39,7 +35,7 @@ assets:
 
 근데 `.ico` 를 VisualStudio로 열어보자.
 
-![](PowerShell_501_icoGenerator.webp)
+![](/assets/powershell/Powershell_icoGenerator/PowerShell_501_icoGenerator.webp)
 
 왼쪽 탭에 여러 사이즈의 이미지를 가지고 있는 것이 보이는가?
 

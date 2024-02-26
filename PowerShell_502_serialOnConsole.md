@@ -6,10 +6,6 @@ layout: libdoc/page
 #LibDoc specific below
 category: PowerShell
 order: 502
-assets:
-  path_from_root: /assets/powershell/PowerShell_502_serialOnConsole
-  extensions_enabled: 
-    - webp
 ---
 * 
 {:toc}

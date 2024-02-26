@@ -6,10 +6,6 @@ layout: libdoc/page
 #LibDoc specific below
 category: Utilities
 order: 604
-assets:
-  path_from_root: /assets/utilities/Utilities_604_fontAwesome
-  extensions_enabled: 
-    - webp
 ---
 {:.toc}
 

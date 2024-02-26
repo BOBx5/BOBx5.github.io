@@ -1,11 +1,11 @@
 ---
 title: 자기소개
-description: 자기소개
+description: 닷넷을 좋아하는 5년차 개발자입니다.
 layout: libdoc/page
 
 #LibDoc specific below
-category: 자기소개
-order: 80
+category: Introduction
+order: 101
 ---
 * 
 {:.toc}

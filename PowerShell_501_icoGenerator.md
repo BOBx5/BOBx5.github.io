@@ -10,6 +10,8 @@ order: 501
 * 
 {:toc}
 
+<img src="https://img.shields.io/badge/PowerShell-5391FE?style=flat&logo=powershell&logoColor=white"/>
+
 ## 계기
 
 닷넷 인스톨러 프로젝트에 바로가기 아이콘을 지정했는데,
@@ -33,7 +35,7 @@ order: 501
 
 근데 `.ico` 를 VisualStudio로 열어보자.
 
-![Untitled](/assets/powershell/Powershell_icoGenerator/ico_open_by_vs--WebP.webp)
+![Untitled](/assets/powershell/Powershell_icoGenerator/PowerShell_501_icoGenerator.webp)
 
 왼쪽 탭에 여러 사이즈의 이미지를 가지고 있는 것이 보이는가?
 

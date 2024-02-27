@@ -1,5 +1,5 @@
 ---
-title: XML Summary to Swagger Document
+title: XML Document to Swagger Document
 description: C# XML Summary를 Swagger 문서로 변환
 layout: libdoc/page
 

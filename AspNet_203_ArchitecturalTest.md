@@ -30,7 +30,7 @@ order: 203
 ## 코드 예시
 ---
 ### CASE 1. 
-#### ***'A 어셈블리가 B 어셈블리를 반드시 참조해야한다.'***
+#### *'A 어셈블리가 B 어셈블리를 반드시 참조해야한다.'*
 ---
 ```csharp
 public class LayerTest
@@ -51,7 +51,7 @@ public class LayerTest
 ```
 
 ### CASE 2. 
-#### ***'A 어셈블리는 B 어셈블리를 참조해서는 안된다.'***
+#### *'A 어셈블리는 B 어셈블리를 참조해서는 안된다.'*
 ---
 ```csharp
 public class LayerTest
@@ -71,7 +71,7 @@ public class LayerTest
 }
 ```
 ### CASE 3. 
-#### ***'Handler'로 끝나는 클래스는 특정 어셈블리를 반드시 참조해야한다.***
+#### *'Handler'로 끝나는 클래스는 특정 어셈블리를 반드시 참조해야한다.*
 ---
 ```csharp
 public class LayerTest
@@ -93,7 +93,7 @@ public class LayerTest
 }
 ```
 ### CASE 4. 
-#### ***'Entity를 구현하는 클래스는 반드시 파라미터가 없는 `private` constructor를 구현하고 있어야 한다.'***
+#### *'Entity를 구현하는 클래스는 반드시 파라미터가 없는 `private` constructor를 구현하고 있어야 한다.'*
 ---
 ```csharp
 public class DomainTest
@@ -124,7 +124,7 @@ public class DomainTest
 }
 ```
 ### CASE 5. 
-#### ***'DomainEvent를 구현하는 클래스는 반드시 `sealed` 한정자로 구현되어 한다.'***
+#### *'DomainEvent를 구현하는 클래스는 반드시 `sealed` 한정자로 구현되어 한다.'*
 ---
 ```csharp
 public class DomainTest
@@ -146,7 +146,7 @@ public class DomainTest
 }
 ```
 ### CASE 6. 
-#### ***'ICommandHandler를 구현하는 클래스는 반드시 'Handler'라는 이름으로 끝나야한다.'***
+#### *'ICommandHandler를 구현하는 클래스는 반드시 'Handler'라는 이름으로 끝나야한다.'*
 ---
 ```csharp
 public class ApplicationTest
@@ -168,7 +168,7 @@ public class ApplicationTest
 }
 ```
 ### CASE 7. 
-#### ***'모든 인터페이스는 대문자 `I`로 시작해야한다.'***
+#### *'모든 인터페이스는 대문자 `I`로 시작해야한다.'*
 ---
 ```csharp
 public class LayerTest

@@ -12,18 +12,14 @@ order: 502
 
 <img src="https://img.shields.io/badge/PowerShell-5391FE?style=flat&logo=powershell&logoColor=white"/>
 
-## 계기
-
+### 계기
 ---
-
 `com0com`을 이용한 가상 시리얼 포트를 생성하고, 해당포트로 영수증 데이터 수신을 테스트 해야하는 경우가 발생했다. 
 
 별도의 C# 콘솔 프로젝트 생성하고 `SerialPort` 클래스에 물려서 콘솔로 출력하게 할까도 생각했지만, 매번 하기 너무 번거로웠다. 좀더 간단하게 할 방법이 필요했다.
 
-## 해결방법1 (Putty)
-
+### 해결방법1 (Putty)
 ---
-
 [Putty](https://www.putty.org/)를 설치하게 되면 설치 폴더(기본: *C:\Program Files\PuTTY*)에 `plink.exe` 가 설치되게 되는데
 별도의 GUI가 없는 커맨드 기반의 콘솔 프로그램이다.
 해당 폴더를 실행폴더로 잡아 파워쉘을 실행 후 아래의 코드를 실행하면
@@ -42,10 +38,8 @@ order: 502
 **plink.exe -serial "\\.\COM21" -sercfg 9600,8,n,1,D**
 ```
 
-## 해결방법2 (PowerShell)
-
+### 해결방법2 (PowerShell)
 ---
-
 ```powershell
 #현재 연결 가능한 포트명 목록을 불러옵니다
 [System.IO.Ports.SerialPort]::GetPortNames()

@@ -1,5 +1,5 @@
 ---
-title: Pictogrammer
+title: 🔗Pictogrammer
 description: Material Design Icons 둘러보기
 layout: libdoc/page
 

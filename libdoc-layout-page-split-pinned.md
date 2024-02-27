@@ -5,7 +5,7 @@ layout: libdoc/page-split
 
 #LibDoc specific below
 category: Layouts examples
-order: 200
+order: 1200
 ---
 
 Just add `.playground-pin`  on the first playground as follows: 

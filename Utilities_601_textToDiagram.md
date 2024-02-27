@@ -1,5 +1,5 @@
 ---
-title: Text to Diagram 
+title: 🔗Text to Diagram 
 description: 마크다운 다이어그램들을 비교해보기
 layout: libdoc/page
 

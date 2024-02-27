@@ -5,7 +5,7 @@ layout: libdoc/page-split
 
 #LibDoc specific below
 category: Layouts examples
-order: 200
+order: 1200
 ---
 
 Intended to be used to feature a playground, the page split layout extends the syntax highlighter by running the first highlighted code found onto the right sided panel.

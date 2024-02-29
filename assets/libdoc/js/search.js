@@ -1,4 +1,4 @@
-(function() {
+(require(['./lunr.js', './lunr.stemmer.support.js', './lunr.ko.js'], function() {
     function displaySearchResults(results, store) {
         var searchResults = document.getElementById("libdoc-search-results");
 
@@ -42,9 +42,9 @@
     if (searchTerm) {
         document.getElementById("libdoc-search-box").setAttribute("value", searchTerm);
         
-        var lunr = require('./lib/lunr.min.js');
-        require('./lunr.stemmer.support.min.js')(lunr);
-        require('./lunr.ko.min.js')(lunr); // or any other language you want
+        // var lunr = require('./lib/lunr.min.js');
+        // require('./lunr.stemmer.support.min.js')(lunr);
+        // require('./lunr.ko.min.js')(lunr); // or any other language you want
 
         // Initalize lunr with the fields it will be searching on. I've given title
         // a boost of 10 to indicate matches on this field are more important.

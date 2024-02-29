@@ -53,6 +53,7 @@ order: 401
     ```
 ## 스니펫으로 만들어보자
 ---
+
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <CodeSnippets  xmlns="<http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet>">
@@ -90,12 +91,14 @@ order: 401
 	</CodeSnippet>
 </CodeSnippets>
 ```
+
 * 위와 같이 작성된 파일을 `propmvvm.snippet`이라는 이름으로 저장한다.
 * `C:/Users/{PC유저명}/Documents/Visual Studio 2022/Code Snippets/Visual C#/My Code Snippets` 경로에 저장한다.
   
 ## 결과물
 ---
 이제 VS에서 `propmvvm`이라고 입력하면 아래와 같은 코드가 생성된다.
+
 ```csharp
 public int MyProperty
 {
@@ -104,6 +107,7 @@ public int MyProperty
 }
 private int _MyProperty;
 ```
+
 ### 기존 `propfull` 스니펫과 다른 점
 --- 
 #### 1. 가독성 개선

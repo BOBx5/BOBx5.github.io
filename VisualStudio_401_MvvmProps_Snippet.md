@@ -103,7 +103,8 @@ public int MyProperty
 ```
 
 * 위와 같이 작성된 파일을 *propmvvm.snippet* 이라는 이름으로 저장한다.
-* *C:/Users/{PC유저명}/Documents/Visual Studio 2022/Code Snippets/Visual C#/My Code Snippets* 경로에 저장한다.
+* 아래 경로에 저장한다
+    > *C:/Users/{PC유저명}/Documents/Visual Studio 2022/Code Snippets/Visual C#/My Code Snippets* 
   
 ## 결과물
 

@@ -36,7 +36,7 @@
         }
     }
 
-    function trimmerEnKo(token) {
+    const trimmerEnKo = function(token) {
         return token
             .replace(/^[^\w가-힣]+/, '')
             .replace(/[^\w가-힣]+$/, '');

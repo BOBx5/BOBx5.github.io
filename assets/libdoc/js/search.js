@@ -5,7 +5,6 @@
         if (results.length) {
             // Are there any results?
             var appendString = "";
-
             for (var i = 0; i < results.length; i++) {
                 // Iterate over the results
                 var item = store[results[i].ref];

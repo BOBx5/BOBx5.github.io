@@ -1,3 +1,4 @@
+const lunr = require("./lunr.min");
 (function () {
     function displaySearchResults(results, store) {
         var searchResults = document.getElementById("libdoc-search-results");
@@ -36,11 +37,11 @@
         }
     }
 
-    function trimmerEnKo(e) {
-        return this.update(function(e) {
-            return e.replace(/^[^\w가-힣]+/, '').replace(/[^\w가-힣]+$/, '');
-        })
-    }
+    function trimmerEnKo(token) {
+        return token
+            .replace(/^[^\w가-힣]+/, '')
+            .replace(/[^\w가-힣]+$/, '');
+    };
 
     var searchTerm = getQueryVariable("query");
 
@@ -57,8 +58,8 @@
             this.pipeline.registerFunction(trimmerEnKo, "trimmerEnKo");
             this.pipeline.add(
                 trimmerEnKo,
-                this.stopWordFilter,
-                this.stemmer
+                lunrMin.stopWordFilter,
+                lunrMin.stemmer
             );
             this.ref("id");
             this.field("title", { boost: 10 });

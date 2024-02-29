@@ -1,16 +1,8 @@
 ---
-title: Search results
+title: 검색결과
 description: Search results of the specified query
 layout: libdoc/page
 unlisted: true
-assets: 
-    js:
-        - assets/libdoc/js/require.min.js
-        - assets/libdoc/js/lunr.min.js
-        - assets/libdoc/js/lunr.multi.min.js
-        - assets/libdoc/js/lunr.stemmer.support.min.js
-        - assets/libdoc/js/lunr.ko.min.js
-        - assets/libdoc/js/search.js
 ---
 <ul id="libdoc-search-results" class="u-p-none u-ls-none"></ul>
 <script>
@@ -28,5 +20,5 @@ assets:
         {% endfor %}
     };
 </script>
-<script type="text/javascript" src="{{ 'assets/libdoc/js/lunr.min.js' | relative_url }}"></script>
-<script type="text/javascript" src="{{ 'assets/libdoc/js/search.js' | relative_url }}"></script>
+<script type="text/javascript" charset="utf-8" src="{{ 'assets/libdoc/js/lunr.min.js' | relative_url }}"></script>
+<script type="text/javascript" charset="utf-8" src="{{ 'assets/libdoc/js/search.js' | relative_url }}"></script>

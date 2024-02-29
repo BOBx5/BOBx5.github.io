@@ -62,7 +62,6 @@
             this.field("title", { boost: 10 });
             this.field("author");
             this.field("category");
-            this.field("tags");
             this.field("content");
             for (var key in window.store) {
                 // Add the data to lunr

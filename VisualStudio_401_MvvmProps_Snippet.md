@@ -6,7 +6,6 @@ layout: libdoc/page
 #LibDoc specific below
 category: VisualStudio
 order: 401
-tags: VisualStudio, Snippet, MVVM, TTEST
 ---
 * 
 {:toc}
@@ -15,17 +14,17 @@ tags: VisualStudio, Snippet, MVVM, TTEST
 
 ---
 
-* Visual Studio에서 'propfull'이라고 입력하면 탭을 누르면 아래와 같은 코드가 생성된다.
+* Visual Studio에서 'propfull'이라고 입력하면 탭을 누르면 아래와 같은 코드가 생성된다.<br/>
 
-```csharp
-private string _myProperty;
+    ```csharp
+    private string _myProperty;
 
-public int MyProperty
-{
-    get { return myVar; }
-    set { myVar = value; }
-}
-```
+    public int MyProperty
+    {
+        get { return myVar; }
+        set { myVar = value; }
+    }
+    ```
 
 ## MVVM 패턴을 적용한 코드
 

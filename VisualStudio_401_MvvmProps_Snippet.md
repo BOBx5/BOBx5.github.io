@@ -144,13 +144,15 @@ private int _MyProperty;
 
  ---
 
-* (기존) *<u>field</u>*명: 언더바`_` + 소문자 시작<br/>
-![](/assets/visualStudio/VisualStudio_401_MvvmProps_Snippet/VisualStudio_401_MvvmProps_Snippet_3.webp)<br/>
-`private int _myProperty;`
+* (기존) *<u>field</u>*명: 언더바`_` + 소문자 시작
 
-* (변경) *<u>field</u>*명: 언더바`_` + 대문자 시작<br/>
-![](/assets/visualStudio/VisualStudio_401_MvvmProps_Snippet/VisualStudio_401_MvvmProps_Snippet_4.webp)<br/> 
-`private int _MyProperty;`
+    ![](/assets/visualStudio/VisualStudio_401_MvvmProps_Snippet/VisualStudio_401_MvvmProps_Snippet_3.webp)<br/>
+    `private int _myProperty;`
+
+* (변경) *<u>field</u>*명: 언더바`_` + 대문자 시작
+
+    ![](/assets/visualStudio/VisualStudio_401_MvvmProps_Snippet/VisualStudio_401_MvvmProps_Snippet_4.webp)<br/> 
+    `private int _MyProperty;`
 
 * VS스니펫은 일괄적으로 네이밍 변경 기능을 제공하는데<br/>
   덕분에 기본 `propfull` 스니펫은 `_myProperty` *<u>field</u>*를 일괄적으로 변경할 수 있다.

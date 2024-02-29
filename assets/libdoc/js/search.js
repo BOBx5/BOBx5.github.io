@@ -36,10 +36,10 @@
         }
     }
 
-    function trimmerEnKo(token) {
-        return token
-            .replace(/^[^\w가-힣]+/, '')
-            .replace(/[^\w가-힣]+$/, '');
+    function trimmerEnKo(e) {
+        return e.update(function (e) {
+            return e.replace(/^[^\w가-힣]+/, '').replace(/[^\w가-힣]+$/, '');
+        });
     };
 
     var searchTerm = getQueryVariable("query");

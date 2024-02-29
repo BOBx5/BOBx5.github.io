@@ -1,3 +1,4 @@
+import { require } from './require.min.js';
 (function() {
     function displaySearchResults(results, store) {
         var searchResults = document.getElementById("libdoc-search-results");
@@ -48,16 +49,20 @@
     if (searchTerm) {
         document.getElementById("libdoc-search-box").setAttribute("value", searchTerm);
 
+        var lunr = require('./lib/lunr.js');
+        require('./lunr.stemmer.support.js')(lunr);
+        require('./lunr.ko.js')(lunr); // or any other language you want
+
         // Initalize lunr with the fields it will be searching on. I've given title
         // a boost of 10 to indicate matches on this field are more important.
         var idx = lunr(function() {
-            this.pipeline.reset();
-            this.pipeline.add(
-                trimmerEnKo,
-                lunr.stopWordFilter,
-                lunr.stemmer
-            );
-            // this.use(lunr.ko);
+            // this.pipeline.reset();
+            // this.pipeline.add(
+            //     trimmerEnKo,
+            //     lunr.stopWordFilter,
+            //     lunr.stemmer
+            // );
+             this.use(lunr.ko);
             this.field("id");
             this.field("title", { boost: 10 });
             this.field("author");

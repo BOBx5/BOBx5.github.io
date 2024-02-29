@@ -144,7 +144,7 @@ private int _MyProperty;
 
  ---
 
-* (기존) *<u>field</u>*명: 언더바`_` + 소문자 시작 <br/>
+* (기존) *<u>field</u>*명: 언더바`_` + 소문자 시작<br/>
 ![](/assets/visualStudio/VisualStudio_401_MvvmProps_Snippet/VisualStudio_401_MvvmProps_Snippet_3.webp)<br/>
 `private int _myProperty;`
 

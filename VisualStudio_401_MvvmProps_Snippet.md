@@ -1,10 +1,10 @@
 ---
-title: %5BSnippet%5B MVVM Props
+title: \[Snippet\] MVVM Props
 description: MVVM 패턴에서 사용하는 프로퍼티 스니펫 
 layout: libdoc/page
 
 #LibDoc specific below
-category: ASP.NET
+category: VisualStudio
 order: 401
 ---
 * 

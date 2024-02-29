@@ -1,4 +1,4 @@
-define(
+(function() {
     ["./lunr.js", "./lunr.stemmer.support.js", "./lunr.ko.js"],
     function (lunr, stemmerSupport, ko) {
         function displaySearchResults(results, store) {
@@ -88,4 +88,5 @@ define(
                 }
             });
         }
-    });
+    }
+})();

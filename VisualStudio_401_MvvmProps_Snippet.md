@@ -1,5 +1,5 @@
 ---
-title: \[Snippet] MVVM Props
+title: [[Snippet]] MVVM Props
 description: MVVM 패턴에서 사용하는 프로퍼티 스니펫 
 layout: libdoc/page
 
@@ -139,19 +139,22 @@ private int _MyProperty;
   그게 field 선언 사이의 공간을 띄워 가독성이 떨어지게 만든다.<br/>
   특히, `property` 스코프를 접으면 눈에 띈다.
 
- #### 2. 편리한 네이밍 변경
- ##### 대소문자 변경
+#### 2. 편리한 네이밍 변경
+##### 대소문자 변경
 
  ---
 
-* (기존) `field`는 언더바`_` + 소문자 시작
- ![](/assets/visualStudio/VisualStudio_401_MvvmProps_Snippet/VisualStudio_401_MvvmProps_Snippet_3.webp)<br/>
-  `private int _myProperty;`
-* (변경) `field`는 언더바`_` + 대문자 시작
- ![](/assets/visualStudio/VisualStudio_401_MvvmProps_Snippet/VisualStudio_401_MvvmProps_Snippet_4.webp)<br/>
- `private int _MyProperty;`
+* (기존) `field`는 언더바`_` + 소문자 시작<br/>
+![](/assets/visualStudio/VisualStudio_401_MvvmProps_Snippet/VisualStudio_401_MvvmProps_Snippet_3.webp)<br/>
+`private int _myProperty;`
+
+* (변경) `field`는 언더바`_` + 대문자 시작<br/>
+![](/assets/visualStudio/VisualStudio_401_MvvmProps_Snippet/VisualStudio_401_MvvmProps_Snippet_4.webp)<br/> 
+`private int _MyProperty;`
+
 * VS스니펫은 일괄적으로 네이밍 변경 기능을 제공하는데<br/>
   덕분에 기본 `propfull` 스니펫은 `_myProperty` field를 일괄적으로 변경할 수 있다.
+  
 * `propmvvm` 스니펫은 `field` & `property` 모두 대문자 시작으로 동일하게 변경하여 스니펫 입력 시 일괄적으로 같은 이름을 넣어줄 수 있게 만들었다.
 
 

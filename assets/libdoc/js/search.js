@@ -48,7 +48,7 @@
     if (searchTerm) {
         document.getElementById("libdoc-search-box").setAttribute("value", searchTerm);
 
-        var lunr = require('./lib/lunr.js');
+        var lunr = require('./lunr.js');
         require('./lunr.stemmer.support.js')(lunr);
         require('./lunr.ko.js')(lunr); // or any other language you want
 

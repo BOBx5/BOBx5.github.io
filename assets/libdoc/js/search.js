@@ -1,6 +1,4 @@
-import { require } from 'require.min.js';
-
-require(['lunr.min.js', 'lunr.stemmer.support.min.js', 'lunr.ko.min.js'], function() {
+(function() {
     function displaySearchResults(results, store) {
         var searchResults = document.getElementById("libdoc-search-results");
 
@@ -38,6 +36,12 @@ require(['lunr.min.js', 'lunr.stemmer.support.min.js', 'lunr.ko.min.js'], functi
             }
         }
     }
+    
+    function trimmerEnKo(token) {
+        return token
+            .replace(/^[^\w가-힣]+/, '')
+            .replace(/[^\w가-힣]+$/, '');
+    };
 
     var searchTerm = getQueryVariable("query");
 
@@ -47,7 +51,13 @@ require(['lunr.min.js', 'lunr.stemmer.support.min.js', 'lunr.ko.min.js'], functi
         // Initalize lunr with the fields it will be searching on. I've given title
         // a boost of 10 to indicate matches on this field are more important.
         var idx = lunr(function() {
-            this.use(lunr.ko);
+            this.pipeline.reset();
+            this.pipeline.add(
+                trimmerEnKo,
+                lunr.stopWordFilter,
+                lunr.stemmer
+            );
+            // this.use(lunr.ko);
             this.field("id");
             this.field("title", { boost: 10 });
             this.field("author");
@@ -79,4 +89,4 @@ require(['lunr.min.js', 'lunr.stemmer.support.min.js', 'lunr.ko.min.js'], functi
             }
         });
     }
-});
+})();

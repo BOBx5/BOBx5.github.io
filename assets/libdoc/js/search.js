@@ -1,5 +1,6 @@
-import require from 'require.min.js';
-require(['./lunr.min.js', './lunr.stemmer.support.min.js', './lunr.ko.min.js'], function() {
+import { require } from 'require.min.js';
+
+require(['lunr.min.js', 'lunr.stemmer.support.min.js', 'lunr.ko.min.js'], function() {
     function displaySearchResults(results, store) {
         var searchResults = document.getElementById("libdoc-search-results");
 

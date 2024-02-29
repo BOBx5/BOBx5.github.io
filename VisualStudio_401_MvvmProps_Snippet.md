@@ -6,6 +6,11 @@ layout: libdoc/page
 #LibDoc specific below
 category: VisualStudio
 order: 401
+tags:
+    - VisualStudio
+    - Snippet
+    - MVVM
+    - TEST
 ---
 * 
 {:toc}

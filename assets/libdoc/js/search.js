@@ -1,4 +1,4 @@
-(function() {
+(function(lunr, stemmerSupport, ko) {
     function displaySearchResults(results, store) {
         var searchResults = document.getElementById("libdoc-search-results");
 
@@ -47,7 +47,7 @@
         // Initalize lunr with the fields it will be searching on. I've given title
         // a boost of 10 to indicate matches on this field are more important.
         var idx = lunr(function() {
-            this.use(lunr.ko)
+            this.use(lunr.ko);
             this.field("id");
             this.field("title", { boost: 10 });
             this.field("author");

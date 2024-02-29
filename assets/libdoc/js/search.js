@@ -1,4 +1,3 @@
-const lunr = require("./lunr.min");
 (function () {
     function displaySearchResults(results, store) {
         var searchResults = document.getElementById("libdoc-search-results");

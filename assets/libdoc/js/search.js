@@ -48,7 +48,6 @@
     if (searchTerm) {
         document.getElementById("libdoc-search-box").setAttribute("value", searchTerm);
 
-        const require = require("./require.min.js");
         var lunr = require('./lib/lunr.js');
         require('./lunr.stemmer.support.js')(lunr);
         require('./lunr.ko.js')(lunr); // or any other language you want
@@ -62,7 +61,8 @@
             //     lunr.stopWordFilter,
             //     lunr.stemmer
             // );
-             this.use(lunr.ko);
+            
+            this.use(lunr.ko);
             this.field("id");
             this.field("title", { boost: 10 });
             this.field("author");

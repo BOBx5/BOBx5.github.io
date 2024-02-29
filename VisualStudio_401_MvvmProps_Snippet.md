@@ -1,5 +1,5 @@
 ---
-title: [Snippet] MVVM Props
+title: %5BSnippet%5B MVVM Props
 description: MVVM 패턴에서 사용하는 프로퍼티 스니펫 
 layout: libdoc/page
 

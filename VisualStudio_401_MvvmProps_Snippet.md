@@ -102,8 +102,8 @@ public int MyProperty
 </CodeSnippets>
 ```
 
-* 위와 같이 작성된 파일을 `propmvvm.snippet`이라는 이름으로 저장한다.
-* `C:/Users/{PC유저명}/Documents/Visual Studio 2022/Code Snippets/Visual C#/My Code Snippets` 경로에 저장한다.
+* 위와 같이 작성된 파일을 *propmvvm.snippet* 이라는 이름으로 저장한다.
+* *C:/Users/{PC유저명}/Documents/Visual Studio 2022/Code Snippets/Visual C#/My Code Snippets* 경로에 저장한다.
   
 ## 결과물
 
@@ -129,33 +129,34 @@ private int _MyProperty;
 
 ---
 
- * (기존) `field` 선 선언 & `property` 후 선언
+ * (기존) <u>*field*</u> 선 선언 & <u>*property*</u> 후 선언
  ![](/assets/visualStudio/VisualStudio_401_MvvmProps_Snippet/VisualStudio_401_MvvmProps_Snippet_1.webp)
 
- * (변경) `property` 선 선언 & `field` 후 선언으로 
+ * (변경) <u>*property*</u> 선 선언 & <u>*field*</u> 후 선언으로 
  ![](/assets/visualStudio/VisualStudio_401_MvvmProps_Snippet/VisualStudio_401_MvvmProps_Snippet_2.webp)
 
  * VisualStudio의 *CodeLens*는 property를 참조하는 숫자를 보여주는데, <br/>
   그게 field 선언 사이의 공간을 띄워 가독성이 떨어지게 만든다.<br/>
-  특히, `property` 스코프를 접으면 눈에 띈다.
+  특히, <u>*property*</u> 스코프를 접으면 눈에 띈다.
 
 #### 2. 편리한 네이밍 변경
 ##### 대소문자 변경
 
  ---
 
-* (기존) `field`는 언더바`_` + 소문자 시작<br/>
+* (기존) <u>*field*</u>명: 언더바`_` + 소문자 시작 <br/>
 ![](/assets/visualStudio/VisualStudio_401_MvvmProps_Snippet/VisualStudio_401_MvvmProps_Snippet_3.webp)<br/>
 `private int _myProperty;`
 
-* (변경) `field`는 언더바`_` + 대문자 시작<br/>
+* (변경) <u>*field*</u>명: 언더바`_` + 대문자 시작<br/>
 ![](/assets/visualStudio/VisualStudio_401_MvvmProps_Snippet/VisualStudio_401_MvvmProps_Snippet_4.webp)<br/> 
 `private int _MyProperty;`
 
 * VS스니펫은 일괄적으로 네이밍 변경 기능을 제공하는데<br/>
-  덕분에 기본 `propfull` 스니펫은 `_myProperty` field를 일괄적으로 변경할 수 있다.
+  덕분에 기본 `propfull` 스니펫은 `_myProperty` <u>*field*</u>를 일괄적으로 변경할 수 있다.
 
-* `propmvvm` 스니펫은 `field` & `property` 모두 대문자 시작으로 동일하게 변경하여 스니펫 입력 시 일괄적으로 같은 이름을 넣어줄 수 있게 만들었다.
+* `propmvvm` 스니펫은 <u>*field*</u> & <u>*property*</u> 모두 대문자 시작으로 동일하게 변경하여<br/>
+스니펫 입력 시 일괄적으로 같은 이름을 넣어줄 수 있게 만들었다.
 
 
 

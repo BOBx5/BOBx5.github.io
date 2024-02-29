@@ -55,7 +55,6 @@ const lunr = require("./lunr.min");
         // a boost of 10 to indicate matches on this field are more important.
         var idx = lunr(function () {
             this.pipeline.reset();
-            this.pipeline.registerFunction(trimmerEnKo, "trimmerEnKo");
             this.pipeline.add(
                 trimmerEnKo,
                 lunrMin.stopWordFilter,

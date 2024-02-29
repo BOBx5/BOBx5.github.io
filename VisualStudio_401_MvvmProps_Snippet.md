@@ -1,5 +1,5 @@
 ---
-title: [[Snippet]] MVVM Props
+title: MVVM Property Snippet
 description: MVVM 패턴에서 사용하는 프로퍼티 스니펫 
 layout: libdoc/page
 
@@ -154,7 +154,7 @@ private int _MyProperty;
 
 * VS스니펫은 일괄적으로 네이밍 변경 기능을 제공하는데<br/>
   덕분에 기본 `propfull` 스니펫은 `_myProperty` field를 일괄적으로 변경할 수 있다.
-  
+
 * `propmvvm` 스니펫은 `field` & `property` 모두 대문자 시작으로 동일하게 변경하여 스니펫 입력 시 일괄적으로 같은 이름을 넣어줄 수 있게 만들었다.
 
 

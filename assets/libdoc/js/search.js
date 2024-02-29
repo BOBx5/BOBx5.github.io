@@ -60,22 +60,21 @@
             this.field("category");
             this.field("tags");
             this.field("content");
+            for (var key in window.store) {
+                // Add the data to lunr
+                idx.add({
+                    id: key,
+                    title: window.store[key].title,
+                    author: window.store[key].author,
+                    category: window.store[key].category,
+                    tags: window.store[key].tags,
+                    content: window.store[key].content
+                });
+            }
         });
 
-        for (var key in window.store) {
-            // Add the data to lunr
-            idx.add({
-                id: key,
-                title: window.store[key].title,
-                author: window.store[key].author,
-                category: window.store[key].category,
-                tags: window.store[key].tags,
-                content: window.store[key].content
-            });
-
-            var results = idx.search(searchTerm); // Get lunr to perform a search
-            displaySearchResults(results, window.store); // We'll write this in the next section
-        }
+        var results = idx.search(searchTerm); // Get lunr to perform a search
+        displaySearchResults(results, window.store); // We'll write this in the next section
 
         document.querySelectorAll('.libdoc-search-query').forEach(function (el) {
             el.innerText = searchTerm;

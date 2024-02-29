@@ -81,4 +81,4 @@ require(['./lunr.js', './lunr.stemmer.support.js', './lunr.ko.js'], function() {
             }
         });
     }
-})();
+});

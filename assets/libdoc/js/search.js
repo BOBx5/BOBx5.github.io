@@ -1,4 +1,4 @@
-(function() {
+define(function() {
     function displaySearchResults(results, store) {
         var searchResults = document.getElementById("libdoc-search-results");
 
@@ -81,4 +81,4 @@
             }
         });
     }
-})();
+});

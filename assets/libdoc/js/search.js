@@ -1,4 +1,4 @@
-(require(['./lunr.js', './lunr.stemmer.support.js', './lunr.ko.js'], function() {
+require(['./lunr.js', './lunr.stemmer.support.js', './lunr.ko.js'], function() {
     function displaySearchResults(results, store) {
         var searchResults = document.getElementById("libdoc-search-results");
 

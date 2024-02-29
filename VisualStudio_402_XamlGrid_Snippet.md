@@ -11,12 +11,8 @@ order: 402
 {:toc}
 
 ## VisualStudio 기본 스니펫
-
 ---
-
-### 기능
-
-#### 1. RowDefinition 생성
+### 1. RowDefinition 생성
 
 * `rd` 입력 후 탭을 누르면 아래와 같은 코드가 생성된다.
 
@@ -24,7 +20,7 @@ order: 402
     <RowDefinition Height="*"/>
     ```
 
-#### 2. ColumnDefinition 생성
+### 2. ColumnDefinition 생성
 
 * `cd` 입력 후 탭을 누르면 아래와 같은 코드가 생성된다.
 
@@ -36,10 +32,9 @@ order: 402
 * 실제로 xaml 파일을 작성하다보면 `RowDefinition`과 `ColumnDefinition`를 당연히 포함하는 `<Grid/>`를 생성하는 일이 많다.
 
 
-## 해결방법 1
-### 기존 Snippet 수정
+## 해결방법
+### 1. 기존 Snippet 수정
 ---
-
 "*C:/Program Files/Microsoft Visual Studio/2022/Community/DesignTools/Snippets/XAML/{number}*" 경로 내부에 있는 `Grid.snippet` 파일을 수정하여 사용할 수 있다.
 
 ```xml
@@ -92,11 +87,8 @@ order: 402
 </CodeSnippet>
 ```
 
-
-## 해결방법 2
-### 신규 커스텀 Snippet 추가
+### 2. 신규 커스텀 Snippet 추가
 ---
-
 "*C:/Users/{UserName}/Documents/Visual Studio 2022/Code Snippets/XAML/My XAML Snippets*" 경로에 `GridFull.snippet` 파일을 생성한다.
 
 ```xml
@@ -195,7 +187,7 @@ order: 402
 
 ## 사용방법
 ---
-이제 VisualStudio에서 xaml 파일을 열고 `grdfull`을 입력 후 탭을 누르면<br/> `Grid`와 `RowDefinition`, `ColumnDefinition`이 모두 포함된 코드가 생성된다.
+이제 VisualStudio에서 xaml 파일을 열고 `gridfull`을 입력 후 탭을 누르면<br/> `Grid`와 `RowDefinition`, `ColumnDefinition`이 모두 포함된 코드가 생성된다.
 
 ```xml
 <Grid>

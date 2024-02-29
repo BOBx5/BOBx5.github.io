@@ -37,10 +37,10 @@
     }
 
     function trimmerEnKo(e) {
-        return e.update(function (e) {
+        return this.update(function(e) {
             return e.replace(/^[^\w가-힣]+/, '').replace(/[^\w가-힣]+$/, '');
-        });
-    };
+        })
+    }
 
     var searchTerm = getQueryVariable("query");
 
@@ -54,10 +54,11 @@
         // a boost of 10 to indicate matches on this field are more important.
         var idx = lunr(function () {
             this.pipeline.reset();
+            this.pipeline.registerFunction(trimmerEnKo, "trimmerEnKo");
             this.pipeline.add(
                 trimmerEnKo,
-                lunr.stopWordFilter,
-                lunr.stemmer
+                this.stopWordFilter,
+                this.stemmer
             );
             this.ref("id");
             this.field("title", { boost: 10 });

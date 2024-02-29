@@ -54,6 +54,7 @@ order: 401
 ## 스니펫으로 만들어보자
 ---
 
+
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <CodeSnippets  xmlns="<http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet>">
@@ -108,11 +109,15 @@ public int MyProperty
 private int _MyProperty;
 ```
 
-### 기존 `propfull` 스니펫과 다른 점
+### 개선사항
+
 --- 
+
 #### 1. 가독성 개선
 ##### 선언 순서 변경
+
 ---
+
  * (기존) `field` 선 선언 & `property` 후 선언
  ![](/assets/visualStudio/VisualStudio_401_MvvmProps_Snippet/VisualStudio_401_MvvmProps_Snippet_1.webp)
 
@@ -125,7 +130,9 @@ private int _MyProperty;
 
  #### 2. 편리한 네이밍 변경
  ##### 대소문자 변경
+
  ---
+
 * (기존) `field`는 언더바`_` + 소문자 시작
  ![](/assets/visualStudio/VisualStudio_401_MvvmProps_Snippet/VisualStudio_401_MvvmProps_Snippet_3.webp)<br/>
   `private int _myProperty;`

@@ -385,7 +385,7 @@ prism:
         #- jq
         #- jsdoc
         #- js-extras
-        #- json
+        - json
         #- json5
         #- jsonp
         #- jsstacktrace
@@ -464,7 +464,7 @@ prism:
         #- jsx
         #- tsx
         #- reason
-        #- regex
+        - regex
         #- rego
         #- renpy
         #- rest
@@ -522,7 +522,7 @@ prism:
         #- wiki
         #- wolfram
         #- xeora
-        # - xml-doc
+        - xml-doc
         #- xojo
         #- xquery
         - yaml

@@ -1,5 +1,5 @@
 ---
-title: [Snippet] MVVM Props
+title: %5BSnippet_%5D MVVM Props
 description: MVVM 패턴에서 사용하는 프로퍼티 스니펫 
 layout: libdoc/page
 
@@ -11,8 +11,11 @@ order: 401
 {:toc}
 
 ## 기본 'propfull' 스니펫
+
 ---
+
 * Visual Studio에서 'propfull'이라고 입력하면 탭을 누르면 아래와 같은 코드가 생성된다.
+* 
     ```csharp
     private string _myProperty;
 
@@ -22,9 +25,12 @@ order: 401
         set { myVar = value; }
     }
     ```
+
  ## MVVM 패턴을 적용한 코드
+
  ---
- * MVVM 패턴에서는 프로퍼티가 변경될 때마다 `OnPropertyChanged` 메서드를 호출하여 UI를 업데이트한다.
+
+* MVVM 패턴에서는 프로퍼티가 변경될 때마다 `OnPropertyChanged` 메서드를 호출하여 UI를 업데이트한다.
     ```csharp
     private string _myProperty;
 
@@ -41,7 +47,9 @@ order: 401
         }
     }
     ```
+    
 * 간소화 시키면 아래와 같이 작성할 수 있다. * *CommunityToolKit 기준*
+    
     ```csharp
     private string _myProperty;
 
@@ -51,9 +59,10 @@ order: 401
         set => SetProperty(ref _myProperty, value);
     }
     ```
-## 스니펫으로 만들어보자
----
 
+## 스니펫으로 만들어보자
+
+---
 
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
@@ -97,7 +106,9 @@ order: 401
 * `C:/Users/{PC유저명}/Documents/Visual Studio 2022/Code Snippets/Visual C#/My Code Snippets` 경로에 저장한다.
   
 ## 결과물
+
 ---
+
 이제 VS에서 `propmvvm`이라고 입력하면 아래와 같은 코드가 생성된다.
 
 ```csharp

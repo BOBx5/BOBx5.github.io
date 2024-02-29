@@ -3,6 +3,14 @@ title: Search results
 description: Search results of the specified query
 layout: libdoc/page
 unlisted: true
+assets: 
+    js:
+        - assets/libdoc/js/require.min.js
+        - assets/libdoc/js/lunr.min.js
+        - assets/libdoc/js/lunr.multi.min.js
+        - assets/libdoc/js/lunr.stemmer.support.min.js
+        - assets/libdoc/js/lunr.ko.min.js
+        - assets/libdoc/js/search.js
 ---
 <ul id="libdoc-search-results" class="u-p-none u-ls-none"></ul>
 <script>
@@ -20,7 +28,7 @@ unlisted: true
         {% endfor %}
     };
 </script>
-<script type="module" src="{{ 'assets/libdoc/js/require.min.js' | relative_url }}"></script>
+<script src="{{ 'assets/libdoc/js/require.min.js' | relative_url }}"></script>
 <script type="text/javascript" src="{{ 'assets/libdoc/js/lunr.min.js' | relative_url }}"></script>
 <script type="text/javascript" src="{{ 'assets/libdoc/js/lunr.multi.min.js' | relative_url }}"></script>
 <script type="text/javascript" src="{{ 'assets/libdoc/js/lunr.stemmer.support.min.js' | relative_url }}"></script>

@@ -1,5 +1,5 @@
 ---
-title: \[Snippet\] MVVM Props
+title: \[Snippet] MVVM Props
 description: MVVM 패턴에서 사용하는 프로퍼티 스니펫 
 layout: libdoc/page
 
@@ -15,18 +15,18 @@ order: 401
 ---
 
 * Visual Studio에서 'propfull'이라고 입력하면 탭을 누르면 아래와 같은 코드가 생성된다.
-* 
-    ```csharp
-    private string _myProperty;
 
-    public int MyProperty
-    {
-        get { return myVar; }
-        set { myVar = value; }
-    }
-    ```
+```csharp
+private string _myProperty;
 
- ## MVVM 패턴을 적용한 코드
+public int MyProperty
+{
+    get { return myVar; }
+    set { myVar = value; }
+}
+```
+
+## MVVM 패턴을 적용한 코드
 
  ---
 

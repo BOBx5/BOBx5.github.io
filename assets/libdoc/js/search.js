@@ -56,8 +56,8 @@
             this.pipeline.reset();
             this.pipeline.add(
                 trimmerEnKo,
-                lunrMin.stopWordFilter,
-                lunrMin.stemmer
+                this.stopWordFilter,
+                this.stemmer
             );
             this.ref("id");
             this.field("title", { boost: 10 });

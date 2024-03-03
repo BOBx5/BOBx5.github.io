@@ -11,6 +11,6 @@ order: 702
 
 [🔗Mobbin](https://mobbin.com/)
 
-![](/assets/uiux/UIUX_702_Mobbin/UIUX_702_Mobbin.webp)
+![](/assets/docs/700_Uiux/702/1.webp)
 
 * 해외 유명 모바일 앱의 UI 래퍼런스 참고할 수 있는 사이트

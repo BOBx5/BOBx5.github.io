@@ -11,7 +11,7 @@ order: 704
 
 [🔗Pictogrammer](https://pictogrammers.com/library/mdi/)
 
-![](/assets/uiux/UIUX_704_MaterialDesignIcons/UIUX_704_MaterialDesignIcons.webp)
+![](/assets/docs/700_Uiux/704/1.webp)
 
 * Material Design Icon들을 모아놓아,<br/>
 필요에 따라 키워드 등을 검색하여 찾아보기 좋게 되어있다.

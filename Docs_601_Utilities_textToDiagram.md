@@ -12,7 +12,7 @@ order: 601
 ---
 [🔗Text-to-Diagram](https://text-to-diagram.com/)
 
-![](/assets/utilities/Utilities_601_textToDiagram/Utilities_601_textToDiagram.webp)
+![](/assets/docs/600_Utilities/601/1.webp)
 
 * 비교 가능 라이브러리
   * D2

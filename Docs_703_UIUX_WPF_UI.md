@@ -11,8 +11,8 @@ order: 703
 
 [🔗WPF UI](https://wpfui.lepo.co/)
 
-![](/assets/uiux/UIUX_703_WPF_UI/UIUX_703_WPF_UI_1.webp)
-![](/assets/uiux/UIUX_703_WPF_UI/UIUX_703_WPF_UI_2.webp)
+![](/assets/docs/700_Uiux/703/1.webp)
+![](/assets/docs/700_Uiux/703/2.webp)
 
 * Document가 잘 되어있어 참고하기 좋다.
 * 다양한 API도 이미 구현되어 있다.

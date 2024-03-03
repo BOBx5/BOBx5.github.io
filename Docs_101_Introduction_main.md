@@ -7,7 +7,6 @@ layout: libdoc/page
 category: Introduction
 order: 101
 ---
-* 
 {:.toc}
 
 ![header](https://capsule-render.vercel.app/api?type=cylinder&height=200&color=gradient&text=BOBx5%20GitHub&descAlign=78)

@@ -1,6 +1,6 @@
 ---
 layout: libdoc/page-split
-permalink: index.html # To avoid: Warning: Empty `slug` generated for '/'.
+# permalink: index.html # To avoid: Warning: Empty `slug` generated for '/'.
 unlisted: true
 ---
 ![LibDoc layout](assets/libdoc/img/libdoc-layout-page-split.webp)

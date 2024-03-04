@@ -82,11 +82,11 @@
         //Accentuated contrast mode
         @if $step < 0 {
              @if $luminance > $briks-luminance-threshold {
-                $new_amount: -calc($step / 100) * (100 - briks-strip-units($lightness));
+                $new_amount: -(calc($step / 100) * (100 - briks-strip-units($lightness)));
                 $color_final: lighten($color, $new_amount);
             }
             @else {
-                $new_amount: -calc($step / 100) * briks-strip-units($lightness);
+                $new_amount: -(calc($step / 100) * briks-strip-units($lightness));
                 $color_final: darken($color, $new_amount);
             }
         }

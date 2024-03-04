@@ -31,6 +31,10 @@ sass:
 # https://olivier3lanc.github.io/Jekyll-LibDoc/libdoc-config.html
 # ---------
 
+remote_theme: olivier3lanc/Jekyll-LibDoc
+plugins:
+  - jekyll-remote-theme
+
 # PLAYGROUND
 # The user context entirely separated from LibDoc theme
 playground:

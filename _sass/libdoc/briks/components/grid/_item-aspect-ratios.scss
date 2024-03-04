@@ -20,7 +20,7 @@ and length($briks-components__grid__item-aspect-ratios-names-and-values) > 0 {
                         content: '';
                         float: left;
                         pointer-events: none;
-                        padding-top: unquote(100 * calc(1 / $value) + '%');
+                        padding-top: unquote(100 * (1 / $value) + '%');
                     }
                 }
             }
@@ -34,7 +34,7 @@ and length($briks-components__grid__item-aspect-ratios-names-and-values) > 0 {
                                     content: '';
                                     float: left;
                                     pointer-events: none;
-                                    padding-top: unquote(100 * calc(1 / $value) + '%');
+                                    padding-top: unquote(100 * (1 / $value) + '%');
                                 }
                             }
                         }

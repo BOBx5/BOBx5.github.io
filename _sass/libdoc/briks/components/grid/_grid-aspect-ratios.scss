@@ -20,7 +20,7 @@ and length($briks-components__grid__aspect-ratios-names-and-values) > 0 {
                         content: '';
                         float: left;
                         pointer-events: none;
-                        padding-top: unquote(100 * calc(1 / $value) + '%');
+                        padding-top: unquote(100 * (1 / $value) + '%');
                     }
                     @if $briks-components__grid__aspect-ratios-item-bypass-name != false
                     and $briks-components__grid__aspect-ratios-item-bypass-name != '' {
@@ -45,7 +45,7 @@ and length($briks-components__grid__aspect-ratios-names-and-values) > 0 {
                                     content: '';
                                     float: left;
                                     pointer-events: none;
-                                    padding-top: unquote(100 * calc(1 / $value) + '%');
+                                    padding-top: unquote(100 * (1 / $value) + '%');
                                 }
                             }
                         }

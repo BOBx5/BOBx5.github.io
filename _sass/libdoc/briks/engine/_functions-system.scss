@@ -135,12 +135,7 @@
     @param $string - string - The value  with its unit to trim
 */
 @function briks-strip-units($string) {
-    // @return  $string / ($string * 0 + 1);
-    @if type-of($string)=='number' and not unitless($string) {
-        $aUnit: ($string * 0 + 1); // ex) 1px
-        @return calc($string / $aUnit); // 120px / 1px = 120 (integer)
-    }
-    @return $string;
+     @return  $string / ($string * 0 + 1);
 }
 
 /*

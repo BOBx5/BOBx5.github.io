@@ -4,8 +4,9 @@ description: An example of LibDoc's assets layout with custom parameters sets on
 layout: libdoc/assets
 
 #LibDoc specific below
-category: Layouts examples
+# category: Layouts examples
 order: 1200
+unlisted: true
 assets:
     path_from_root: /demo-only
     extensions_enabled: # File extension to display

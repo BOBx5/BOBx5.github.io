@@ -4,8 +4,9 @@ description: Apply the first playground on the right panel.
 layout: libdoc/page-split
 
 #LibDoc specific below
-category: Layouts examples
+# category: Layouts examples
 order: 1200
+unlisted: true
 ---
 
 Intended to be used to feature a playground, the page split layout extends the syntax highlighter by running the first highlighted code found onto the right sided panel.

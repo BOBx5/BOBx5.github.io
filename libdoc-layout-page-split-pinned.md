@@ -4,8 +4,9 @@ description: Same as page split but with the 1st playground pinned at the top of
 layout: libdoc/page-split
 
 #LibDoc specific below
-category: Layouts examples
+# category: Layouts examples
 order: 1200
+unlisted: true
 ---
 
 Just add `.playground-pin`  on the first playground as follows: 

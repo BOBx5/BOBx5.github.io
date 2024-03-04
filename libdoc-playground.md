@@ -4,8 +4,9 @@ description: Standalone configurable code playground.
 layout: libdoc/page
 
 #LibDoc specific below
-category: Features
+# category: Features
 order: 1100
+unlisted: true
 ---
 * 
 {:toc}

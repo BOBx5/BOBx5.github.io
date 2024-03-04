@@ -4,9 +4,9 @@ description: Page example for Github Flavoured Markdown
 layout: libdoc/page
 
 #LibDoc specific below
-category: Features
+# category: Features
 order: 1100
-#unlisted: true
+unlisted: true
 ---
 * 
 {:toc}

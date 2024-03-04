@@ -4,8 +4,9 @@ description: Optional LibDoc specific parameters available for each page.
 layout: libdoc/page
 
 #LibDoc specific below
-category: Features
+# category: Features
 order: 1100
+unlisted: true
 ---
 * 
 {:toc}

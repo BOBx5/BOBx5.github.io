@@ -4,9 +4,9 @@ description: Easily add shields.io badges into the footer.
 layout: libdoc/page
 
 #LibDoc specific below
-category: Features
+# category: Features
 order: 1100
-#unlisted: true
+unlisted: true
 ---
 LibDoc allows to display [shields](https://shields.io) badges into the footer. You can add badges into the [config.yml](libdoc-config.html).
 

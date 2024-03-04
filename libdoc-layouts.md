@@ -4,8 +4,9 @@ description: List and descriptions of available layouts.
 layout: libdoc/page
 
 #LibDoc specific below
-category: Features
+# category: Features
 order: 1100
+unlisted: true
 ---
 * 
 {:toc}

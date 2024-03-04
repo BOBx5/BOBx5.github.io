@@ -180,27 +180,27 @@ sidebar:
         #     iframe_mode: true
         #     category: Features
         # Example URL
-        -   url: https://olivier3lanc.github.io/Scroll-Btween/
-            title: Scroll Btween
-            order: 800
-            category: Showcase
-        -   url: https://olivier3lanc.github.io/Scroll-Frames/
-            title: Scroll Frames
-            order: 800
-            category: Showcase
-        -   url: https://olivier3lanc.github.io/seemap/
-            title: SEEMAP
-            order: 800
-            category: Showcase
+        # -   url: https://olivier3lanc.github.io/Scroll-Btween/
+        #     title: Scroll Btween
+        #     order: 800
+        #     category: Showcase
+        # -   url: https://olivier3lanc.github.io/Scroll-Frames/
+        #     title: Scroll Frames
+        #     order: 800
+        #     category: Showcase
+        # -   url: https://olivier3lanc.github.io/seemap/
+        #     title: SEEMAP
+        #     order: 800
+        #     category: Showcase
         # Example remote URL
-        -   url: https://pages.github.com
+        -   url: https://github.com/BOBx5/BOBx5.github.io/settings/pages
+            category: External resources
             title: Github Pages
             order: 910
-            category: External resources
         -   url: https://jekyllrb.com
+            category: External resources
             title: Jekyll
             order: 910
-            category: External resources
 
 # BADGES
 # Feature that allows to display badges into the footer https://shields.io image html and url
@@ -256,7 +256,7 @@ assets:
 prism:
     # THEME
     # coy, dark, funky, okaidia, twilight, solarizedlight, tomorrow, 
-    theme: tomorrow
+    theme: dark
 
     # FONT SIZE
     # CSS font-size property override for <code>

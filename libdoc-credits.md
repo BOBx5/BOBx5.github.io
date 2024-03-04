@@ -4,8 +4,9 @@ description: Resources used into LibDoc
 layout: libdoc/page
 
 #LibDoc specific below
-category: Features
+# category: Features
 order: 1100
+unlisted: true
 ---
 
 LibDoc was built using the great following resources:

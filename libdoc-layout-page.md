@@ -4,8 +4,9 @@ description: An example of LibDoc's page layout.
 layout: libdoc/page
 
 #LibDoc specific below
-category: Layouts examples
+# category: Layouts examples
 order: 1200
+unlisted: true
 ---
 * 
 {:toc}

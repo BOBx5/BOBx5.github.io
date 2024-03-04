@@ -4,9 +4,9 @@ description: Every setting details available for LibDoc Jekyll Theme.
 layout: libdoc/page
 
 #LibDoc specific below
-category: Features
+# category: Features
 order: 1100
-# unlisted: true
+unlisted: true
 # iframe_mode: true
 ---
 * 

@@ -1,6 +1,6 @@
 ---
 title: 아키텍처 테스트
-description: 아키텍처에 맞게 코딩되었는지 테스트하기
+description: #ASP.NET
 layout: libdoc/page
 
 #LibDoc specific below

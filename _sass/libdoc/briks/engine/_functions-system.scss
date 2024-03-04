@@ -5,7 +5,6 @@
     @param $number - the number
     Source https://www.antimath.info/css/sass-sqrt-function/
 */
-@use "sass:math";
 @function briks-sqrt($number) {
     $x0: 1;
     $x1: $x0;
@@ -83,22 +82,22 @@
         //Accentuated contrast mode
         @if $step < 0 {
              @if $luminance > $briks-luminance-threshold {
-                $new_amount: -math.div($step,100) * (100 - briks-strip-units($lightness));
+                $new_amount: -calc($step / 100) * (100 - briks-strip-units($lightness));
                 $color_final: lighten($color, $new_amount);
             }
             @else {
-                $new_amount: -math.div($step, 100) * briks-strip-units($lightness);
+                $new_amount: -calc($step / 100) * briks-strip-units($lightness);
                 $color_final: darken($color, $new_amount);
             }
         }
         //Smart contrast mode
         @else {
              @if $luminance > $briks-luminance-threshold {
-                $new_amount: math.div($step, 100) * briks-strip-units($lightness);
+                $new_amount: calc($step / 100) * briks-strip-units($lightness);
                 $color_final: darken($color, $new_amount);
             }
             @else {
-                $new_amount: math.div($step, 100) * (100 - briks-strip-units($lightness));
+                $new_amount: calc($step / 100) * (100 - briks-strip-units($lightness));
                 $color_final: lighten($color, $new_amount);
             }
         }
@@ -136,7 +135,12 @@
     @param $string - string - The value  with its unit to trim
 */
 @function briks-strip-units($string) {
-    @return math.div($string, ($string * 0 + 1));
+    // @return  $string / ($string * 0 + 1);
+    @if type-of($string)=='number' and not unitless($string) {
+        $aUnit: ($string * 0 + 1); // ex) 1px
+        @return calc($string / $aUnit); // 120px / 1px = 120 (integer)
+    }
+    @return $string;
 }
 
 /*

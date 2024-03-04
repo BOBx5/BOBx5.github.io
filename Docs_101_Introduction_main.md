@@ -32,4 +32,4 @@ order: 101
 
 ![Typing SVG](https://readme-typing-svg.demolab.com?font=Nanum+Gothic&pause=1000&random=false&width=435&lines=%EB%8B%B7%EB%84%B7%EC%9D%84+%EC%A2%8B%EC%95%84%ED%95%98%EB%8A%94+5%EB%85%84%EC%B0%A8+%EA%B0%9C%EB%B0%9C%EC%9E%90%EC%9E%85%EB%8B%88%EB%8B%A4.)
 
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=BOBx5&layout=compact&theme=github_dark"><br><br>
+<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=BOBx5&layout=compact&exclude_repo=BOBx5.github.io&theme=github_dark"><br><br>

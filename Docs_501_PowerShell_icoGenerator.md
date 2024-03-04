@@ -1,14 +1,15 @@
 ---
 title: 아이콘(ico) 생성 스크립트
-description: 스크립트 ico 파일을 생성해보자
+description: <span>&#x23;PowerShell</span>
 layout: libdoc/page
 
 #LibDoc specific below
 category: PowerShell
 order: 501
 ---
-* 
 {:toc}
+
+## 스크립트 ico 파일을 생성해보자
 
 <img src="https://img.shields.io/badge/PowerShell-5391FE?style=flat&logo=powershell&logoColor=white"/>
 

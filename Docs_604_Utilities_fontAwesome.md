@@ -1,6 +1,6 @@
 ---
 title: 🔗FontAwesome
-description: 폰트기반 아이콘 라이브러리
+description: <span>&#x23;Utility &#x23;Icon</span>
 layout: libdoc/page
 
 #LibDoc specific below
@@ -8,6 +8,8 @@ category: Utilities
 order: 604
 ---
 {:.toc}
+
+## 폰트기반 아이콘 라이브러리
 
 [🔗Font Awesome](https://fontawesome.com/)
 

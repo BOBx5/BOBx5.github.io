@@ -1,6 +1,6 @@
 ---
 title: 🔗Flaticon
-description: 유/무료 아이콘 찾기
+description: <span>&#x23;Utility &#x23;Icon</span>
 layout: libdoc/page
 
 #LibDoc specific below
@@ -8,7 +8,8 @@ category: Utilities
 order: 602
 ---
 {:.toc}
-## 마크다운 다이어그램 비교 사이트
+
+## 유/무료 아이콘 찾기
 ---
 [🔗Flaticion](https://www.flaticon.com/)
 

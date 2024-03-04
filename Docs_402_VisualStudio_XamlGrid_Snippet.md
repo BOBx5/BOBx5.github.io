@@ -1,14 +1,15 @@
 ---
 title: WPF Grid Snippet
-description: Row&Column Defined XAML <Grid/>
+description: <span>&#x23;VisualStudio &#x23;WPF &#x23;Xaml</span>
 layout: libdoc/page
 
 #LibDoc specific below
 category: VisualStudio
 order: 402
 ---
-* 
 {:toc}
+
+# RowDefinition과 ColumnDefinition을 포함한 Grid 스니펫
 
 ## VisualStudio 기본 스니펫
 ---

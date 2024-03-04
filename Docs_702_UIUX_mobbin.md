@@ -1,6 +1,6 @@
 ---
 title: 🔗Mobbin
-description: 해외 유명 모바일 앱의 UI 래퍼런스 참고
+description: <span>&#x23;UI &#x23;UX</span>
 layout: libdoc/page
 
 #LibDoc specific below
@@ -8,6 +8,8 @@ category: UI/UX
 order: 702
 ---
 {:.toc}
+
+## 해외 유명 모바일 앱의 UI 래퍼런스 참고
 
 [🔗Mobbin](https://mobbin.com/)
 

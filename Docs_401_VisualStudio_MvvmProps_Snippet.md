@@ -1,14 +1,15 @@
 ---
 title: MVVM Property Snippet
-description: MVVM 패턴에서 사용하는 프로퍼티 스니펫 
+description: <span>&#x23;VisualStudio &#x23;CSharp &#x23;MVVM</span>
 layout: libdoc/page
 
 #LibDoc specific below
 category: VisualStudio
 order: 401
 ---
-* 
 {:toc}
+
+# MVVM 패턴용 편리한 프로퍼티 스니펫 
 
 ## 기본 'propfull' 스니펫
 

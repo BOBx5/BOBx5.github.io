@@ -1,6 +1,6 @@
 ---
 title: Gitflow
-description: 효과적인 프로젝트 관리를 위한 Gitflow 전략
+description: <span>&#x23;Git</span>
 layout: libdoc/page
 
 #LibDoc specific below
@@ -8,6 +8,9 @@ category: Git
 order: 801
 ---
 {:.toc}
+
+# 효과적인 프로젝트 관리를 위한 Gitflow 전략
+
 
 ![](/assets/docs/800_Git/801/1.webp)
 

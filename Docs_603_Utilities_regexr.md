@@ -1,6 +1,6 @@
 ---
 title: 🔗Regexr
-description: 정규식 테스트 사이트
+description: <span>&#x23; Utility&#x23;Regex</span>
 layout: libdoc/page
 
 #LibDoc specific below

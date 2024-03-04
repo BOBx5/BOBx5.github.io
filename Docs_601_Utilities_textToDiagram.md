@@ -1,6 +1,6 @@
 ---
 title: 🔗Text to Diagram 
-description: 마크다운 다이어그램들을 비교해보기
+description: <span>&#x23;Utility &#x23;Markdown</span>
 layout: libdoc/page
 
 #LibDoc specific below
@@ -8,7 +8,8 @@ category: Utilities
 order: 601
 ---
 {:.toc}
-## 마크다운 다이어그램 비교 사이트
+
+## 마크다운 다이어그램들을 비교해보기
 ---
 [🔗Text-to-Diagram](https://text-to-diagram.com/)
 

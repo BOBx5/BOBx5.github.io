@@ -1,14 +1,15 @@
 ---
 title: 파워쉘로 시리얼 포트 제어하기
-description: 파워쉘 스크립트만으로 시리얼 포트를 수신해보자
+description: <span>&#x23;PowerShell &#x23;Serial</span>
 layout: libdoc/page
 
 #LibDoc specific below
 category: PowerShell
 order: 502
 ---
-* 
 {:toc}
+
+## 파워쉘 스크립트만으로 시리얼 포트를 수신해보자
 
 <img src="https://img.shields.io/badge/PowerShell-5391FE?style=flat&logo=powershell&logoColor=white"/>
 

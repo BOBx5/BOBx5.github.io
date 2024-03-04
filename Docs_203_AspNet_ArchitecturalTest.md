@@ -1,6 +1,6 @@
 ---
 title: 아키텍처 테스트
-description: #ASP.NET
+description: <span>&#x23;ASP.NET</span>
 layout: libdoc/page
 
 #LibDoc specific below

@@ -1,6 +1,6 @@
 ---
 title: 🔗WPF UI
-description: WPF UI 래퍼런스용 오픈소스 프로젝스 소스
+description: <span>&#x23;UI &#x23;UX</span>
 layout: libdoc/page
 
 #LibDoc specific below
@@ -8,6 +8,8 @@ category: UI/UX
 order: 703
 ---
 {:.toc}
+
+## WPF UI 래퍼런스용 오픈소스 프로젝스 소스
 
 [🔗WPF UI](https://wpfui.lepo.co/)
 

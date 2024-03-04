@@ -82,22 +82,22 @@
         //Accentuated contrast mode
         @if $step < 0 {
              @if $luminance > $briks-luminance-threshold {
-                $new_amount: -(calc($step / 100) * (100 - briks-strip-units($lightness)));
+                $new_amount: -(($step / 100) * (100 - briks-strip-units($lightness)));
                 $color_final: lighten($color, $new_amount);
             }
             @else {
-                $new_amount: -(calc($step / 100) * briks-strip-units($lightness));
+                $new_amount: -(($step / 100) * briks-strip-units($lightness));
                 $color_final: darken($color, $new_amount);
             }
         }
         //Smart contrast mode
         @else {
              @if $luminance > $briks-luminance-threshold {
-                $new_amount: calc($step / 100) * briks-strip-units($lightness);
+                $new_amount: ($step / 100) * briks-strip-units($lightness);
                 $color_final: darken($color, $new_amount);
             }
             @else {
-                $new_amount: calc($step / 100) * (100 - briks-strip-units($lightness));
+                $new_amount: ($step / 100) * (100 - briks-strip-units($lightness));
                 $color_final: lighten($color, $new_amount);
             }
         }
@@ -108,7 +108,6 @@
         @warn 'You may call a color contrast that does not exist';
         @return '';
     }
-
 }
 
 @function briks-contrast-ratio($color1, $color2) {

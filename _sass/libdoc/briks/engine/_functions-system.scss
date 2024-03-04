@@ -1,3 +1,5 @@
+@use "sass:math";
+
 /*
     SQUARE ROOT
     DESIGN SYSTEM FUNCTION
@@ -82,22 +84,22 @@
         //Accentuated contrast mode
         @if $step < 0 {
              @if $luminance > $briks-luminance-threshold {
-                $new_amount: -(($step / 100) * (100 - briks-strip-units($lightness)));
+                $new_amount: -(math.div($step, 100) * (100 - briks-strip-units($lightness)));
                 $color_final: lighten($color, $new_amount);
             }
             @else {
-                $new_amount: -(($step / 100) * briks-strip-units($lightness));
+                $new_amount: -(math.div($step, 100) * briks-strip-units($lightness));
                 $color_final: darken($color, $new_amount);
             }
         }
         //Smart contrast mode
         @else {
              @if $luminance > $briks-luminance-threshold {
-                $new_amount: ($step / 100) * briks-strip-units($lightness);
+                $new_amount: math.div($step, 100) * briks-strip-units($lightness);
                 $color_final: darken($color, $new_amount);
             }
             @else {
-                $new_amount: ($step / 100) * (100 - briks-strip-units($lightness));
+                $new_amount: math.div($step, 100) * (100 - briks-strip-units($lightness));
                 $color_final: lighten($color, $new_amount);
             }
         }
@@ -134,7 +136,8 @@
     @param $string - string - The value  with its unit to trim
 */
 @function briks-strip-units($string) {
-     @return  $string / ($string * 0 + 1);
+    @return math.div($string, $string * 0 + 1);
+    //  @return  $string / ($string * 0 + 1);
 }
 
 /*

@@ -1,3 +1,4 @@
+@use "sass:math";
 
 /*
     FORMS RANGES
@@ -7,7 +8,6 @@
     ---
     Based on Daniel Stern work http://danielstern.ca/range.css
 */
-@use "sass:math";
 @if $briks-components__forms__enabled 
 and $briks-components-prefix != '' 
 and $briks-components-prefix != false 

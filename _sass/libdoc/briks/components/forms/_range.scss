@@ -7,6 +7,7 @@
     ---
     Based on Daniel Stern work http://danielstern.ca/range.css
 */
+@use "sass:math";
 @if $briks-components__forms__enabled 
 and $briks-components-prefix != '' 
 and $briks-components-prefix != false 
@@ -25,7 +26,7 @@ and length($briks-components__forms__ranges-hooks) > 0 {
         &>input[type="range"] {
             width: 100%;
             outline: none;
-            margin: #{(map-get($briks-components__forms__ranges-hooks, thumb-height) - map-get($briks-components__forms__ranges-hooks, track-height)) / 2} 0;
+            margin: #{math.div((map-get($briks-components__forms__ranges-hooks, thumb-height) - map-get($briks-components__forms__ranges-hooks, track-height)), 2)} 0;
             background-color: transparent;
             -webkit-appearance: none;
             // label-css is the label tag
@@ -102,7 +103,7 @@ and length($briks-components__forms__ranges-hooks) > 0 {
             &::-ms-track {
                 background: transparent;
                 border-color: transparent;
-                border-width: #{(map-get($briks-components__forms__ranges-hooks, thumb-height) - map-get($briks-components__forms__ranges-hooks, track-height)) / 2} 0;
+                border-width: #{math.div((map-get($briks-components__forms__ranges-hooks, thumb-height) - map-get($briks-components__forms__ranges-hooks, track-height)), 2)} 0;
                 color: transparent;
                 width: 100%;
                 height: map-get($briks-components__forms__ranges-hooks, track-height);
@@ -111,7 +112,7 @@ and length($briks-components__forms__ranges-hooks) > 0 {
             // Thumb
             &::-webkit-slider-thumb {
                 -webkit-appearance: none;
-                margin-top: #{-1 * (map-get($briks-components__forms__ranges-hooks, thumb-height) - map-get($briks-components__forms__ranges-hooks, track-height)) / 2};
+                margin-top: #{-1 * math.div((map-get($briks-components__forms__ranges-hooks, thumb-height) - map-get($briks-components__forms__ranges-hooks, track-height)), 2)};
                 background: map-get($briks-components__forms__ranges-hooks, thumb-background);
                 border: map-get($briks-components__forms__ranges-hooks, thumb-border);
                 border-radius: map-get($briks-components__forms__ranges-hooks, thumb-border-radius);
@@ -121,7 +122,7 @@ and length($briks-components__forms__ranges-hooks) > 0 {
             }
             &::-moz-range-thumb {
                 box-sizing: border-box;
-                margin-top: #{-1 * (map-get($briks-components__forms__ranges-hooks, thumb-height) - map-get($briks-components__forms__ranges-hooks, track-height)) / 2};
+                margin-top: #{-1 * math.div((map-get($briks-components__forms__ranges-hooks, thumb-height) - map-get($briks-components__forms__ranges-hooks, track-height)), 2)};
                 background: map-get($briks-components__forms__ranges-hooks, thumb-background);
                 border: map-get($briks-components__forms__ranges-hooks, thumb-border);
                 border-radius: map-get($briks-components__forms__ranges-hooks, thumb-border-radius);

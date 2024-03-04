@@ -4,6 +4,7 @@
     ---
     Feature of Briks grid component
 */
+@use "sass:math";
 @if $briks-components__grid__enabled 
 and $briks-components-prefix != '' 
 and $briks-components-prefix != false 
@@ -20,7 +21,7 @@ and length($briks-components__grid__aspect-ratios-names-and-values) > 0 {
                         content: '';
                         float: left;
                         pointer-events: none;
-                        padding-top: unquote(100 * (1 / $value) + '%');
+                        padding-top: unquote(100 * math.div(1, $value) + '%');
                     }
                     @if $briks-components__grid__aspect-ratios-item-bypass-name != false
                     and $briks-components__grid__aspect-ratios-item-bypass-name != '' {
@@ -45,7 +46,7 @@ and length($briks-components__grid__aspect-ratios-names-and-values) > 0 {
                                     content: '';
                                     float: left;
                                     pointer-events: none;
-                                    padding-top: unquote(100 * (1 / $value) + '%');
+                                    padding-top: unquote(100 * math.div(1, $value) + '%');
                                 }
                             }
                         }

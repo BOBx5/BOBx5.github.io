@@ -7,11 +7,16 @@ layout: libdoc/page
 category: ASP.NET
 order: 201
 ---
+<div align="left">
+    <img src="https://img.shields.io/badge/C%23-512BD4?style=flat&logo=csharp&logoColor=white"/>
+    <img src="https://img.shields.io/badge/ASP.NET Core-512BD4?style=flat&logo=.NET&logoColor=white"/>
+</div>
 {:toc}
+---
+
 ## 크론잡을 쉽게 관리할 수 있는 라이브러리 
 #### [Hangfire.io](https://www.hangfire.io/)
----
-<img src="https://img.shields.io/badge/ASP.NET Core-512BD4?style=flat&logo=.NET&logoColor=white"/>
+
 ![](/assets/docs/200_AspNet/201/1.webp)
 
 * **백그라운드잡**을 쉽게 관리할 수 있는 라이브러리

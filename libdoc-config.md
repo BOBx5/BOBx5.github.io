@@ -95,7 +95,7 @@ baseurl: /Jekyll-LibDoc/_site # the subpath of your site, e.g. /blog
 #permalink: /:path/:basename/:output_ext
 #destination: ../your/new/path # Build relative path destination. The destination directory e.g. /blog
 #keep_files: [cache]
-markdown: kramdown
+# markdown: kramdown
 # defaults:
 #   -
 #     values:

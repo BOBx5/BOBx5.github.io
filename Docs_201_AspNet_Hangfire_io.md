@@ -8,12 +8,8 @@ category: ASP.NET
 order: 201
 ---
 {:toc}
+## 크론잡을 쉽게 관리할 수 있는 라이브러리 **[🔗Hangfire.io](https://www.hangfire.io/)**
 <img src="https://img.shields.io/badge/ASP.NET Core-512BD4?style=flat&logo=.NET&logoColor=white"/>
-
-## 크론잡을 쉽게 관리할 수 있는 라이브러리
-
-**[Hangfire.io](https://www.hangfire.io/)**
-
 ![](/assets/docs/200_AspNet/201/1.webp)
 
 * **백그라운드잡**을 쉽게 관리할 수 있는 라이브러리

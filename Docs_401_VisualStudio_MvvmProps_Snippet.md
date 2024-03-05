@@ -32,6 +32,7 @@ order: 401
  ---
 
 * MVVM 패턴에서는 프로퍼티가 변경될 때마다 `OnPropertyChanged` 메서드를 호출하여 UI를 업데이트한다.
+  
     ```csharp
     private string _myProperty;
 
@@ -132,10 +133,12 @@ private int _MyProperty;
 ---
 
  * (기존) *<u>field</u>* 선 선언 & *<u>property</u>* 후 선언
- ![](/assets/docs/400_VisualStudio/401/1.webp)
 
- * (변경) *<u>property</u>* 선 선언 & *<u>field</u>* 후 선언으로 
- ![](/assets/docs/400_VisualStudio/401/2.webp)
+    ![](/assets/docs/400_VisualStudio/401/1.webp)<br/>
+
+ * (변경) *<u>property</u>* 선 선언 & *<u>field</u>* 후 선언으로
+
+    ![](/assets/docs/400_VisualStudio/401/2.webp)<br/>
 
  * VisualStudio의 *CodeLens*는 property를 참조하는 숫자를 보여주는데, <br/>
   그게 field 선언 사이의 공간을 띄워 가독성이 떨어지게 만든다.<br/>
@@ -149,12 +152,12 @@ private int _MyProperty;
 * (기존) *<u>field</u>*명: 언더바`_` + 소문자 시작
 
     ![](/assets/docs/400_VisualStudio/401/3.webp)<br/>
-    `private int _myProperty;`
+    `private int _**m**yProperty;`
 
 * (변경) *<u>field</u>*명: 언더바`_` + 대문자 시작
 
     ![](/assets/docs/400_VisualStudio/401/4.webp)<br/>
-    `private int _MyProperty;`
+    `private int _**M**yProperty;`
 
 * VS스니펫은 일괄적으로 네이밍 변경 기능을 제공하는데<br/>
   덕분에 기본 `propfull` 스니펫은 `_myProperty` *<u>field</u>*를 일괄적으로 변경할 수 있다.

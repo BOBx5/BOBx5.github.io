@@ -19,27 +19,7 @@ order: 502
 
 별도의 C# 콘솔 프로젝트 생성하고 `SerialPort` 클래스에 물려서 콘솔로 출력하게 할까도 생각했지만, 매번 하기 너무 번거로웠다. 좀더 간단하게 할 방법이 필요했다.
 
-### 해결방법1 (Putty)
----
-[Putty](https://www.putty.org/)를 설치하게 되면 설치 폴더(기본: *C:\Program Files\PuTTY*)에 `plink.exe` 가 설치되게 되는데
-별도의 GUI가 없는 커맨드 기반의 콘솔 프로그램이다.
-해당 폴더를 실행폴더로 잡아 파워쉘을 실행 후 아래의 코드를 실행하면
-시리얼포트에 연결되고, 해당 포트로 수신하는 데이터가 콘솔에 출력된다.
-필요에 따라 닷넷 프로젝트에 Process로 띄워서 작업할 수 도 있으리라고 본다.
-
-```powershell
-# putty의 plink.exe 를 이용하여 COM21 포트 수신
-# -serial: 시리얼통신
-# "\\.\COM21": COM10 위로는 '\\.\'를 prefix로 작성해줘야 연결이 정상적으로 됨
-# -sercfg: 시리얼 설정값
-#   BaudRate: 통신속도 설정
-#   DataBits: 데이터비트 설정
-#   Parity: 패리티 설정 n(None), e(Even), m(Mark), s(Space)
-#   FlowControl: 플로우컨트롤 설정 N(None), X(XON/XOF), R(RTS/CTS), D(DSR/DTR)
-**plink.exe -serial "\\.\COM21" -sercfg 9600,8,n,1,D**
-```
-
-### 해결방법2 (PowerShell)
+### 해결방법1 (PowerShell)
 ---
 ```powershell
 #현재 연결 가능한 포트명 목록을 불러옵니다
@@ -86,3 +66,23 @@ $port.Close()
 2. `SerialPort`를 `Open()` 하기 전에 해당 포트에 데이터를 Write 해놓음.
 3. `SerialPort`를 `Open()` 후 `ReadExisting()` 를 실행하면 공백데이터(`""`)만 추출됨.
 4. 그러나 `SerialPort.ReadLine()` 을 실행하면 기존 버퍼에 있는 데이터가 나옴
+
+### 해결방법2 (Putty)
+---
+[Putty](https://www.putty.org/)를 설치하게 되면 설치 폴더(기본: *C:\Program Files\PuTTY*)에 `plink.exe` 가 설치되게 되는데
+별도의 GUI가 없는 커맨드 기반의 콘솔 프로그램이다.
+해당 폴더를 실행폴더로 잡아 파워쉘을 실행 후 아래의 코드를 실행하면
+시리얼포트에 연결되고, 해당 포트로 수신하는 데이터가 콘솔에 출력된다.
+필요에 따라 닷넷 프로젝트에 Process로 띄워서 작업할 수 도 있으리라고 본다.
+
+```powershell
+# putty의 plink.exe 를 이용하여 COM21 포트 수신
+# -serial: 시리얼통신
+# "\\.\COM21": COM10 위로는 '\\.\'를 prefix로 작성해줘야 연결이 정상적으로 됨
+# -sercfg: 시리얼 설정값
+#   BaudRate: 통신속도 설정
+#   DataBits: 데이터비트 설정
+#   Parity: 패리티 설정 n(None), e(Even), m(Mark), s(Space)
+#   FlowControl: 플로우컨트롤 설정 N(None), X(XON/XOF), R(RTS/CTS), D(DSR/DTR)
+**plink.exe -serial "\\.\COM21" -sercfg 9600,8,n,1,D**
+```

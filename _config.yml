@@ -4,7 +4,7 @@
 # ---------
 
 # TO USE JEKYLL LIBDOC AS REMOTE THEME, UNCOMMENT (available only on Github)
-# remote_theme: olivier3lanc/Jekyll-LibDoc
+remote_theme: olivier3lanc/Jekyll-LibDoc
 title: BOBx5.github.io # title of the documentation
 description: >- # Description of the docs. (>- means to ignore newlines until next param)
   닷넷 개발자의 조용한 수집품
@@ -14,7 +14,7 @@ url: https://bobx5.github.io # the base hostname & protocol for your site, e.g. 
 #permalink: /:path/:basename/:output_ext
 #destination: ../your/new/path # Build relative path destination. The destination directory e.g. /blog
 #keep_files: [cache]
-#markdown: kramdown
+markdown: kramdown
 defaults:
   -
     values:
@@ -24,16 +24,14 @@ kramdown:
         disable: true
 sass:
     style: compressed
+plugins:
+  - jekyll-remote-theme
 #exclude: ['/misc']
 
 # ---------
 # LIBDOC CONFIGURATION
 # https://olivier3lanc.github.io/Jekyll-LibDoc/libdoc-config.html
 # ---------
-
-remote_theme: olivier3lanc/Jekyll-LibDoc
-plugins:
-  - jekyll-remote-theme
 
 # PLAYGROUND
 # The user context entirely separated from LibDoc theme
@@ -275,7 +273,7 @@ prism:
     languages:
         - markup
         - css
-        #- clike
+        - clike
         - javascript
         #- abap
         #- abnf
@@ -296,7 +294,7 @@ prism:
         #- asm6502
         #- autohotkey
         #- autoit
-        - bash
+        #- bash
         #- basic
         #- batch
         #- bbcode
@@ -325,7 +323,7 @@ prism:
         #- csv
         #- cypher
         #- d
-        - dart
+        #- dart
         #- dataweave
         #- dax
         #- dhall
@@ -359,7 +357,7 @@ prism:
         #- git
         #- glsl
         #- go
-        - graphql
+        #- graphql
         #- groovy
         #- haml
         #- handlebars
@@ -368,7 +366,7 @@ prism:
         #- hcl
         #- hlsl
         #- hoon
-        - http
+        #- http
         #- hpkp
         #- hsts
         #- ichigojam
@@ -452,23 +450,23 @@ prism:
         #- prolog
         #- promql
         #- properties
-        - protobuf
+        #- protobuf
         #- pug
         #- puppet
         #- pure
         #- purebasic
         #- purescript
-        - python
+        #- python
         #- qsharp
         #- q
         #- qml
         #- qore
         #- r
         #- racket
-        - jsx
-        - tsx
+        #- jsx
+        #- tsx
         #- reason
-        - regex
+        #- regex
         #- rego
         #- renpy
         #- rest
@@ -509,7 +507,7 @@ prism:
         #- toml
         #- turtle
         #- twig
-        - typescript
+        #- typescript
         #- typoscript
         #- unrealscript
         #- uri

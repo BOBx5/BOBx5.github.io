@@ -201,10 +201,10 @@ sidebar:
             category: External resources
             title: Github Pages
             order: 910
-        -   url: https://jekyllrb.com
-            category: External resources
-            title: Jekyll
-            order: 910
+        # -   url: https://jekyllrb.com
+        #     category: External resources
+        #     title: Jekyll
+        #     order: 910
 
 # BADGES
 # Feature that allows to display badges into the footer https://shields.io image html and url

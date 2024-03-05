@@ -260,7 +260,7 @@ assets:
 prism:
     # THEME
     # coy, dark, funky, okaidia, twilight, solarizedlight, tomorrow, 
-    theme: dark
+    theme: tomorrow
 
     # FONT SIZE
     # CSS font-size property override for <code>
@@ -275,7 +275,7 @@ prism:
     languages:
         - markup
         - css
-        - clike
+        #- clike
         - javascript
         #- abap
         #- abnf
@@ -296,7 +296,7 @@ prism:
         #- asm6502
         #- autohotkey
         #- autoit
-        #- bash
+        - bash
         #- basic
         #- batch
         #- bbcode
@@ -325,7 +325,7 @@ prism:
         #- csv
         #- cypher
         #- d
-        #- dart
+        - dart
         #- dataweave
         #- dax
         #- dhall
@@ -359,7 +359,7 @@ prism:
         #- git
         #- glsl
         #- go
-        #- graphql
+        - graphql
         #- groovy
         #- haml
         #- handlebars
@@ -368,7 +368,7 @@ prism:
         #- hcl
         #- hlsl
         #- hoon
-        #- http
+        - http
         #- hpkp
         #- hsts
         #- ichigojam
@@ -452,21 +452,21 @@ prism:
         #- prolog
         #- promql
         #- properties
-        #- protobuf
+        - protobuf
         #- pug
         #- puppet
         #- pure
         #- purebasic
         #- purescript
-        #- python
+        - python
         #- qsharp
         #- q
         #- qml
         #- qore
         #- r
         #- racket
-        #- jsx
-        #- tsx
+        - jsx
+        - tsx
         #- reason
         - regex
         #- rego
@@ -509,7 +509,7 @@ prism:
         #- toml
         #- turtle
         #- twig
-        #- typescript
+        - typescript
         #- typoscript
         #- unrealscript
         #- uri

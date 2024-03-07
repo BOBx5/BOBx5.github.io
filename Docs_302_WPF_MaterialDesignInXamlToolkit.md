@@ -206,3 +206,8 @@ order: 301
   </Application.Resources>
 </Application>
 ```
+
+## 참고
+---
+기본 테마 컬러의 일부를 변경하고 싶다면 아래의 링크를 참고하여 Override 하면 된다.
+[MaterialDesignInXamlToolkit Brush-Names](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit/wiki/Brush-Names)

@@ -86,5 +86,3 @@ order: 301
         }
     }
     ```
-
-<!-- ## [MaterialDesignInXamlToolkit](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit) -->

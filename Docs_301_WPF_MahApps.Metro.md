@@ -27,7 +27,7 @@ order: 301
 * Microsoft 에서 개발한 Metro Design 스타일의 테마
 * 군더더기 없는 깔끔한 스타일이 특징
 
-## 설치
+## 사용방법
 ---
 * NuGet 패키지 매니저를 이용하여 설치
     ```powershell

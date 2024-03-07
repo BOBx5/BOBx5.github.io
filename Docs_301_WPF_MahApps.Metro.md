@@ -1,6 +1,6 @@
 ---
 title: MahApps.Metro
-description: <span>&#x23;WPF</span>
+description: <span>&#x23;WPF &#x23;NuGet</span>
 layout: libdoc/page
 
 #LibDoc specific below
@@ -8,9 +8,8 @@ category: WPF
 order: 301
 ---
 <div align="left">
-    <img src="https://img.shields.io/badge/VisualStudio-5C2D91?style=flat&logo=visualstudio&logoColor=white"/>
     <img src="https://img.shields.io/badge/WPF-512BD4?style=flat&logo=dotnet&logoColor=white"/>
-    <img src="https://img.shields.io/badge/XAML-0C54C2?style=flat&logo=xaml&logoColor=white"/>
+    <img src="https://img.shields.io/badge/NuGet-004880?style=flat&logo=nuget&logoColor=white"/>
 </div>
 {:toc}
 ---

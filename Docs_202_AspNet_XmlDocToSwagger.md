@@ -7,9 +7,13 @@ layout: libdoc/page
 category: ASP.NET
 order: 202
 ---
+<div align="left">
+    <img src="https://img.shields.io/badge/ASP.NET Core-512BD4?style=flat&logo=.NET&logoColor=white"/>
+</div>
 {:toc}
-## C# XML Summary를 Swagger 문서로 변환
+---
 
+## C# XML Summary를 Swagger 문서로 변환
 
 ```csharp
 public class SomeController : ControllerBase
@@ -41,6 +45,7 @@ builder.Services.AddSwaggerGen(options =>
     options.IncludeXmlComments(xmlPath);
 });
 ```
+
 #### `{ProjectName}.csproj`
 ```xml
 <PropertyGroup>
@@ -53,4 +58,4 @@ builder.Services.AddSwaggerGen(options =>
 
 위와 같이 작성하게 되면 Swagger에 XML 주석이 자동으로 생성 및 반영된다.
 
-> 개꿀 👍
+개꿀 👍

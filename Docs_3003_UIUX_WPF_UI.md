@@ -9,9 +9,8 @@ order: 3003
 ---
 {:.toc}
 
-## WPF UI 래퍼런스용 오픈소스 프로젝스 소스
-
-[🔗WPF UI](https://wpfui.lepo.co/)
+## [WPF UI](https://wpfui.lepo.co/)
+### WPF UI 래퍼런스용 오픈소스 프로젝스 소스
 
 ![](/assets/docs/3000_Uiux/3003/1.webp)
 ![](/assets/docs/3000_Uiux/3003/2.webp)

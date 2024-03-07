@@ -9,9 +9,8 @@ order: 3002
 ---
 {:.toc}
 
-## 해외 유명 모바일 앱의 UI 래퍼런스 참고
-
-[🔗Mobbin](https://mobbin.com/)
+## [Mobbin](https://mobbin.com/)
+### 해외 유명 모바일 앱의 UI 래퍼런스 참고
 
 ![](/assets/docs/3000_Uiux/3002/1.webp)
 

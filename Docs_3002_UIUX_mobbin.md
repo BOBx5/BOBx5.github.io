@@ -1,5 +1,5 @@
 ---
-title: 🔗Mobbin
+title: Mobbin🔗
 description: <span>&#x23;UI &#x23;UX</span>
 layout: libdoc/page
 

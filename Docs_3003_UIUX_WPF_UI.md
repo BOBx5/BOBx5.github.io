@@ -1,5 +1,5 @@
 ---
-title: 🔗WPF UI
+title: WPF UI🔗
 description: <span>&#x23;UI &#x23;UX</span>
 layout: libdoc/page
 

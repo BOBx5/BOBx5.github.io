@@ -7,7 +7,12 @@ layout: libdoc/page
 category: VisualStudio
 order: 402
 ---
+<div align="left">
+    <img src="https://img.shields.io/badge/VisualStudio-5C2D91?style=flat&logo=visualstudio&logoColor=white"/>
+    <img src="https://img.shields.io/badge/WPF-512BD4?style=flat&logo=dotnet&logoColor=white"/>
+</div>
 {:toc}
+---
 
 # RowDefinition과 ColumnDefinition을 포함한 Grid 스니펫
 

@@ -1,5 +1,5 @@
 ---
-title: 🔗Flaticon
+title: Flaticon🔗
 description: <span>&#x23;Utility &#x23;Icon</span>
 layout: libdoc/page
 

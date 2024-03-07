@@ -1,5 +1,5 @@
 ---
-title: 🔗Regexr
+title: Regexr🔗
 description: <span>&#x23;Utility &#x23;Regex</span>
 layout: libdoc/page
 

@@ -1,5 +1,5 @@
 ---
-title: 🔗Text to Diagram 
+title: Text to Diagram🔗
 description: <span>&#x23;Utility &#x23;Markdown</span>
 layout: libdoc/page
 

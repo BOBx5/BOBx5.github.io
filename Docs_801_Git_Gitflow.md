@@ -7,10 +7,13 @@ layout: libdoc/page
 category: Git
 order: 801
 ---
+<div align="left">
+    <img src="https://img.shields.io/badge/Git-F05032?style=flat&logo=git&logoColor=white"/>
+</div>
 {:.toc}
+---
 
 # 효과적인 프로젝트 관리를 위한 Gitflow 전략
-
 
 ![](/assets/docs/800_Git/801/1.webp)
 

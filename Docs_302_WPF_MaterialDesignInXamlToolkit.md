@@ -162,7 +162,8 @@ order: 301
 #### 최종 결과
 
 ```xml
-<Application x:Class="MaterialMahApps.App"
+<Application 
+  x:Class="MaterialMahApps.App"
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   StartupUri="MainWindow.xaml">

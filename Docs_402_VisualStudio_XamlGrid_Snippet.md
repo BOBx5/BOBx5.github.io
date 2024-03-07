@@ -10,7 +10,6 @@ order: 402
 <div align="left">
     <img src="https://img.shields.io/badge/VisualStudio-5C2D91?style=flat&logo=visualstudio&logoColor=white"/>
     <img src="https://img.shields.io/badge/WPF-512BD4?style=flat&logo=dotnet&logoColor=white"/>
-    <img src="https://img.shields.io/badge/XAML-0C54C2?style=flat&logo=xaml&logoColor=white"/>
 </div>
 {:toc}
 ---

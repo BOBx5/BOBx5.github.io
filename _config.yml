@@ -198,7 +198,7 @@ sidebar:
         -   url: https://github.com/BOBx5/BOBx5.github.io/settings/pages
             category: External resources
             title: Github Pages
-            order: 910
+            order: 9999
         # -   url: https://jekyllrb.com
         #     category: External resources
         #     title: Jekyll

@@ -9,10 +9,9 @@ order: 2001
 ---
 {:.toc}
 
-## 마크다운 다이어그램들을 비교해보기
+## [Text-to-Diagram](https://text-to-diagram.com/)
+### 마크다운 다이어그램들을 비교해보기
 ---
-[🔗Text-to-Diagram](https://text-to-diagram.com/)
-
 ![](/assets/docs/2000_Utilities/2001/1.webp)
 
 * 비교 가능 라이브러리

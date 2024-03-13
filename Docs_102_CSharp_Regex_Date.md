@@ -64,13 +64,18 @@ public static DateTime? FindDate(string input, string seperator)
 ### 기능
 ---
 문자열에서 날짜값을 추출하여 반환한다.
-  * Type: `DateTime?`
-  * Default: `null`
+* Type: `DateTime?`
+* Default: `null`
 
 ### 검출 가능 유형
 ---
-  * `yyyy.MM.dd`<br/>*2021.01.01*
-  * `yyyy/MM/dd`<br/>*2021/01/01*
-  * `yyyy-MM-dd`<br/>*2021-01-01*
-  * `yyyy년MM월dd일`<br/>*2021년01월01일*
-  * `yyyy년 MM월 dd일`<br/>*2021년 01월 01일*
+* #### `yyyy.MM.dd`
+    *2021.01.01*
+* #### `yyyy/MM/dd`
+    *2021/01/01*
+* #### `yyyy-MM-dd`
+    *2021-01-01*
+* #### `yyyy년MM월dd일`
+    *2021년01월01일*
+* #### `yyyy년 MM월 dd일`
+    *2021년 01월 01일*

@@ -47,11 +47,13 @@ public static TimeSpan FindTime(string input)
 
 ### 기능
 ---
-  * 문자열에서 시간값을 추출하여 반환한다.
-  * Type: `TimeSpan`
-  * Default: `TimeSpan.Zero`
+* 문자열에서 시간값을 추출하여 반환한다.
+* Type: `TimeSpan`
+* Default: `TimeSpan.Zero`
 
 ### 검출 가능 유형
 ---
-  * `mm:ss`<br/>23:59
-  * `hh:mm:ss`<br/>23:59:59
+* #### `mm:ss`
+*23:59*
+* #### `hh:mm:ss`
+*23:59:59*

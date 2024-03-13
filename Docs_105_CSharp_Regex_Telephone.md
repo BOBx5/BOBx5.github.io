@@ -9,12 +9,8 @@ order: 105
 ---
 * 
 {:toc}
-<div align="left">
-    <img src="https://img.shields.io/badge/C%23-512BD4?style=flat&logo=csharp&logoColor=white"/>
-</div>
----
 
-### 휴대폰 번호 추출
+## 휴대폰 번호 추출
 ---
 ```csharp
 public static string Contact(string input)
@@ -42,16 +38,38 @@ public static string Contact(string input)
     return string.Empty;
 }
 ```
+
+### 기능
+---
 * 문자열에서 휴대폰 번호를 추출하여 반환한다.
 * Type: `string`
 * Default: `string.Empty`
-* 검출 가능 유형 (`X` = [016789]) `010` `011` `016` `017` `018` `019`
-  * `01X-DDD-DDDD`<br/>010-123-4567
-  * `01X-DDDD-DDDD`<br/>010-1234-5678
-  * `01XDDDDDDDD`<br/>0101234567
-  * `01XDDDDDDD`<br/>01012345678
+
+### 검출 가능 유형
+--- 
+`01X`= `010` `011` `016` `017` `018` `019`
+
+1. #### Pattern 1
+---
+```regex
+01{1}[016789]{1}-[0-9]{3,4}-[0-9]{4}
+```
+* ##### `01X-DDD-DDDD`
+*010-123-4567*
+* ##### `01X-DDDD-DDDD`
+*010-1234-5678*
+
+2. #### Pattern 2
+---
+```regex
+01{1}[016789]{1}[0-9]{7,8}
+```
+* ##### `01XDDDDDDDD`
+*0101234567*
+* ##### `01XDDDDDDD`
+*01012345678*
   
-### 전화번호 추출
+## 전화번호 추출
 ---
 ```csharp
 public static string Contact(string input)
@@ -77,24 +95,67 @@ public static string Contact(string input)
     return string.Empty;
 }
 ```
+
+### 기능
+---
 * 문자열에서 전화번호를 추출하여 반환한다.
 * Type: `string`
 * Default: `string.Empty`
-* 검출 가능 유형 (`D` = Digit [0-9])
-  1. **Pattern 1** : `-` 포함된 번호 대응
-      * `0D-DDD-DDDD`
-      * `0DD-DDD-DDDD`
-      * `0DD-DDDD-DDDD`
-  2. **Pattern 2** : `-` 없는 번호 대응
-      * `0DDDDDDDD`<br/>02123456
-      * `0DDDDDDDDD`<br/>0311234567
-      * `0DDDDDDDDDD`<br/>03112345678
-  3. **Pattern 3** : 배민이 가운데 자리 5글자 패턴 대응
-      * `0DD-DDDD-DDDD`
-      * `0DD-DDDD-DDDD`
-      * `0DD-DDDDD-DDDD`<br/>050-37362-1627
-  4. **Pattern 4** : 서울 지역번호 대응
-      * `02-DDD-DDDD`<br/>02-123-4567
-      * `02-DDDD-DDDD`<br/>02-12342-5678
-      * `02DDDDDDD`<br/>021234567
-      * `02DDDDDDDD`<br/>0212345678
+
+### 검출 가능 유형 
+---
+`-` 포함된 번호 대응<br/>
+`D`= Digit [0-9]
+
+1. #### Pattern 1
+---
+```regex
+(0{1}\d{2,3}-\d{3,4}-\d{4})
+```
+* ##### `0D-DDD-DDDD`
+*02-123-4567*
+* ##### `0DD-DDD-DDDD`
+*031-123-4567*
+* ##### `0DD-DDDD-DDDD`
+*031-1234-45678*
+
+2. #### Pattern 2
+---
+`-` 없는 번호 대응
+```regex
+(0{1}\d{2,3}\d{3,4}\d{4})
+```
+* ##### `0DDDDDDDD`
+*021234567*
+* ##### `0DDDDDDDDD`
+*0311234567*
+* ##### `0DDDDDDDDDD`
+*03112345678*
+
+3. #### Pattern 3
+---
+배민이 안심번호 가운데 자리 5글자 패턴 대응
+```regex
+(0{1}\d{2}-\d{3,5}-\d{4})
+```
+* ##### `0DD-DDD-DDDD`
+*031-123-4567*
+* ##### `0DD-DDDD-DDDD`
+*031-1234-5678*
+* ##### `0DD-DDDDD-DDDD`
+*050-51234-5678*
+
+4. #### Pattern 4
+---
+서울 지역번호 대응
+```regex
+(02-\d{3,4}-\d{4})|(02\d{3,4}\d{4})
+```
+* ##### `02-DDD-DDDD`
+*02-123-4567*
+* ##### `02-DDDD-DDDD`
+*02-12342-5678*
+* ##### `02DDDDDDD`
+*021234567*
+* ##### `02DDDDDDDD`
+*0212345678*

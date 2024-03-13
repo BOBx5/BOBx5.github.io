@@ -8,7 +8,6 @@ category: Git
 order: 802
 ---
 {:.no_toc}
-
 <div align="left">
     <img src="https://img.shields.io/badge/Git-F05032?style=flat&logo=git&logoColor=white"/>
     <img src="https://img.shields.io/badge/GitLab-FC6D26?style=flat&logo=gitlab&logoColor=white"/>

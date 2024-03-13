@@ -10,12 +10,7 @@ order: 104
 * 
 {:toc}
 
-<div align="left">
-    <img src="https://img.shields.io/badge/C%23-512BD4?style=flat&logo=csharp&logoColor=white"/>
-</div>
----
-
-### 숫자값 추출
+## 숫자값 추출
 ---
 ```csharp
 public static int? Digit(string input)
@@ -30,9 +25,16 @@ public static int? Digit(string input)
     return null;
 }
 ```
+
+### 기능
+---
 * 문자열에서 숫자값을 추출하여 반환한다.
 * Type: `int`
 * Default: `null`
-* 검출 가능 유형
-    * `123456`
-    * `123,456`
+
+### 검출 가능 유형
+---
+* #### `dddddd`
+*123456*
+* #### `ddd,ddd`
+*123,456*

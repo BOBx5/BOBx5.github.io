@@ -464,7 +464,7 @@ prism:
         #- jsx
         #- tsx
         #- reason
-        #- regex
+        - regex
         #- rego
         #- renpy
         #- rest

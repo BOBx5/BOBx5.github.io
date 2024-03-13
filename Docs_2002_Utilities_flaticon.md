@@ -7,7 +7,7 @@ layout: libdoc/page
 category: Utilities
 order: 2002
 ---
-{:.toc}
+{:.no_toc}
 
 ## [Flaticion](https://www.flaticon.com/)
 ### 유/무료 아이콘 찾기

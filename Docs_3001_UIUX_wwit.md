@@ -7,7 +7,7 @@ layout: libdoc/page
 category: UI/UX
 order: 3001
 ---
-{:.toc}
+{:.no_toc}
 
 ## [WWIT-윗](https://wwit.design/)
 ### 국내 유명 모바일 앱의 UI 래퍼런스 참고용 사이트

@@ -7,7 +7,7 @@ layout: libdoc/page
 category: UI/UX
 order: 3003
 ---
-{:.toc}
+{:.no_toc}
 
 ## [WPF UI](https://wpfui.lepo.co/)
 ### WPF UI 래퍼런스용 오픈소스 프로젝스 소스

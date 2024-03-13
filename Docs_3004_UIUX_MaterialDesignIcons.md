@@ -7,7 +7,7 @@ layout: libdoc/page
 category: UI/UX
 order: 3004
 ---
-{:.toc}
+{:.no_toc}
 
 ## [Pictogrammer](https://pictogrammers.com/library/mdi/)
 ### Material Design Icons 둘러보기

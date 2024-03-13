@@ -14,18 +14,16 @@ url: https://bobx5.github.io # the base hostname & protocol for your site, e.g. 
 #permalink: /:path/:basename/:output_ext
 #destination: ../your/new/path # Build relative path destination. The destination directory e.g. /blog
 #keep_files: [cache]
-# markdown: kramdown
-# defaults:
-#   -
-#     values:
-#       layout: libdoc/page # Uncommenting brings pbms on static files that must not be associated to any layout
+markdown: kramdown
+defaults:
+  -
+    values:
+      layout: libdoc/page # Uncommenting brings pbms on static files that must not be associated to any layout
 kramdown:
     syntax_highlighter_opts:
         disable: true
 sass:
     style: compressed
-plugins:
-    - jekyll-remote-theme
 #exclude: ['/misc']
 
 # ---------

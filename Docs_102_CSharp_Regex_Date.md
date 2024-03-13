@@ -7,13 +7,11 @@ layout: libdoc/page
 category: CSharp
 order: 102
 ---
-<div align="left">
-    <img src="https://img.shields.io/badge/C%23-512BD4?style=flat&logo=csharp&logoColor=white"/>
-</div>
----
-{:toc}
 
-### 날짜값 추출
+![](https://img.shields.io/badge/C%23-512BD4?style=flat&logo=csharp&logoColor=white)
+
+## 날짜값 추출
+{:toc}
 ---
 ```csharp
 public class Seperators

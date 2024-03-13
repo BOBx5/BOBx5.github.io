@@ -14,14 +14,14 @@ url: https://bobx5.github.io # the base hostname & protocol for your site, e.g. 
 #permalink: /:path/:basename/:output_ext
 #destination: ../your/new/path # Build relative path destination. The destination directory e.g. /blog
 #keep_files: [cache]
-markdown: kramdown
+#markdown: kramdown
 defaults:
   -
     values:
       layout: libdoc/page
 kramdown:
     syntax_highlighter_opts:
-        disable: true
+        disable: false
 sass:
     style: compressed
 plugins:
@@ -294,7 +294,7 @@ prism:
         #- asm6502
         #- autohotkey
         #- autoit
-        #- bash
+        - bash
         #- basic
         #- batch
         #- bbcode

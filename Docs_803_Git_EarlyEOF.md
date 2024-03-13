@@ -7,10 +7,12 @@ layout: libdoc/page
 category: Git
 order: 803
 ---
+{:toc}
+
+---
 <div align="left">
     <img src="https://img.shields.io/badge/Git-F05032?style=flat&logo=git&logoColor=white"/>
 </div>
-{:.toc}
 ---
 
 
@@ -23,7 +25,7 @@ Git Repo Clone 해서 내려받던 중<br/>
 오류 메세지를 기반으로 검색하여<br/>
 아래와 같은 *StackOverflow* 에서 한 Thread를 발견
 
-[fatal: early EOF fatal: index-pack failed](https://stackoverflow.com/questions/21277806/fatal-early-eof-fatal-index-pack-failed)
+[StackOverflow: *fatal: early EOF fatal: index-pack failed*](https://stackoverflow.com/questions/21277806/fatal-early-eof-fatal-index-pack-failed)
 
 ![](/assets/docs/800_Git/803/2.webp)
 

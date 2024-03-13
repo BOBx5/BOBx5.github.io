@@ -4,7 +4,7 @@ description: <span>&#x23;CSharp &#x23;Regex</span>
 layout: libdoc/page
 
 #LibDoc specific below
-category: C#
+category: CSharp
 order: 102
 ---
 <div align="left">

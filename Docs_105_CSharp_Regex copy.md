@@ -1,10 +1,10 @@
 ---
 title: 전화번호 정규식
-description: <span>&#x23;C&#x23; &#x23;Regex</span>
+description: <span>&#x23;CSharp &#x23;Regex</span>
 layout: libdoc/page
 
 #LibDoc specific below
-category: C#
+category: CSharp
 order: 105
 ---
 <div align="left">

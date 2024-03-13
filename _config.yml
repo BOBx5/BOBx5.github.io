@@ -327,7 +327,7 @@ prism:
         #- dataweave
         #- dax
         #- dhall
-        #- diff
+        - diff
         #- django
         #- dns-zone-file
         #- docker

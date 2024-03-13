@@ -14,17 +14,23 @@ order: 803
 ---
 ![](/assets/docs/800_Git/803/1.webp)
 
-Git Repo Clone 해서 내려받던 중<br/>
-위와 같은 오류 화면이 발생했다.<br/>
-오류 메세지를 기반으로 검색하여<br/>
+Git Repo Clone 해서 내려받던 중
+
+위와 같은 오류 화면이 발생했다.
+
+오류 메세지를 기반으로 검색하여
+
 아래와 같은 *StackOverflow* 에서 한 Thread를 발견
 
-[StackOverflow: *fatal: early EOF fatal: index-pack failed*](https://stackoverflow.com/questions/21277806/fatal-early-eof-fatal-index-pack-failed)
+[***StackOverflow***: *fatal: early EOF fatal: index-pack failed*](https://stackoverflow.com/questions/21277806/fatal-early-eof-fatal-index-pack-failed)
 
 ![](/assets/docs/800_Git/803/2.webp)
 
-해당 Thread를 참고하여 모든 방법을 적용해봤으나<br/>
-해결되지 않았다.<br/>
+해당 Thread를 참고하여 모든 방법을 적용해봤으나 해결되지 않았다.
+
+다만 해당 Thread에서 언급된 내용을 바탕으로
+
+아래와 같은 해결 방법을 찾아냈다.
     
 ## 해결방법
 ---
@@ -55,25 +61,23 @@ Git Repo Clone 해서 내려받던 중<br/>
     > 따라서 이후 과정을 실행할 필요가 있다.
     
 4. ***<u>.git</u>*** 경로로 이동하여 `config`파일 수정
-    1. *git* 에서 내려받을 때 메모리 사용량 설정을 변경해준다.
-    2. `fetch` 해오는 경로를 master(repo에 따라 이름은 다를 수 있음) 가 아닌 `*` (와일드카드) 로 변경해준다.
-    
+
+    **기존**
     ```bash
-    # BEFORE
-    [core]
-        repositoryformatversion = 0
-        filemode = false
-        bare = false
-        logallrefupdates = true
-        symlinks = false
-        ignorecase = true
-    [remote "origin"]
-        url = <repository-URL> 
-        fetch = +refs/heads/master:refs/remotes/origin/master
+        [core]
+            repositoryformatversion = 0
+            filemode = false
+            bare = false
+            logallrefupdates = true
+            symlinks = false
+            ignorecase = true
+        [remote "origin"]
+            url = *<repository-URL>*
+            fetch = +refs/heads/master:refs/remotes/origin/master
     ```
     
-    ```bash 
-    # AFTER
+    **변경점**
+    ```diff
     [core]
         repositoryformatversion = 0
         filemode = false
@@ -81,22 +85,40 @@ Git Repo Clone 해서 내려받던 중<br/>
         logallrefupdates = true
         symlinks = false
         ignorecase = true
-    #### 1. 추가 ####
+    +   packedGitLimit = 2048m 
+    +   packedGitWindowSize = 2048m 
+    [remote "origin"]
+        url = *<repository-URL>*
+    -   fetch = +refs/heads/master:refs/remotes/origin/master
+    +   fetch = +refs/heads/:refs/remotes/origin/
+    +[pack] 
+    +   deltaCacheSize = 4095m 
+    +   packSizeLimit = 4095m 
+    +   windowMemory = 4095m
+    ```
+    
+    **변경완료**
+    ```bash
+    [core]
+        repositoryformatversion = 0
+        filemode = false
+        bare = false
+        logallrefupdates = true
+        symlinks = false
+        ignorecase = true
         packedGitLimit = 2048m 
         packedGitWindowSize = 2048m 
-    ##############
     [remote "origin"]
-        url = <repository-URL>
-    #### 2. 변경 ####
+        url = *<repository-URL>*
         fetch = +refs/heads/:refs/remotes/origin/
-    ##############
-    #### 3. 추가 ####
     [pack] 
         deltaCacheSize = 4095m 
         packSizeLimit = 4095m 
         windowMemory = 4095m
-    ##############
     ```
+    
+    * *git* 에서 내려받을 때 메모리 사용량 설정을 변경해준다.
+    * `fetch` 해오는 경로를 master(repo에 따라 이름은 다를 수 있음) 가 아닌 `*` (와일드카드) 로 변경해준다.
     
 5. git-bash의 WorkingDirectory 변경
     
@@ -122,3 +144,17 @@ Git Repo Clone 해서 내려받던 중<br/>
     문제가 해결된 것이다.
     
 8. 4번 과정에서 했던 과정을 원복시켜 저장해준다.
+    **원복**
+    ```bash
+        [core]
+            repositoryformatversion = 0
+            filemode = false
+            bare = false
+            logallrefupdates = true
+            symlinks = false
+            ignorecase = true
+        [remote "origin"]
+            url = *<repository-URL>*
+            fetch = +refs/heads/master:refs/remotes/origin/master
+    ```
+    

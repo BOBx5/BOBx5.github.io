@@ -1,21 +1,23 @@
 ---
-title: Copy Nice Extension
-description: <span>&#x23;VisualStudio</span>
+title: "[Extension] Copy Nice"
+description: <span>&#x23;VisualStudio &#x23;Extension</span>
 layout: libdoc/page
 
 #LibDoc specific below
 category: VisualStudio
 order: 403
 ---
+* 
+{:toc}
 <div align="left">
     <img src="https://img.shields.io/badge/VisualStudio-5C2D91?style=flat&logo=visualstudio&logoColor=white"/>
 </div>
-{:toc}
 ---
 
 ## 복붙 시 거슬리는 Indent 제거하기
 
 ### 기존 복사(`Ctrl`+`C`) & 붙여넣기(`Ctrl`+`V`)의 문제점
+{:.no_toc}
 ---
 ![](/assets/docs/400_VisualStudio/403/1.webp)
 

@@ -1,5 +1,5 @@
 ---
-title: 시간 정규식
+title: "[Regex] Time"
 description: <span>&#x23;CSharp &#x23;Regex</span>
 layout: libdoc/page
 
@@ -7,13 +7,10 @@ layout: libdoc/page
 category: CSharp
 order: 103
 ---
-<div align="left">
-    <img src="https://img.shields.io/badge/C%23-512BD4?style=flat&logo=csharp&logoColor=white"/>
-</div>
----
+* 
 {:toc}
 
-### 시간값 추출
+## 시간값 추출하기
 ---
 ```csharp
 public static TimeSpan FindTime(string input)
@@ -47,9 +44,14 @@ public static TimeSpan FindTime(string input)
     return TimeSpan.Zero;
 }
 ```
-* 문자열에서 시간값을 추출하여 반환한다.
-* Type: `TimeSpan`
-* Default: `TimeSpan.Zero`
-* 검출 가능 유형
+
+### 기능
+---
+  * 문자열에서 시간값을 추출하여 반환한다.
+  * Type: `TimeSpan`
+  * Default: `TimeSpan.Zero`
+
+### 검출 가능 유형
+---
   * `mm:ss`<br/>23:59
   * `hh:mm:ss`<br/>23:59:59

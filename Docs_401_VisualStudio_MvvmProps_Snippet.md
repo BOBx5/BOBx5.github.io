@@ -1,17 +1,18 @@
 ---
-title: MVVM Property Snippet
-description: <span>&#x23;VisualStudio &#x23;CSharp &#x23;MVVM</span>
+title: "[Snippet] MVVM Property"
+description: <span>&#x23;VisualStudio &#x23;CSharp &#x23;MVVM &#x23;Snippet</span>
 layout: libdoc/page
 
 #LibDoc specific below
 category: VisualStudio
 order: 401
 ---
+* 
+{:toc}
 <div align="left">
     <img src="https://img.shields.io/badge/VisualStudio-5C2D91?style=flat&logo=visualstudio&logoColor=white"/>
     <img src="https://img.shields.io/badge/C%23-512BD4?style=flat&logo=csharp&logoColor=white"/>
 </div>
-{:toc}
 ---
 
 # MVVM 패턴용 편리한 프로퍼티 스니펫 

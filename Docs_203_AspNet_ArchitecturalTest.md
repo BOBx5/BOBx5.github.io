@@ -7,9 +7,10 @@ layout: libdoc/page
 category: ASP.NET
 order: 203
 ---
+* 
 {:toc}
 
-# NetArchTest.Rule
+#  NetArchTest.Rule
 <div align="left">
     <a href="https://www.ben-morris.com/writing-archunit-style-tests-for-net-and-c-for-self-testing-architectures/">
         <img src="https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white"/>
@@ -22,7 +23,7 @@ order: 203
     </a>
 </div>
 
-## 아키텍처 테스트
+##  아키텍처 테스트
 ---
 * 예시 
   1. '*A 어셈블리가 B 어셈블리를 반드시 참조해야한다*'
@@ -34,10 +35,10 @@ order: 203
   7. '*모든 인터페이스는 대문자 `I`로 시작해야한다.*'
 * 위와 같은 것들을 테스트 자동화로 구현화여 코드가 아키텍처 규칙을 준수하는지 확인할 수 있다.
 
-## 코드 예시
+##  코드 예시
 ---
-### CASE 1. 
-#### *'A 어셈블리가 B 어셈블리를 반드시 참조해야한다.'*
+###  CASE 1. 
+####  *'A 어셈블리가 B 어셈블리를 반드시 참조해야한다.'*
 ---
 ```csharp
 public class LayerTest
@@ -57,8 +58,8 @@ public class LayerTest
 }
 ```
 
-### CASE 2. 
-#### *'A 어셈블리는 B 어셈블리를 참조해서는 안된다.'*
+###  CASE 2. 
+####  *'A 어셈블리는 B 어셈블리를 참조해서는 안된다.'*
 ---
 ```csharp
 public class LayerTest
@@ -77,8 +78,8 @@ public class LayerTest
     }
 }
 ```
-### CASE 3. 
-#### *'Handler'로 끝나는 클래스는 특정 어셈블리를 반드시 참조해야한다.*
+###  CASE 3. 
+####  *'Handler'로 끝나는 클래스는 특정 어셈블리를 반드시 참조해야한다.*
 ---
 ```csharp
 public class LayerTest
@@ -99,8 +100,8 @@ public class LayerTest
     }
 }
 ```
-### CASE 4. 
-#### *'Entity를 구현하는 클래스는 반드시 파라미터가 없는 `private` constructor를 구현하고 있어야 한다.'*
+###  CASE 4. 
+####  *'Entity를 구현하는 클래스는 반드시 파라미터가 없는 `private` constructor를 구현하고 있어야 한다.'*
 ---
 ```csharp
 public class DomainTest
@@ -130,8 +131,8 @@ public class DomainTest
     }
 }
 ```
-### CASE 5. 
-#### *'DomainEvent를 구현하는 클래스는 반드시 `sealed` 한정자로 구현되어 한다.'*
+###  CASE 5. 
+####  *'DomainEvent를 구현하는 클래스는 반드시 `sealed` 한정자로 구현되어 한다.'*
 ---
 ```csharp
 public class DomainTest
@@ -152,8 +153,8 @@ public class DomainTest
     }
 }
 ```
-### CASE 6. 
-#### *'ICommandHandler를 구현하는 클래스는 반드시 'Handler'라는 이름으로 끝나야한다.'*
+###  CASE 6. 
+####  *'ICommandHandler를 구현하는 클래스는 반드시 'Handler'라는 이름으로 끝나야한다.'*
 ---
 ```csharp
 public class ApplicationTest
@@ -174,8 +175,8 @@ public class ApplicationTest
     }
 }
 ```
-### CASE 7. 
-#### *'모든 인터페이스는 대문자 `I`로 시작해야한다.'*
+###  CASE 7. 
+####  *'모든 인터페이스는 대문자 `I`로 시작해야한다.'*
 ---
 ```csharp
 public class LayerTest

@@ -1,5 +1,5 @@
 ---
-title: 날짜 정규식
+title: "[Regex] Date"
 description: <span>&#x23;CSharp &#x23;Regex</span>
 layout: libdoc/page
 
@@ -7,11 +7,10 @@ layout: libdoc/page
 category: CSharp
 order: 102
 ---
-
-![](https://img.shields.io/badge/C%23-512BD4?style=flat&logo=csharp&logoColor=white)
-
-## 날짜값 추출
+* 
 {:toc}
+
+## 날짜값 추출하기
 ---
 ```csharp
 public class Seperators
@@ -61,12 +60,17 @@ public static DateTime? FindDate(string input, string seperator)
     return null;
 }
 ```
-* 문자열에서 날짜값을 추출하여 반환한다.
-* Type: `DateTime?`
-* Default: `null`
-* 검출 가능 유형
-  * `yyyy.MM.dd`<br/>2021.01.01
-  * `yyyy/MM/dd`<br/>2021/01/01
-  * `yyyy-MM-dd`<br/>2021-01-01
-  * `yyyy년MM월dd일`<br/>2021년01월01일
-  * `yyyy년 MM월 dd일`<br/>2021년 01월 01일
+
+### 기능
+---
+문자열에서 날짜값을 추출하여 반환한다.
+  * Type: `DateTime?`
+  * Default: `null`
+
+### 검출 가능 유형
+---
+  * `yyyy.MM.dd`<br/>*2021.01.01*
+  * `yyyy/MM/dd`<br/>*2021/01/01*
+  * `yyyy-MM-dd`<br/>*2021-01-01*
+  * `yyyy년MM월dd일`<br/>*2021년01월01일*
+  * `yyyy년 MM월 dd일`<br/>*2021년 01월 01일*

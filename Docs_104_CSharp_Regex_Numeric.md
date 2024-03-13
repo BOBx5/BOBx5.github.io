@@ -1,5 +1,5 @@
 ---
-title: 숫자 정규식
+title: "[Regex] Numeric"
 description: <span>&#x23;CSharp &#x23;Regex</span>
 layout: libdoc/page
 
@@ -7,10 +7,12 @@ layout: libdoc/page
 category: CSharp
 order: 104
 ---
+* 
+{:toc}
+
 <div align="left">
     <img src="https://img.shields.io/badge/C%23-512BD4?style=flat&logo=csharp&logoColor=white"/>
 </div>
-{:toc}
 ---
 
 ### 숫자값 추출

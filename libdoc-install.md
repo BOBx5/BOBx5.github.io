@@ -4,7 +4,7 @@ description: How to start crafting documentation with LibDoc.
 layout: libdoc/page
 
 #LibDoc specific below
-category: Features
+# category: Features
 order: 1100
 unlisted: true
 ---

@@ -10,7 +10,7 @@ order: 301
 * 
 {:toc}
 
-## [MahApps.Metro](https://github.com/MahApps/MahApps.Metro)
+## [**MahApps.Metro**](https://github.com/MahApps/MahApps.Metro)
 ---
 ![MahApps.Metro_1](/assets/docs/300_WPF/301/1.webp)
 ![MahApps.Metro_2](/assets/docs/300_WPF/301/2.webp)
@@ -23,64 +23,65 @@ order: 301
 * Microsoft 에서 개발한 Metro Design 스타일의 테마
 * 군더더기 없는 깔끔한 스타일이 특징
 
-## 사용방법
+## **사용방법**
 ---
-* NuGet 패키지 매니저를 이용하여 설치
-    ```powershell
-    Install-Package MahApps.Metro
-    ```
-* App.xaml 파일에 아래와 같이 추가
-    ```xml
-    <Application x:Class="SampleApp"
-                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                StartupUri="MainWindow.xaml">
-    <Application.Resources>
-        <ResourceDictionary>
-        <ResourceDictionary.MergedDictionaries>
-            <!-- MahApps.Metro ResourceDictionay 추가. 대소문자에 주의! -->
-            <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
-            <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
-            <!-- Theme setting -->
-            <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Blue.xaml" />
-        </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Application.Resources>
-    </Application>
-    ```
-* 적용하고자 하는 View에 적용
+### 1. NuGet 패키지 매니저를 이용하여 설치
+```powershell
+Install-Package MahApps.Metro
+```
 
-    **`xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"`**
+### 2. App.xaml 파일에 아래와 같이 추가
+```xml
+<Application x:Class="SampleApp"
+            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            StartupUri="MainWindow.xaml">
+<Application.Resources>
+    <ResourceDictionary>
+    <ResourceDictionary.MergedDictionaries>
+        <!-- MahApps.Metro ResourceDictionay 추가. 대소문자에 주의! -->
+        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+        <!-- Theme setting -->
+        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Blue.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+</Application.Resources>
+</Application>
+```
+### 3. 적용하고자 하는 View에 적용
 
-    ```xml
-    <mah:MetroWindow 
-        x:Class="SampleApp.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        Title="MainWindow"
-        Width="800"
-        Height="450"
-        WindowStartupLocation="CenterScreen"
-        mc:Ignorable="d">
-    <Grid>
-        <!--  Your content  -->
-    </Grid>
-    </mah:MetroWindow>
-    ```
+**`xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"`**
 
-    ```csharp
-    using MahApps.Metro.Controls;
-    namespace SampleApp
+```xml
+<mah:MetroWindow 
+    x:Class="SampleApp.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="MainWindow"
+    Width="800"
+    Height="450"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+<Grid>
+    <!--  Your content  -->
+</Grid>
+</mah:MetroWindow>
+```
+
+```csharp
+using MahApps.Metro.Controls;
+namespace SampleApp
+{
+    public partial class MainWindow : MetroWindow
     {
-        public partial class MainWindow : MetroWindow
+        public MainWindow()
         {
-            public MainWindow()
-            {
-                InitializeComponent();
-            }
+            InitializeComponent();
         }
     }
-    ```
+}
+```

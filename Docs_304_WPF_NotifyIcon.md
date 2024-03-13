@@ -10,9 +10,9 @@ order: 304
 * 
 {:toc}
 
-## [Hardcodet NotifyIcon for WPF](https://github.com/hardcodet/wpf-notifyicon)
+## [**Hardcodet NotifyIcon for WPF**](https://github.com/hardcodet/wpf-notifyicon)
 ### Windows TaskBar에 아이콘을 표시하는 라이브러리
-
+{:.no_toc}
 * 윈도우 우측 하단 시스템 트레이 영역에 아이콘을 표시하는 라이브러리
 * 지원기능
   * 마우스 클릭에 대한 사용자 지정 팝업(대화형 컨트롤)
@@ -26,32 +26,32 @@ order: 304
   * 트레이 아이콘의 클릭/더블클릭에 대한 `Command` 지원
 
   
-## 적용방법
+## **적용방법**
 ---
-1. NuGet 패키지 설치
-    ```powershell
-    Install-Package Hardcodet.NotifyIcon.Wpf
-    ```
-2. XAML에 네임스페이스 추가
-    ```xml
-    xmlns:tb="http://www.hardcodet.net/taskbar"
-    ```
-    ```xml
-    <Window
-      x:Class="Hardcodet.NetDrives.UI.SystemTray.Sample"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:tb="http://www.hardcodet.net/taskbar">
-      <tb:TaskbarIcon 
-        x:Name="myNotifyIcon"
-        Visibility="Visible"
-        ToolTipText="Fallback ToolTip for Windows xp"
-        IconSource="/Images/TrayIcons/Logo.ico"
-        ContextMenu="{StaticResource TrayMenu}"
-        MenuActivation="LeftOrRightClick"
-        TrayPopup="{StaticResoure TrayStatusPopup}"
-        PopupActivation="DoubleClick"
-        TrayToolTip="{StaticResource TrayToolTip}"
-        />
-    </Window>    
-    ```
+### 1. NuGet 패키지 설치
+```powershell
+Install-Package Hardcodet.NotifyIcon.Wpf
+```
+### 2. XAML에 네임스페이스 추가
+```xml
+xmlns:tb="http://www.hardcodet.net/taskbar"
+```
+```xml
+<Window
+  x:Class="Hardcodet.NetDrives.UI.SystemTray.Sample"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:tb="http://www.hardcodet.net/taskbar">
+  <tb:TaskbarIcon 
+    x:Name="myNotifyIcon"
+    Visibility="Visible"
+    ToolTipText="Fallback ToolTip for Windows xp"
+    IconSource="/Images/TrayIcons/Logo.ico"
+    ContextMenu="{StaticResource TrayMenu}"
+    MenuActivation="LeftOrRightClick"
+    TrayPopup="{StaticResoure TrayStatusPopup}"
+    PopupActivation="DoubleClick"
+    TrayToolTip="{StaticResource TrayToolTip}"
+    />
+</Window>    
+```

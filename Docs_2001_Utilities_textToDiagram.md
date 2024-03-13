@@ -15,10 +15,10 @@ order: 2001
 ![](/assets/docs/2000_Utilities/2001/1.webp)
 
 * 비교 가능 라이브러리
-  * D2
-  * PlantUML
-  * Mermaid.js
-  * GraphViz
+  * [D2](https://d2lang.com/)
+  * [PlantUML](https://plantuml.com/)
+  * [Mermaid.js](https://mermaid.js.org/)
+  * [GraphViz](https://graphviz.org/)
 
 * 비교 가능 항목
   * Basic

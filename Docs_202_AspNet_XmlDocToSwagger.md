@@ -30,8 +30,7 @@ public class SomeController : ControllerBase
 ASP.NET 개발을 하다보면 위와 같은 XML주석(*Summary*)을 작성하게 되는데<br/>
 이를 Swagger 문서로 변환하는 방법을 알아보자.
 
-`Program.cs`
-
+### `Program.cs`
 ---
 ```csharp
 builder.Services.AddSwaggerGen(options =>
@@ -45,8 +44,7 @@ builder.Services.AddSwaggerGen(options =>
 });
 ```
 
-`{ProjectName}.csproj`
-
+### `*.csproj`
 ---
 ```xml
 <PropertyGroup>

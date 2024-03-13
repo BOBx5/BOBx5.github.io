@@ -193,9 +193,13 @@ sidebar:
         #     order: 800
         #     category: Showcase
         # Example remote URL
-        -   url: https://github.com/BOBx5/BOBx5.github.io/settings/pages
+        -   url: https://github.com/BOBx5/BOBx5.github.io/settings/pages/
             category: External resources
             title: Github Pages
+            order: 9998
+        -   url: https://olivier3lanc.github.io/Jekyll-LibDoc/
+            category: External resources
+            title: LibDoc Document
             order: 9999
         # -   url: https://jekyllrb.com
         #     category: External resources

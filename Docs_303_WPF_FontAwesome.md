@@ -29,7 +29,7 @@ order: 303
   * *.Net Framework 3.5* 부터 지원하여 하위 종속성 👍
         
 #### [FontAwesome.Sharp](https://github.com/awesome-inc/FontAwesome.Sharp)
-  * 가장 최근까지 업데이트가 지속되는 패키지 (추천)
+  * 가장 최근까지 업데이트가 지속되는 패키지 **[추천]**
   * 종속성
       * *.NET 5.0*
       * *.NET Core 3.1*

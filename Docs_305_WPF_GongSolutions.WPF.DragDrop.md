@@ -11,14 +11,17 @@ order: 305
 {:toc}
 
 ## [**GongSolutions.WPF.DragDrop**](https://github.com/punker76/gong-wpf-dragdrop)
-### `ItemsControl` 아이템들의 *Drag&Drop*을 지원하는 라이브러리
-{:.no_toc}
+---
 ![](/assets/docs/300_WPF/305/1.webp)
 ![](/assets/docs/300_WPF/305/2.webp)
 ![](/assets/docs/300_WPF/305/3.webp)
 
-* `ListBox`, `ListView`, `TreeView`, `DataGrid` 등 `ItemsControl` 컨트롤을 모두 지원한다.
-* 다른 컨트롤로의 *INSERT*, *REMOVE*, *COPY* 등의 기능을 지원한다.
+* `ItemsControl`을 상속받는 컨트롤들에 *Drag&Drop*을 지원하는 라이브러리
+  * `ListBox`
+  * `ListView`
+  * `TreeView`
+  * `DataGrid`
+* 다른 컨트롤로의 *MOVE*, *INSERT*, *REMOVE*, *COPY* 등의 기능을 지원한다.
 * 작업자에게 안내 메세지 등을 띄울 수 있습니다.
 * Drag&Drop을 위한 미리보기(Preview)를 제공합니다.
   

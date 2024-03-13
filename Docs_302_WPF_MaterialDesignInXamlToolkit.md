@@ -9,11 +9,6 @@ order: 301
 ---
 * 
 {:toc}
-<div align="left">
-    <img src="https://img.shields.io/badge/WPF-512BD4?style=flat&logo=dotnet&logoColor=white"/>
-    <img src="https://img.shields.io/badge/NuGet-004880?style=flat&logo=nuget&logoColor=white"/>
-</div>
----
 
 ## [MaterialDesignInXamlToolkit](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit)
 ---
@@ -37,7 +32,7 @@ order: 301
 * 자체적으로 Icon Pack을 내장하고 있다.
 * *MahApps.Metro* 와 혼용도 가능하다. 
 
-## 사용방법 [🔗](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit/wiki/Getting-Started)
+## [사용방법](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit/wiki/Getting-Started)
 ---
 * NuGet 패키지 설치
     ```powershell
@@ -87,15 +82,15 @@ order: 301
     </mah:MetroWindow>
     ```
     
-### MahApps.Metro와 함께 사용하기 [🔗](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit/wiki/MahApps.Metro-integration)
+### [MahApps.Metro와 함께 사용하기](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit/wiki/MahApps.Metro-integration)
 ---
 * NuGet Package 설치
     ```powershell
     Install-Package MaterialDesignThemes.MahApps
     ```
-* App.xaml<br/>
-\>`ResourceDictionary`<br/>
-\>`ResourceDictionary.MergedDictionaries`<br/>
+* `App.xaml`<br/>
+\> `ResourceDictionary`<br/>
+\> `ResourceDictionary.MergedDictionaries`<br/>
 에 아래 추가
     ```xml
     <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />

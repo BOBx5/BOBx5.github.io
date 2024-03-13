@@ -9,18 +9,11 @@ order: 401
 ---
 * 
 {:toc}
-<div align="left">
-    <img src="https://img.shields.io/badge/VisualStudio-5C2D91?style=flat&logo=visualstudio&logoColor=white"/>
-    <img src="https://img.shields.io/badge/C%23-512BD4?style=flat&logo=csharp&logoColor=white"/>
-</div>
----
 
 # MVVM 패턴용 편리한 프로퍼티 스니펫 
 
-## 기본 'propfull' 스니펫
-
+## VisualStudio 기본 'propfull' 스니펫
 ---
-
 * Visual Studio에서 'propfull'이라고 입력하면 탭을 누르면 아래와 같은 코드가 생성된다.<br/>
 
     ```csharp
@@ -34,9 +27,7 @@ order: 401
     ```
 
 ## MVVM 패턴을 적용한 코드
-
- ---
-
+---
 * MVVM 패턴에서는 프로퍼티가 변경될 때마다 `OnPropertyChanged` 메서드를 호출하여 UI를 업데이트한다.
   
     ```csharp
@@ -111,8 +102,8 @@ order: 401
 ```
 
 * 위와 같이 작성된 파일을 *propmvvm.snippet* 이라는 이름으로 저장한다.
-* 아래 경로에 저장한다
-    > *C:/Users/{PC유저명}/Documents/Visual Studio 2022/Code Snippets/Visual C#/My Code Snippets* 
+* 아래 경로에 저장한다<br/>
+`C:/Users/{PC유저명}/Documents/Visual Studio 2022/Code Snippets/Visual C#/My Code Snippets`
   
 ## 결과물
 
@@ -135,7 +126,7 @@ private int _MyProperty;
 
 #### 1. 가독성 개선
 ##### 선언 순서 변경
-
+{:.no_toc}
 ---
 
  * (기존) *<u>field</u>* 선 선언 & *<u>property</u>* 후 선언
@@ -152,7 +143,7 @@ private int _MyProperty;
 
 #### 2. 편리한 네이밍 변경
 ##### 대소문자 변경
-
+{:.no_toc}
  ---
 
 * (기존) *<u>field</u>*명: 언더바`_` + 소문자 시작

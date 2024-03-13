@@ -9,11 +9,6 @@ order: 305
 ---
 * 
 {:toc}
-<div align="left">
-    <img src="https://img.shields.io/badge/WPF-512BD4?style=flat&logo=dotnet&logoColor=white"/>
-    <img src="https://img.shields.io/badge/NuGet-004880?style=flat&logo=nuget&logoColor=white"/>
-</div>
----
 
 ## [GongSolutions.WPF.DragDrop](https://github.com/punker76/gong-wpf-dragdrop)
 ### `ItemsControl` 아이템들의 *Drag&Drop*을 지원하는 라이브러리

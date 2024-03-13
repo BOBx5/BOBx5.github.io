@@ -7,16 +7,10 @@ layout: libdoc/page
 category: PowerShell
 order: 501
 ---
-{:.no_toc}
-
-<div align="left">
-  <img src="https://img.shields.io/badge/PowerShell-5391FE?style=flat&logo=powershell&logoColor=white"/>
-</div>
----
+* 
+{:toc}
 
 ## 스크립트 ico 파일을 생성해보자
-
-<img src="https://img.shields.io/badge/PowerShell-5391FE?style=flat&logo=powershell&logoColor=white"/>
 
 ### 계기
 ---

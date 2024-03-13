@@ -9,11 +9,6 @@ order: 301
 ---
 * 
 {:toc}
-<div align="left">
-    <img src="https://img.shields.io/badge/WPF-512BD4?style=flat&logo=dotnet&logoColor=white"/>
-    <img src="https://img.shields.io/badge/NuGet-004880?style=flat&logo=nuget&logoColor=white"/>
-</div>
----
 
 ## [MahApps.Metro](https://github.com/MahApps/MahApps.Metro)
 ---
@@ -54,7 +49,8 @@ order: 301
     </Application>
     ```
 * 적용하고자 하는 View에 적용
-    > xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+
+    **`xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"`**
 
     ```xml
     <mah:MetroWindow 
@@ -74,6 +70,7 @@ order: 301
     </Grid>
     </mah:MetroWindow>
     ```
+
     ```csharp
     using MahApps.Metro.Controls;
     namespace SampleApp

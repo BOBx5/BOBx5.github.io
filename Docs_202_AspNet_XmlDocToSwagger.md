@@ -9,10 +9,6 @@ order: 202
 ---
 * 
 {:toc}
-<div align="left">
-    <img src="https://img.shields.io/badge/ASP.NET Core-512BD4?style=flat&logo=.NET&logoColor=white"/>
-</div>
----
 
 ## C# XML Summary를 Swagger 문서로 변환
 
@@ -34,7 +30,9 @@ public class SomeController : ControllerBase
 ASP.NET 개발을 하다보면 위와 같은 XML주석(*Summary*)을 작성하게 되는데<br/>
 이를 Swagger 문서로 변환하는 방법을 알아보자.
 
-#### `Program.cs`
+`Program.cs`
+
+---
 ```csharp
 builder.Services.AddSwaggerGen(options =>
 {
@@ -47,7 +45,9 @@ builder.Services.AddSwaggerGen(options =>
 });
 ```
 
-#### `{ProjectName}.csproj`
+`{ProjectName}.csproj`
+
+---
 ```xml
 <PropertyGroup>
     <!--XML 도큐먼트 자동 생성-->

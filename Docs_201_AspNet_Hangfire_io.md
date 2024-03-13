@@ -9,11 +9,6 @@ order: 201
 ---
 * 
 {:toc}
-<div align="left">
-    <img src="https://img.shields.io/badge/ASP.NET Core-512BD4?style=flat&logo=.NET&logoColor=white"/>
-    <img src="https://img.shields.io/badge/NuGet-004880?style=flat&logo=nuget&logoColor=white"/>
-</div>
----
 
 ## 크론잡을 쉽게 관리할 수 있는 라이브러리 
 #### [Hangfire.io](https://www.hangfire.io/)

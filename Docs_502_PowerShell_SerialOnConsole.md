@@ -7,12 +7,8 @@ layout: libdoc/page
 category: PowerShell
 order: 502
 ---
-{:.no_toc}
-
-<div align="left">
-  <img src="https://img.shields.io/badge/PowerShell-5391FE?style=flat&logo=powershell&logoColor=white"/>
-</div>
----
+* 
+{:toc}
 
 ## 파워쉘 스크립트만으로 시리얼 포트를 수신해보자
 

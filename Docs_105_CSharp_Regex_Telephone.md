@@ -49,7 +49,7 @@ public static string Contact(string input)
 --- 
 `01X`= `010` `011` `016` `017` `018` `019`
 
-1. #### Pattern 1
+1. #### **Pattern 1**
 ---
 ```regex
 01{1}[016789]{1}-[0-9]{3,4}-[0-9]{4}
@@ -59,7 +59,7 @@ public static string Contact(string input)
 * ##### `01X-DDDD-DDDD`
 *010-1234-5678*
 
-2. #### Pattern 2
+2. #### **Pattern 2**
 ---
 ```regex
 01{1}[016789]{1}[0-9]{7,8}
@@ -107,7 +107,7 @@ public static string Contact(string input)
 `-` 포함된 번호 대응<br/>
 `D`= Digit [0-9]
 
-1. #### Pattern 1
+1. #### **Pattern 1**
 ---
 ```regex
 (0{1}\d{2,3}-\d{3,4}-\d{4})
@@ -119,7 +119,7 @@ public static string Contact(string input)
 * ##### `0DD-DDDD-DDDD`
 *031-1234-45678*
 
-2. #### Pattern 2
+2. #### **Pattern 2**
 ---
 `-` 없는 번호 대응
 ```regex
@@ -132,7 +132,7 @@ public static string Contact(string input)
 * ##### `0DDDDDDDDDD`
 *03112345678*
 
-3. #### Pattern 3
+3. #### **Pattern 3**
 ---
 배민이 안심번호 가운데 자리 5글자 패턴 대응
 ```regex
@@ -145,7 +145,7 @@ public static string Contact(string input)
 * ##### `0DD-DDDDD-DDDD`
 *050-51234-5678*
 
-4. #### Pattern 4
+4. #### **Pattern 4**
 ---
 서울 지역번호 대응
 ```regex

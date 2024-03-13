@@ -9,10 +9,6 @@ order: 403
 ---
 * 
 {:toc}
-<div align="left">
-    <img src="https://img.shields.io/badge/VisualStudio-5C2D91?style=flat&logo=visualstudio&logoColor=white"/>
-</div>
----
 
 ## 복붙 시 거슬리는 Indent 제거하기
 

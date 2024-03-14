@@ -26,6 +26,7 @@ sass:
     style: compressed
 plugins:
     - jekyll-remote-theme
+mermaid: true
 #exclude: ['/misc']
 
 # ---------
@@ -412,6 +413,7 @@ prism:
         # - markup-templating
         #- matlab
         #- mel
+        - mermaid
         #- mizar
         #- mongodb
         #- monkey

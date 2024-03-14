@@ -24,6 +24,11 @@ kramdown:
         disable: true
 sass:
     style: compressed
+gems: [jekyll-mermaid]
+mermaid:
+    scripts_head: 
+        - /assets/libdoc/js/mermaid.slim.min.js
+
 #exclude: ['/misc']
 
 # ---------
@@ -414,6 +419,7 @@ prism:
         # - markup-templating
         #- matlab
         #- mel
+        - mermaid
         #- mizar
         #- mongodb
         #- monkey

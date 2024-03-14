@@ -17,14 +17,13 @@ order: 106
 
 * 기본 닷넷 StackTrace는 읽기 어렵다. (특히 async 메서드 포함 시)
 * 이러한 StackTrace를 읽기 쉽게 만들어주는 NuGet 패키지
-    > `demystify` 는 사전적으로<br/>
-*to make something easier to understand.*<br/>
-*무언가를 이해하기 쉽게 만들다.*<br/>
-라는 의미
+> **demystify**는 사전적 의미
+> * *to make something easier to understand.*
+> * *무언가를 이해하기 쉽게 만들다.*
 
 
 ### 기존 StackTrace
-
+---
 `exception.ToString()`
 
 ```csharp
@@ -66,8 +65,115 @@ System.InvalidOperationException: Collection was modified; enumeration operation
     at Program.Main(String[] args)
 ```
 
-### Demystifier 적용
 
+* **생성자(constructors)** 
+
+    * 기존
+
+        `at Program..ctor(Action action)`
+
+    * 변경
+
+        `at void Program.RunAction(Action<object> lambda, object state)`
+    
+* **매개변수(parameters)** `ref`, `out`, `in`
+
+    * 기존
+
+        `at Program.<RefMethod>g__LocalFuncRefReturn|10_1(<>c__DisplayClass10_0& )`
+
+    * 변경
+
+        `at ref string Program.RefMethod(in string value)+LocalFuncRefReturn()`
+   
+* **반복자(iterators)**  **overload* 확인
+
+    * 기존
+
+        `<Iterator>d__3.MoveNext()`
+
+    * 변경
+
+        `Iterator(int startAt)+MoveNext()`
+    
+* **Linq** **overload* 확인
+
+    * 기존
+
+        `Linq.Enumerable.SelectEnumerableIterator``2.MoveNext()`
+
+    * 변경
+
+        `Linq.Enumerable+SelectEnumerableIterator<TSource, TResult>.MoveNext()`
+
+* **비동기(async)** **overload* & `async` 확인
+
+    * 기존
+
+        `<MethodAsync>d__5``1.MoveNext()` 
+
+    * 변경
+
+        `async Task<string> Program.MethodAsync(int value)`
+
+* **람다식(lambdas)**
+    * 기존
+
+        `at Program.<>c__DisplayClass2_0.<.ctor>b__0(Object state)`
+    
+    * 변경
+
+        `at void Program(Action action)+(object state)=>{}`
+
+* **로컬 펑션(local functions)**
+    * 기존
+
+        `at ref string Program.RefMethod(in string value)+LocalFuncRefReturn()`
+    
+    * 변경
+
+        `at Program.<RefMethod>g__LocalFuncRefReturn|10_1(<>c__DisplayClass10_0& )`
+
+* **제네릭 매개변수(generic parameters)**
+    * 기존
+
+        `RunLambda(Func``1 lambda)`
+
+    * 변경
+
+        `RunLambda(Func<string> lambda)`
+
+* **value tuples**
+    * 기존
+
+        `ValueTuple``2 param`
+
+    * 변경
+
+        `(string val, bool) param`
+
+* **원시타입(primitive types)**
+    * 기존
+
+        `Int64`, `Boolean`, `String`
+
+    * 변경
+
+        `long`, `bool`, `string`
+
+* **반환형(return types)**
+
+    * 기존
+
+        `at Program.Start()`
+
+    * 변경
+
+        `at string Program.Start()`
+
+
+### Demystifier 적용
+---
 * NuGet 패키지 설치
     ```powershell
     Install-Package Ben.Demystifier
@@ -114,3 +220,4 @@ System.InvalidOperationException: Collection was modified; enumeration operation
    at new Program()                                                                      // constructor 
    at void Program.Main(String[] args)                                                    
    ```
+

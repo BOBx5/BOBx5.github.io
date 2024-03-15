@@ -17,14 +17,33 @@ order: 106
 
 * 기본 닷넷 StackTrace는 읽기 어렵다. (특히 async 메서드 포함 시)
 * 이러한 StackTrace를 읽기 쉽게 만들어주는 NuGet 패키지
+
 > **demystify**는 사전적 의미
 > * *to make something easier to understand.*
 > * *무언가를 이해하기 쉽게 만들다.*
 
-
-### 기존 StackTrace
+### Demystifier 사용방법
 ---
-`exception.ToString()`
+* NuGet 패키지 설치
+    ```powershell
+    Install-Package Ben.Demystifier
+    ```
+
+* 사용방법
+    ```csharp
+    using Ben.Demystifier;
+    ...
+    catch (Exception ex)
+    {
+        var demystified = ex.Demystify();
+        Console.WriteLine(demystified);
+    }
+    ```
+
+### StackTrace 비교
+---
+
+#### `exception.ToString()`
 
 ```csharp
 System.InvalidOperationException: Collection was modified; enumeration operation may not execute.
@@ -64,6 +83,40 @@ System.InvalidOperationException: Collection was modified; enumeration operation
     at Program..ctor()                                                                     // constructor
     at Program.Main(String[] args)
 ```
+
+
+#### `exception.Demystify()`
+
+```csharp
+System.InvalidOperationException: Collection was modified; enumeration operation may not execute.
+at bool System.Collections.Generic.List<T>+Enumerator.MoveNextRare()
+at IEnumerable<string> Program.Iterator(int startAt)+MoveNext()                       // Resolved enumerator
+at bool System.Linq.Enumerable+SelectEnumerableIterator<TSource, TResult>.MoveNext()  // Resolved enumerator
+at string string.Join(string separator, IEnumerable<string> values)                    
+at string Program+GenericClass<TSuperType>.GenericMethod<TSubType>(ref TSubType value) 
+at async Task<string> Program.MethodAsync(int value)                                  // Resolved async 
+at async Task<string> Program.MethodAsync<TValue>(TValue value)                       // Resolved async 
+at string Program.Method(string value)+()=>{} [0]                                     // lambda source + ordinal
+at string Program.Method(string value)+()=>{} [1]                                     // lambda source + ordinal 
+at string Program.RunLambda(Func<string> lambda)                                       
+at (string val, bool) Program.Method(string value)                                    // Tuple returning
+at ref string Program.RefMethod(in string value)+LocalFuncRefReturn()                 // ref return local func
+at int Program.RefMethod(in string value)+LocalFuncParam(string val)                  // local function
+at string Program.RefMethod(in string value)                                          // in param (readonly ref)    
+at (string val, bool) static Program()+(string s, bool b)=>{}                         // tuple return static lambda
+at void static Program()+(string s, bool b)=>{}                                       // void static lambda
+at void Program.Start((string val, bool) param)                                       // Resolved tuple param
+at void Program.Start((string val, bool) param)+LocalFunc1(long l)                    // void local function 
+at bool Program.Start((string val, bool) param)+LocalFunc2(bool b1, bool b2)          // bool return local function 
+at string Program.Start()                                                              
+at void Program()+()=>{}                                                              // ctor defined lambda  
+at void Program(Action action)+(object state)=>{}                                     // ctor defined lambda 
+at void Program.RunAction(Action<object> lambda, object state)                         
+at new Program(Action action)                                                         // constructor 
+at new Program()                                                                      // constructor 
+at void Program.Main(String[] args)                                                    
+```
+
 
 
 * **생성자(constructors)** 
@@ -170,54 +223,4 @@ System.InvalidOperationException: Collection was modified; enumeration operation
     * 변경
 
         `at string Program.Start()`
-
-
-### Demystifier 적용
----
-* NuGet 패키지 설치
-    ```powershell
-    Install-Package Ben.Demystifier
-    ```
-
-* 사용방법
-    ```csharp
-    using Ben.Demystifier;
-    ...
-    catch (Exception ex)
-    {
-        var demystified = ex.Demystify();
-        Console.WriteLine(demystified);
-    }
-    ```
-
-* 결과
-    ```csharp
-    System.InvalidOperationException: Collection was modified; enumeration operation may not execute.
-   at bool System.Collections.Generic.List<T>+Enumerator.MoveNextRare()
-   at IEnumerable<string> Program.Iterator(int startAt)+MoveNext()                       // Resolved enumerator
-   at bool System.Linq.Enumerable+SelectEnumerableIterator<TSource, TResult>.MoveNext()  // Resolved enumerator
-   at string string.Join(string separator, IEnumerable<string> values)                    
-   at string Program+GenericClass<TSuperType>.GenericMethod<TSubType>(ref TSubType value) 
-   at async Task<string> Program.MethodAsync(int value)                                  // Resolved async 
-   at async Task<string> Program.MethodAsync<TValue>(TValue value)                       // Resolved async 
-   at string Program.Method(string value)+()=>{} [0]                                     // lambda source + ordinal
-   at string Program.Method(string value)+()=>{} [1]                                     // lambda source + ordinal 
-   at string Program.RunLambda(Func<string> lambda)                                       
-   at (string val, bool) Program.Method(string value)                                    // Tuple returning
-   at ref string Program.RefMethod(in string value)+LocalFuncRefReturn()                 // ref return local func
-   at int Program.RefMethod(in string value)+LocalFuncParam(string val)                  // local function
-   at string Program.RefMethod(in string value)                                          // in param (readonly ref)    
-   at (string val, bool) static Program()+(string s, bool b)=>{}                         // tuple return static lambda
-   at void static Program()+(string s, bool b)=>{}                                       // void static lambda
-   at void Program.Start((string val, bool) param)                                       // Resolved tuple param
-   at void Program.Start((string val, bool) param)+LocalFunc1(long l)                    // void local function 
-   at bool Program.Start((string val, bool) param)+LocalFunc2(bool b1, bool b2)          // bool return local function 
-   at string Program.Start()                                                              
-   at void Program()+()=>{}                                                              // ctor defined lambda  
-   at void Program(Action action)+(object state)=>{}                                     // ctor defined lambda 
-   at void Program.RunAction(Action<object> lambda, object state)                         
-   at new Program(Action action)                                                         // constructor 
-   at new Program()                                                                      // constructor 
-   at void Program.Main(String[] args)                                                    
-   ```
 

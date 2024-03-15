@@ -301,7 +301,7 @@ prism:
         #- autoit
         - bash
         #- basic
-        #- batch
+        - batch
         #- bbcode
         #- birb
         #- bison

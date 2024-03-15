@@ -27,9 +27,9 @@ order: 301
 ---
 
 ### 1. NuGet 패키지 매니저를 이용하여 설치
-    ```powershell
-    Install-Package MahApps.Metro
-    ```
+```powershell
+Install-Package MahApps.Metro
+```
 
 ### 2. App.xaml 파일에 아래와 같이 추가
 ```xml
@@ -69,9 +69,9 @@ order: 301
   Height="450"
   WindowStartupLocation="CenterScreen"
   mc:Ignorable="d">
-<Grid>
+  <Grid>
     <!--  Your content  -->
-</Grid>
+  </Grid>
 </mah:MetroWindow>
 ```
 

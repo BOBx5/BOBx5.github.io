@@ -1,5 +1,5 @@
 ---
-title: "[Regex] Numeric"
+title: "숫자 정규식"
 description: <span>&#x23;CSharp &#x23;Regex</span>
 layout: libdoc/page
 

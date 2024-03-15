@@ -117,7 +117,8 @@ at new Program()                                                                
 at void Program.Main(String[] args)                                                    
 ```
 
-
+#### 차이점
+---
 
 * **생성자(constructors)** 
 

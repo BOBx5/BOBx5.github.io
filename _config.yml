@@ -493,7 +493,7 @@ prism:
         #- sparql
         #- splunk-spl
         #- sqf
-        #- sql
+        - sql
         #- squirrel
         #- stan
         #- iecst

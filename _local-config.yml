@@ -25,9 +25,7 @@ kramdown:
 sass:
     style: compressed
 gems: [jekyll-mermaid]
-mermaid:
-    scripts_head: 
-        - /assets/libdoc/js/mermaid.slim.min.js
+mermaid: true
 
 #exclude: ['/misc']
 

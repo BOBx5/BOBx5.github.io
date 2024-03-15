@@ -1,6 +1,6 @@
 ---
 title: 이력서
-description: 
+description: ""
 layout: libdoc/page
 
 #LibDoc specific below
@@ -10,12 +10,12 @@ order: 102
 * 
 {:toc}
 
-## **Personal Information**
+## **Information**
 ---
 * 박현우
 * 1993년생 (만 31세)
 * bapbapbapbapbap@gmail.com
-* **5년차** *(2019년 11월 ~)*
+* **5년차** *(2019년 11월 ~ 현재)*
 
 ## **Education**
 ---
@@ -24,7 +24,7 @@ order: 102
     * 정보통신시스템과
     * 2012.03 - 2020.02
     * 수상이력
-        * 한국폴리텍 4대학 프로젝트 작품 경진대회 **`대상`**
+        * 한국폴리텍 4대학 프로젝트 작품 경진대회   **`대상`**
 
             '*보행자 보호를 위한 볼라드시스템*'
 

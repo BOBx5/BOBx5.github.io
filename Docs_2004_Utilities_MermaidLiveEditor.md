@@ -1,6 +1,6 @@
 ---
 title: Mermaid Live Editor🔗
-description: <span>&#x23;Utility &#x23;Regex</span>
+description: <span>&#x23;Utility &#x23;mermaid.js</span>
 layout: libdoc/page
 
 #LibDoc specific below

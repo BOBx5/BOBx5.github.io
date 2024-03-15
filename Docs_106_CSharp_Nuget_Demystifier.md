@@ -257,11 +257,11 @@ at void Program.Main(String[] args)
 
     * 기존
 
-        `Int64`, `Boolean`, `String`
+        `Int64`, `Int32`, `Boolean`, `String`
 
     * 변경
 
-        `long`, `bool`, `string`
+        `long`, `int`, `bool`, `string`
 
 * **반환형(return types)**
 

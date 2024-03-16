@@ -94,6 +94,7 @@ unlisted: true
 
 * ETC
 
+    ![Docker][Shield_Docker]<br/>
     ![Postman][Shield_Postman]<br/>
     ![FirebaseFCM][Shield_FirebaseFCM]<br/>
     ![DevExpress][Shield_DevExpress]<br/>
@@ -110,26 +111,29 @@ unlisted: true
 * 전임연구원
 * 자사 솔루션(가맹점PC, 대리점PC) 프로그램 기능개발 및 유지보수
 
-
-#### 4. 외부벤더용 API 서버 개발
+---
+#### 4. 모듈화
 {:.no_toc}
 ---
-복잡한 도메인의 유지보수성을 높이기 위해 <br/>
-`Clean Architecture`를 도입한 ASP.NET WebAPI 연구개발을 진행하였다.
-* ![C#][Shield_csharp] ![ASP.NET Core][Shield_ASP.NET_Core] ![EntityFramework][Shield_EntityFramework] ![SqlServer][Shield_SqlServer]
+* 기존 Winform 프로젝트의 [Bloated Large Class](https://refactoring.guru/ko/smells/large-class) 로 인해<br/>
+  유지보수성 저하 문제를 해결하기 위해 모듈화 작업을 진행하였다.
+* 기능들을 각 Feature들로 분리하고 인터페이스화하여 추상화 처리
+* WindowsXP 지원을 위해 사용 중인 `.NET Framework 4.0` 으로 인한 제약 해결
 
-#### 3. 모듈화
-{:.no_toc}
----
-기존 Winform 프로젝트의 [*Bloated Long Class*](https://refactoring.guru/ko/smells/large-class) 로 인해<br/>
-유지보수성 저하 문제를 해결하기 위해 모듈화 작업을 진행하였다.
-* 각 Feature들을 인터페이스화를 이용한 추상화 적용
-* *Windows XP* 지원을 위해 사용 중인 `.NET Framework` **`4.0`** 으로 인한 제약 해결
-    * BCL의 *DependencyInjection* 미지원으로 인한 직접 구현
-    * IoC Container 라이브러리 사용 불가능한 버전으로 유사한 기능 구현
-* `Unit Test` 적용
+   .NET Framework 4.0 BCL 라이브러리의 DependencyInjection 미지원 및<br/>
+   관리되는 IoC Container 라이브러리 사용이 불가능하여 유사한 기능
 
+* 추상화 된 모듈을 활용한 `Unit Test` 사내 최초 적용
 * ![C#][Shield_csharp] ![.NETFramework][Shield_DotNetFramework]
+
+
+#### 3. 클린아키텍처 API R&D
+{:.no_toc}
+---
+* 2023.06 - 2023.09
+* 복잡한 도메인 및 기존 구조의  낮은 유지보수성을 개선하기 위한<br/>
+  ASP.NET WebAPI 에`Clean Architecture`를 도입한 아키텍처 R&D 설계 및 사내 교육 진행
+* ![C#][Shield_csharp] ![ASP.NET Core][Shield_ASP.NET_Core] ![EntityFramework][Shield_EntityFramework] ![SqlServer][Shield_SqlServer]
 
 #### 2. 영수증 데이터 추출 테스트 및 룰 생성 Tool 개발
 {:.no_toc}
@@ -158,7 +162,7 @@ unlisted: true
 * R&D 결과
     1. `json` 형식의 영수증 텍스트 정제 룰에 따라 스스로 정제 가능한 라이브러리 개발
     2. 해당 `json`을 서버에서 내려받아 Client 에서 실행되도록 개발
-    3. 작게 조합하여 사용 가능한 정제 기능을 Unit 단위로 개발
+    3. 작게 조합하여 사용 가능한 정제 기능단위 Unit 개발
         * Trim
         * Replace
         * Split
@@ -183,8 +187,8 @@ unlisted: true
 * 성능개선 및 고객사 요구사항에 맞춘 커스터마이징 기능 추가
 * *'Adobe Illustrator'* 자동제어 스크립트를 활용한 <br/>
   EPUB 인터렉션(퀴즈, 선긋기 등) 생성기능 개발 및 커스터마이징
-* **`Typescript` 도입**하여 통한 인터렉션 생성 스크립트 **개발 생산성 개선**
-* ![C#][Shield_csharp] ![.NETCore][Shield_DotNetCore] ![Winform][Shield_Winform] ![DevExpress][Shield_DevExpress] ![Javascript][Shield_Javascript] ![Typescript][Shield_Typescript]
+* **`Typescript` 도입**을 통한 인터렉션 생성 스크립트 **개발 생산성 개선**
+* ![C#][Shield_csharp] ![.NETFramework][Shield_DotNetFramework] ![Winform][Shield_Winform] ![DevExpress][Shield_DevExpress] ![Javascript][Shield_Javascript] ![Typescript][Shield_Typescript]
 
 #### 5. Bricks 출판사
 {:.no_toc}
@@ -192,9 +196,9 @@ unlisted: true
 * 2021.08 - 2021.11
 * `PDF` to `EPUB` 컨버터 응용프로그램 개발
 * 성능개선 및 고객사 요구사항에 맞춘 커스터마이징 기능 추가
-* *'Adobe 일러스트레이터'* 자동제어 스크립트를 활용한 <br/>
+* *'Adobe Illustrator'* 자동제어 스크립트를 활용한 <br/>
   EPUB 인터렉션(퀴즈, 선긋기 등) 생성기능 개발 및 커스터마이징
-* ![C#][Shield_csharp] ![.NETCore][Shield_DotNetCore] ![Winform][Shield_Winform] ![DevExpress][Shield_DevExpress] ![Javascript][Shield_Javascript]
+* ![C#][Shield_csharp] ![.NETFramework][Shield_DotNetFramework] ![Winform][Shield_Winform] ![DevExpress][Shield_DevExpress] ![Javascript][Shield_Javascript]
 
 #### 4. EPUB 컨버터 솔루션 
 {:.no_toc}
@@ -202,7 +206,7 @@ unlisted: true
 * 2021.05 - 2022.03
 * 자사 핵심 솔루션 `PDF` to `EPUB` 컨버터 응용프로그램 개발
 * 핵심 솔루션을 전담하여 R&D, 유지보수를 담당
-* 멀티쓰레드 방식 구현으로 자원 최대한 활용할 수 있도록 개선하여,<br/>
+* 멀티쓰레드 방식 구현으로 자원 최대한 활용할 수 있도록 개선<br/>
   기존 솔루션 대비 ***300% 효율 상승***
 * Database 및 AWS S3 연동하여 자동으로 Task를 할당하는 기능 개발
 * PDF 정보 추출 기능 개발
@@ -227,7 +231,7 @@ unlisted: true
 * 2021.03 - 2021.08
 * '방송대 eBook' 모바일 어플리케이션 개발
 * 자사 모바일 솔루션 활용한 신규 개발 및 출시
-* 상용 서비스 유지보수
+* 출시 서비스 유지보수
 * ![C#][Shield_csharp] ![.NETCore][Shield_DotNetCore] ![Xamarin][Shield_Xamarin] ![FirebaseFCM][Shield_FirebaseFCM]
 
 #### 1. 펍플 이앨리스 모바일 솔루션
@@ -250,7 +254,7 @@ unlisted: true
 ---
 * 2020.07 - 2020.11
 * 에스글로벌 ERP/MES 프로그램 개발
-* ![C#][Shield_csharp] ![Winform][Shield_Winform] ![DevExpress][Shield_DevExpress]
+* ![C#][Shield_csharp] ![.NETFramework][Shield_DotNetFramework] ![Winform][Shield_Winform] ![DevExpress][Shield_DevExpress]
 
 #### 5. 대진브로아
 {:.no_toc}
@@ -263,7 +267,7 @@ unlisted: true
 {:.no_toc}
 ---
 * 2020.04 - 2020.06
-* 노루페인트 MES 웹버전 개발 및 SQL Server SP튜닝
+* 노루페인트 생산공정용 웹버전 MES 개발 및 SqlServer 프로시저 튜닝
 * ![C#][Shield_csharp] ![.NETFramework][Shield_DotNetFramework] ![Webform][Shield_Webform] ![SqlServer][Shield_SqlServer] 
 
 #### 3. 삼보팩

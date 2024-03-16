@@ -44,62 +44,62 @@ unlisted: true
 ## **Tech Stack**
 ---
 
-* Language
+### Language
 
-    ![C#][Shield_csharp]<br/>
-    ![Xaml][Shield_xaml]<br/>
-    ![Javascript][Shield_Javascript]<br/>
-    ![Typescript][Shield_Typescript]<br/>
-    ![PowerShell][Shield_PowerShell]<br/>
+![C#][Shield_csharp]<br/>
+![Xaml][Shield_xaml]<br/>
+![Javascript][Shield_Javascript]<br/>
+![Typescript][Shield_Typescript]<br/>
+![PowerShell][Shield_PowerShell]<br/>
 
-* Framework
+### Framework
 
-    ![ASP.NET Core][Shield_ASP.NET_Core]<br/>
-    ![WPF][Shield_WPF]<br/>
-    ![Winform][Shield_Winform]<br/>
-    ![Xamarin][Shield_Xamarin]<br/>
+![ASP.NET Core][Shield_ASP.NET_Core]<br/>
+![WPF][Shield_WPF]<br/>
+![Winform][Shield_Winform]<br/>
+![Xamarin][Shield_Xamarin]<br/>
 
-* Database
+### Database
 
-    ![SqlServer][Shield_SqlServer]<br/>
-    ![Supabase][Sheild_Supabase]<br/>
-    ![SQLite][Shield_Sqlite]<br/>
+![SqlServer][Shield_SqlServer]<br/>
+![Supabase][Sheild_Supabase]<br/>
+![SQLite][Shield_Sqlite]<br/>
 
-* Desing Pattern
+### Desing Pattern
 
-    `MVVM` for ![WPF][Shield_WPF] ![Xamarin][Shield_Xamarin] <br/>
-    `Web API` for ![ASP.NET Core][Shield_ASP.NET_Core] <br/>
-    `MVC` for ![ASP.NET Core][Shield_ASP.NET_Core] <br/>
-    `Clean Architecture` for ![ASP.NET Core][Shield_ASP.NET_Core] <br/>
+`MVVM` for ![WPF][Shield_WPF] ![Xamarin][Shield_Xamarin] <br/>
+`Web API` for ![ASP.NET Core][Shield_ASP.NET_Core] <br/>
+`MVC` for ![ASP.NET Core][Shield_ASP.NET_Core] <br/>
+`Clean Architecture` for ![ASP.NET Core][Shield_ASP.NET_Core] <br/>
 
-* IDE
+### IDE
 
-    ![VisualStudio][Shield_VisualStudio]<br/>
-    ![VisualStudioCode][Shield_VisualStudioCode]<br/>
-    ![SSMS][Shield_SSMS]<br/>
-    ![DBeaver][Shield_DBeaver]<br/>
-    ![AzureDataStudio][Shield_AzureDataStudio]<br/>
+![VisualStudio][Shield_VisualStudio]<br/>
+![VisualStudioCode][Shield_VisualStudioCode]<br/>
+![SSMS][Shield_SSMS]<br/>
+![DBeaver][Shield_DBeaver]<br/>
+![AzureDataStudio][Shield_AzureDataStudio]<br/>
 
-* ORM
+### ORM
 
-    ![EntityFramework][Shield_EntityFramework]<br/>
-    ![Dapper][Shield_Dapper]<br/>
+![EntityFramework][Shield_EntityFramework]<br/>
+![Dapper][Shield_Dapper]<br/>
 
-* Source Management
+### Source Management
 
-    ![Git][Shield_Git]<br/>
-    ![GitHub][Shield_GitHub]<br/>
-    ![GitLab][Shield_GitLab]<br/>
-    ![TortoiseSVN][Shield_TortoiseSVN]<br/>
+![Git][Shield_Git]<br/>
+![GitHub][Shield_GitHub]<br/>
+![GitLab][Shield_GitLab]<br/>
+![TortoiseSVN][Shield_TortoiseSVN]<br/>
 
-* ETC
+### ETC
 
-    ![Docker][Shield_Docker]<br/>
-    ![Postman][Shield_Postman]<br/>
-    ![FirebaseFCM][Shield_FirebaseFCM]<br/>
-    ![DevExpress][Shield_DevExpress]<br/>
-    ![Notion][Shield_Notion]<br/>
-    ![Asana][Shield_Asana]<br/>
+![Docker][Shield_Docker]<br/>
+![Postman][Shield_Postman]<br/>
+![FirebaseFCM][Shield_FirebaseFCM]<br/>
+![DevExpress][Shield_DevExpress]<br/>
+![Notion][Shield_Notion]<br/>
+![Asana][Shield_Asana]<br/>
 
 ## **경력기술서**
 ---

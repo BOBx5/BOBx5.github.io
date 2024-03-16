@@ -13,13 +13,13 @@ order: 802
     ```shell
     ssh-keygen -t rsa -b 4096 -C "유저명"
     ```
-    ![](/assets/docs/800_Git/802/1.webp)
+    ![](/assets/Documents/Git/GitlabSshToken/1.webp)
 
     > 빨간 줄 경로의 파일 확인
 
 
 2. GitLab에 키 등록하기2. 
-    ![](/assets/docs/800_Git/802/2.webp)
+    ![](/assets/Documents/Git/GitlabSshToken/2.webp)
     1. Gitlab 로그인
     2. 우상단 프로필 이미지 클릭
     3. **`Edit Profile`** > **`SSH Keys`**

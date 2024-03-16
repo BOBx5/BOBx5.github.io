@@ -12,13 +12,13 @@ order: 301
 
 ## [**MahApps.Metro**](https://github.com/MahApps/MahApps.Metro)
 ---
-![MahApps.Metro_1](/assets/docs/300_WPF/301/1.webp)
-![MahApps.Metro_2](/assets/docs/300_WPF/301/2.webp)
-![MahApps.Metro_3](/assets/docs/300_WPF/301/3.webp)
-![MahApps.Metro_4](/assets/docs/300_WPF/301/4.webp)
-![MahApps.Metro_5](/assets/docs/300_WPF/301/5.webp)
-![MahApps.Metro_6](/assets/docs/300_WPF/301/6.webp)
-![MahApps.Metro_7](/assets/docs/300_WPF/301/7.webp)
+![MahApps.Metro_1](/assets/Documents/WPF/MahApps.Metro/1.webp)
+![MahApps.Metro_2](/assets/Documents/WPF/MahApps.Metro/2.webp)
+![MahApps.Metro_3](/assets/Documents/WPF/MahApps.Metro/3.webp)
+![MahApps.Metro_4](/assets/Documents/WPF/MahApps.Metro/4.webp)
+![MahApps.Metro_5](/assets/Documents/WPF/MahApps.Metro/5.webp)
+![MahApps.Metro_6](/assets/Documents/WPF/MahApps.Metro/6.webp)
+![MahApps.Metro_7](/assets/Documents/WPF/MahApps.Metro/7.webp)
 
 * Microsoft 에서 개발한 Metro Design 스타일의 테마
 * 군더더기 없는 깔끔한 스타일이 특징

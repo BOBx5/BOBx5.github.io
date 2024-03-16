@@ -13,7 +13,7 @@ order: 201
 ## [Hangfire.io](https://www.hangfire.io/)
 ### 크론잡을 쉽게 관리할 수 있는 라이브러리 
 {:.no_toc}
-![](/assets/docs/200_AspNet/201/1.webp)
+![](/assets/Documents/AspNet/Hangfire.io/1.webp)
 
 * **백그라운드잡**을 쉽게 관리할 수 있는 라이브러리
 * 반복 작업(*Recurring Jobs*), 지연 작업(*Delayed Jobs*), 부모작업 완료 후 진행 작업(*Continuations*), 다중 작업(*Batch*) 등을 지원한다.

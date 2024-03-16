@@ -12,7 +12,7 @@ order: 3004
 ## [Pictogrammer](https://pictogrammers.com/library/mdi/)
 ### Material Design Icons 둘러보기
 
-![](/assets/docs/3000_Uiux/3004/1.webp)
+![](/assets/Documents/Uiux/Pictogrammer/1.webp)
 
 * Material Design Icon들을 모아놓아,<br/>
 필요에 따라 키워드 등을 검색하여 찾아보기 좋게 정리되어 있다.

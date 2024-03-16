@@ -11,7 +11,7 @@ order: 801
 
 ## 효과적인 프로젝트 관리를<br/>위한 브랜칭 전략
 
-![](/assets/docs/800_Git/801/1.webp)
+![](/assets/Documents/Git/Gitflow/1.webp)
 
 1. **`develop`**/**`release`**/**`master`** 
     

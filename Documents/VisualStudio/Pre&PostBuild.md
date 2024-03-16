@@ -228,11 +228,11 @@ order: 405
 
     * Qa 일 때
         
-        ![](/assets/docs/400_VisualStudio/405/1.webp)
+        ![](/assets/Documents/VisualStudio/Pre&PostBuild/1.webp)
         
     * Release 일 때
         
-        ![](/assets/docs/400_VisualStudio/405/2.webp)
+        ![](/assets/Documents/VisualStudio/Pre&PostBuild/2.webp)
     
 
 

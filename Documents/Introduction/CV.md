@@ -57,7 +57,7 @@ unlisted: true
 
 라는 마음으로 누나에게 생일 선물 C언어책(<i>열혈강의C, 윤성우 저</i>) 한권을 받았습니다.
 
-![](/assets/docs/Introduction/CV/1.webp) 
+![](/assets/Documents/Introduction/CV/1.webp) 
 
 책을 들고 학교에 가 공부하며 야자시간에는 노트에 손코딩을 하고, 
 

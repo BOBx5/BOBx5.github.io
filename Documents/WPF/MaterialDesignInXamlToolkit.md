@@ -12,18 +12,18 @@ order: 302
 
 ## [MaterialDesignInXamlToolkit](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit)
 ---
-![Material_1](/assets/docs/300_WPF/302/1.webp)
-![Material_2](/assets/docs/300_WPF/302/2.webp)
-![Material_3](/assets/docs/300_WPF/302/3.webp)
-![Material_4](/assets/docs/300_WPF/302/4.webp)
-![Material_5](/assets/docs/300_WPF/302/5.webp)
-![Material_6](/assets/docs/300_WPF/302/6.webp)
-![Material_7](/assets/docs/300_WPF/302/7.webp)
-![Material_8](/assets/docs/300_WPF/302/8.webp)
-![Material_9](/assets/docs/300_WPF/302/9.webp)
-![Material_10](/assets/docs/300_WPF/302/10.webp)
-![Material_11](/assets/docs/300_WPF/302/11.webp)
-![Material_12](/assets/docs/300_WPF/302/12.webp)
+![Material_1](/assets/Documents/WPF/MaterialDesignInXamlToolkit/1.webp)
+![Material_2](/assets/Documents/WPF/MaterialDesignInXamlToolkit/2.webp)
+![Material_3](/assets/Documents/WPF/MaterialDesignInXamlToolkit/3.webp)
+![Material_4](/assets/Documents/WPF/MaterialDesignInXamlToolkit/4.webp)
+![Material_5](/assets/Documents/WPF/MaterialDesignInXamlToolkit/5.webp)
+![Material_6](/assets/Documents/WPF/MaterialDesignInXamlToolkit/6.webp)
+![Material_7](/assets/Documents/WPF/MaterialDesignInXamlToolkit/7.webp)
+![Material_8](/assets/Documents/WPF/MaterialDesignInXamlToolkit/8.webp)
+![Material_9](/assets/Documents/WPF/MaterialDesignInXamlToolkit/9.webp)
+![Material_10](/assets/Documents/WPF/MaterialDesignInXamlToolkit/10.webp)
+![Material_11](/assets/Documents/WPF/MaterialDesignInXamlToolkit/11.webp)
+![Material_12](/assets/Documents/WPF/MaterialDesignInXamlToolkit/12.webp)
 
 * Google 에서 개발한 Material Design 스타일의 테마
 * 미니멀하고 세련된 디자인이 특징

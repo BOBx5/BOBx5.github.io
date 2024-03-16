@@ -15,7 +15,7 @@ order: 403
 ### 기존 복사(`Ctrl`+`C`) & 붙여넣기(`Ctrl`+`V`)의 문제점
 {:.no_toc}
 ---
-![](/assets/docs/400_VisualStudio/403/1.webp)
+![](/assets/Documents/VisualStudio/CopyNice_Extension/1.webp)
 
 문서 작성 등을 위해서 코드를 복사하여 다른 웹이나 문서에 붙여넣기를 하면,<br/>
 **Indent가 유지**되는데 이로 인해 매번 다시 수정해줘야하는 번거로움이 있다.
@@ -27,8 +27,8 @@ order: 403
 *VisualStudio* Extension 중 하나인 **Copy Nice**를 설치하면,<br/>
 복사한 코드를 붙여넣기 할 때 **Indent를 제거**하여 붙여넣기를 할 수 있다.
 
-![설정](/assets/docs/400_VisualStudio/403/2.webp)
+![설정](/assets/Documents/VisualStudio/CopyNice_Extension/2.webp)
 
 `Edit` > `Advanced` > `Strip Leading Whitespace on Copy` 활성화
 
-![결과물](/assets/docs/400_VisualStudio/403/3.webp)
+![결과물](/assets/Documents/VisualStudio/CopyNice_Extension/3.webp)

@@ -131,11 +131,11 @@ private int _MyProperty;
 
  * (기존) *<u>field</u>* 선 선언 & *<u>property</u>* 후 선언
 
-    ![](/assets/docs/400_VisualStudio/401/1.webp)<br/>
+    ![](/assets/Documents/VisualStudio/MvvmProps_Snippet/1.webp)<br/>
 
  * (변경) *<u>property</u>* 선 선언 & *<u>field</u>* 후 선언으로
 
-    ![](/assets/docs/400_VisualStudio/401/2.webp)<br/>
+    ![](/assets/Documents/VisualStudio/MvvmProps_Snippet/2.webp)<br/>
 
  * VisualStudio의 *CodeLens*는 property를 참조하는 숫자를 보여주는데, <br/>
   그게 field 선언 사이의 공간을 띄워 가독성이 떨어지게 만든다.<br/>
@@ -148,12 +148,12 @@ private int _MyProperty;
 
 * (기존) *<u>field</u>*명: 언더바`_` + 소문자 시작
 
-    ![](/assets/docs/400_VisualStudio/401/3.webp)<br/>
+    ![](/assets/Documents/VisualStudio/MvvmProps_Snippet/3.webp)<br/>
     `private int _myProperty;`
 
 * (변경) *<u>field</u>*명: 언더바`_` + 대문자 시작
 
-    ![](/assets/docs/400_VisualStudio/401/4.webp)<br/>
+    ![](/assets/Documents/VisualStudio/MvvmProps_Snippet/4.webp)<br/>
     `private int _MyProperty;`
 
 * VS스니펫은 일괄적으로 네이밍 변경 기능을 제공하는데<br/>

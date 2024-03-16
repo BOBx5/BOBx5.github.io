@@ -15,7 +15,7 @@ order: 404
 ### Clipboard의 Json을 C# Class로 변환하기
 {:.no_toc}
 
-![](/assets/docs/400_VisualStudio/404/1.webp)
+![](/assets/Documents/VisualStudio/VS_Tips/1.webp)
 
 VisualStudio에는 현재 클립보드(`Ctrl` + `C`)에 복사한 json을<br/>
 C# Class로 변환하는 기능이 내장되어 있다.
@@ -26,7 +26,7 @@ C# Class로 변환하는 기능이 내장되어 있다.
 ---
 ### .NET Symbol 문서로 바로 이동하기
 {:.no_toc}
-![](/assets/docs/400_VisualStudio/404/2.webp)
+![](/assets/Documents/VisualStudio/VS_Tips/2.webp)
 원하는 .NET Symbol에 커서를 두고 `F1`을 누르면<br/>
 해당하는 MSDN 문서로 바로 이동할 수 있다.
 

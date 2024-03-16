@@ -12,7 +12,7 @@ order: 803
 
 ## Git Clone 시 발생하는 Early EOF 오류
 ---
-![](/assets/docs/800_Git/803/1.webp)
+![](/assets/Documents/Git/EarlyEOF/1.webp)
 
 Git Repo Clone 해서 내려받던 중
 
@@ -24,7 +24,7 @@ Git Repo Clone 해서 내려받던 중
 
 [***StackOverflow***: *fatal: early EOF fatal: index-pack failed*](https://stackoverflow.com/questions/21277806/fatal-early-eof-fatal-index-pack-failed)
 
-![](/assets/docs/800_Git/803/2.webp)
+![](/assets/Documents/Git/EarlyEOF/2.webp)
 
 해당 Thread를 참고하여 모든 방법을 적용해봤으나 해결되지 않았다.
 
@@ -36,7 +36,7 @@ Git Repo Clone 해서 내려받던 중
 ---
 1. local에 `Clone`할 디렉토리에서 *git bash* 실행
     
-    ![](/assets/docs/800_Git/803/3.webp)
+    ![](/assets/Documents/Git/EarlyEOF/3.webp)
     
 2. *git* 압축설정 0으로 변경
     

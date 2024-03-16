@@ -12,8 +12,8 @@ order: 3003
 ## [WPF UI](https://wpfui.lepo.co/)
 ### WPF UI 래퍼런스용 오픈소스 프로젝스 소스
 
-![](/assets/docs/3000_Uiux/3003/1.webp)
-![](/assets/docs/3000_Uiux/3003/2.webp)
+![](/assets/Documents/Uiux/WPF_UI/1.webp)
+![](/assets/Documents/Uiux/WPF_UI/2.webp)
 
 * Document가 잘 되어있어 참고하기 좋다.
 * 다양한 API도 이미 구현되어 있다.

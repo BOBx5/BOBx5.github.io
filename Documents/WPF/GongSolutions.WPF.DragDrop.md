@@ -12,9 +12,9 @@ order: 305
 
 ## [**GongSolutions.WPF.DragDrop**](https://github.com/punker76/gong-wpf-dragdrop)
 ---
-![](/assets/docs/300_WPF/305/1.webp)
-![](/assets/docs/300_WPF/305/2.webp)
-![](/assets/docs/300_WPF/305/3.webp)
+![](/assets/Documents/WPF/GongSolutions.WPF.DragDrop/1.webp)
+![](/assets/Documents/WPF/GongSolutions.WPF.DragDrop/2.webp)
+![](/assets/Documents/WPF/GongSolutions.WPF.DragDrop/3.webp)
 
 * `ItemsControl`을 상속받는 컨트롤들에 *Drag&Drop*을 지원하는 라이브러리
   * `ListBox`

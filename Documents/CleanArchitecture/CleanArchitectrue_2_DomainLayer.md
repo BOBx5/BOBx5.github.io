@@ -261,7 +261,8 @@ public interface IUserRepository
   * `RemoveAsync(User user)`: 선택한 유저를 제거합니다.
 * 실질적 구현은 추후에 *Persistence* 에서 이뤄지도록 미뤄두고 인터페이스만 먼저 정의합니다.
 
-## User
+## **User Entity**
+---
 **User Entity**가 가지는 기능들을 정의해봅시다.<br/>
 아래는 현재 상태의 User Entity입니다.
 ```csharp

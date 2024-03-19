@@ -198,3 +198,7 @@ Library
 MVC로 구현하고자 하는 경우 부가적으로 `View`의 설계가 필요할 수 있겠지만,
 대부분의 `Use-Case`들이 Application Layer 에서 구현되는 만큼,
 아주 얇은 `View`의 구현에만 신경 쓸 수 있을 것이다.
+
+# Next
+---
+[ASP.NET 클린아키텍처 pt.2](/Documents/CleanArchitecture/CleanArchitectrue_2_DomainLayer.html)

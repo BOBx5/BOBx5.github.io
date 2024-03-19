@@ -365,3 +365,15 @@ public void ChangeStatus(UserStatus userStatus)
 * `User`의 생성은 `User.Create` 메서드를 통해 생성할 수 있도록 합니다.
 
 위와 같은 요소들을 통해 Entity에 대한 *Encapsulation*을 구현합니다.
+
+
+
+
+
+
+
+
+# Next
+---
+ASP.NET 클린아키텍처 pt.3 작업중...
+<!-- [ASP.NET 클린아키텍처 pt.3](/Documents/CleanArchitecture/CleanArchitectrue_2_DomainLayer.html) -->

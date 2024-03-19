@@ -10,7 +10,7 @@ order: 901
 * 
 {:toc}
 
-.NET Conf 2024 - '클린아키텍처로 이사가기'
+[.NET Conf 2024](https://dotnetconf.kr/2024) - '[클린아키텍처로 이사가기](https://dotnetconf.kr/e43c01da2c1c4a0d8ecdb3ca9e5753ce)'
 
 발표 경험을 바탕으로 문서로 정리해보고자 합니다.
 

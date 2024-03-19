@@ -1,5 +1,5 @@
 ---
-title: "ASP.NET 클린아키텍처"
+title: ASP.NET 클린아키텍처 pt.1
 description: <span>&#x23;ASP.NET &#x23;CleanArchitecture</span>
 layout: libdoc/page
 
@@ -9,6 +9,10 @@ order: 901
 ---
 * 
 {:toc}
+
+.NET Conf 2024 - '클린아키텍처로 이사가기'
+
+발표 경험을 바탕으로 문서로 정리해보고자 합니다.
 
 # 클린아키텍처란?
 ---

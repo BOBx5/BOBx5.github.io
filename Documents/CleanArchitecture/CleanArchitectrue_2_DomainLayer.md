@@ -1,5 +1,5 @@
 ---
-title: Domain Layer 설계
+title: ASP.NET 클린아키텍처 pt.2
 description: <span>&#x23;ASP.NET &#x23;CleanArchitecture</span>
 layout: libdoc/page
 

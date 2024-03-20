@@ -16,7 +16,7 @@ order: 901
 
 # 클린아키텍처란?
 ---
-![](/assets/images/CleanArchitecture/CleanArchitecture_1_1.png)
+![](/assets/Documents/CleanArchitecture/)
 * *DDD(Domain-Driven-Deisgn)* 을 적용하기 위한 방법론
 * 몇가지 상속 등에 관한 엄격한 원칙(*Principle*)을 제외하고는 많은 부분이 자유로움
   * 오히려 모호하기 때문에 가이드라인이 불분명하고 어려움
@@ -199,6 +199,5 @@ MVC로 구현하고자 하는 경우 부가적으로 `View`의 설계가 필요�
 대부분의 `Use-Case`들이 Application Layer 에서 구현되는 만큼,
 아주 얇은 `View`의 구현에만 신경 쓸 수 있을 것이다.
 
-# Next
 ---
-[ASP.NET 클린아키텍처 pt.2](/Documents/CleanArchitecture/CleanArchitectrue_2_DomainLayer.html)
+# [ASP.NET 클린아키텍처 pt.2](/Documents/CleanArchitecture/Aspnet_CleanArchitectrue_pt2.html)

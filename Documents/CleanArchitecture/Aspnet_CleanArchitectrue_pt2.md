@@ -239,7 +239,7 @@ LibrarySolution
           └─Enums
           └─DomainEvents
           └─Repositories
-            └─IUserRepository.cs
+            └─IUserRepository.cs*
 ```
 ```csharp
 namespace Library.Domain.Aggregates.Users.Repositories;
@@ -316,13 +316,11 @@ public static User Create(string name, string email)
   return user;
 }
 ```
-1. `private User() { }`
-  * 기존 유저의 Instance화를 위한 생성자 (EF Core에서 사용됨)
-2. `private User(string name, string email)`
+1. **`private User(string name, string email)`**
   * 새로운 유저를 생성하는 생성자
   * `private` 한정자를 적용하여 `new` 키워드를 이용해 엔티티 외부에서의 생성을 불가능하도록 막습니다.
   * `Id`를 생성자 내부에서 생성하여 외부에서 입력받지 않도록 합니다.
-3. `public static User Create(string name, string email)`
+2. **`public static User Create(string name, string email)`**
   * 도메인 외부에서 신규 유저를 생성할 수 있도록 정적 메서드를 제공합니다.
   * 메서드 내부적으로 `2.` 를 통해서 인스턴스를 생성하여 반환합니다.
   * 사용 예시
@@ -331,6 +329,10 @@ public static User Create(string name, string email)
     string email = "Gildong.Hong@gmail.com"
     var user = User.Create(name, email);
     ```
+
+>  **`private User() { }`** <br/> <br/>
+> EntityFramework 에서 `User` 인스턴스를 생성하기 위해서는 <br/>
+> 파라미터가 없는 반드시 기본 생성자가 필요합니다.<br/>
 
 
 ### 유저의 이름 변경
@@ -358,22 +360,215 @@ public void ChangeStatus(UserStatus userStatus)
 
 따라서 외부에서 `User`의 `UserStatus`를 변경할 수 있도록 제공하는 메서드입니다.
 
-### 결론
+## **Book Entity**
 ---
-* `User`의 프로퍼티들을 `private set` 으로 외부에서 수정이 불가능하도록 제한합니다.
-* 외부에서 `User`의 상태값을 변경할 수 있도록 제공하는 메서드를 통해 변경할 수 있도록 합니다.
-* `User`의 생성은 `User.Create` 메서드를 통해 생성할 수 있도록 합니다.
+이전 파트에서 `User` 엔티티를 만든 경험으로
 
-위와 같은 요소들을 통해 Entity에 대한 *Encapsulation*을 구현합니다.
+동일하게 도서를 나타내는 `Book` 엔티티를 만들어보자.
 
+```csharp
+public class Book : EntityBase, IAggregateRoot
+{
+  public Guid Id { get; private set; }
+  public string Title { get; private set; }
+  public string Author { get; private set; }
+  public int Quantity { get; private set; }
 
+  // EF를 위한 Parameterless 생성자
+  private Book() { }
 
+  // 신규 도서의 생성을 위한 생성자
+  private Book(string title, string author, int quantity)
+  {
+    Id = Guid.NewGuid();
+    Title = title;
+    Author = author;
+    Quantity = quantity;
+  }
 
+  // 도서를 신규로 생성할 수 있도록 하는 Factory Method
+  public static Book Create(string title, string author, int quantity)
+  {
+    return new Book(title, author, quantity);
+  }
+}
+```
 
+`User` 와 유사한 방식으로 `Book` 엔티티를 만들었다.
 
+특징적으로 `User`, `Book` 모두 `Guid`를 고유 식별자(ID)로 사용하고 있다.
 
+문제는 이런 ID 값들은 혼용의 여지가 있다.<br/>
+(*`Guid`가 아니라 `int`, `long` 등에서도 마찬가지*)
 
-# Next
+이러한 문제를 해결하기 위해 Strongly-Type 객체인 `ValueObject` 개념을 도입해보자.
+
+## **ValueObject**
 ---
-ASP.NET 클린아키텍처 pt.3 작업중...
-<!-- [ASP.NET 클린아키텍처 pt.3](/Documents/CleanArchitecture/CleanArchitectrue_2_DomainLayer.html) -->
+이전에는 `ValueObject`를 만들기 위해 `struct`를 사용하거나,
+
+`IEquatable<T>` 인터페이스를 구현하여 `Equals` 메서드를 오버라이딩하는 등의 방법을 사용했다.
+
+C# 9.0 부터는 `record` 키워드를 통해 손쉽게 Immutable한 객체를 만들 수 있다.
+
+* 코드 구현
+  * `UserId`
+    
+    ```csharp
+    public record UserId
+    {
+      public Guid Value { get; init; }
+      private UserId(Guid value)
+      {
+        Value = value;
+      }
+      public override string ToString()
+      {
+        return Value.ToString();
+      }
+
+      public static UserId Create()
+      {
+        var newId = Guid.NewGuid();
+        return new UserId(newId);
+      }
+      public static UserId Parse(Guid value)
+      {
+        return new UserId(value);
+      }
+    }
+    ```
+
+  * `BookId`
+    
+    ```csharp
+    public record BookId
+    {
+      public Guid Value { get; init; }
+      private BookId(Guid value)
+      {
+        Value = value;
+      }
+      public override string ToString()
+      {
+        return Value.ToString();
+      }
+
+      public static BookId Create()
+      {
+        var newId = Guid.NewGuid();
+        return new BookId(newId);
+      }
+      public static BookId Parse(Guid value)
+      {
+        return new BookId(value);
+      }
+    }
+    ```
+
+* `UserId`, `BookId`는 내부적으로 `Guid Value`를 가지고 있으며, 이를 통해 고유 식별자를 나타낸다.
+* ***record*** 키워드를 사용하여 `Guid Value`의 값이 동일한 두 객체는 동일한 객체로 취급된다.
+* `Create()` 메서드를 통해 새로운 `UserId`, `BookId`를 생성할 수 있다.
+* `Parse(Guid guid)` 메서드를 통해 기존의 `Guid`를 가지고 있는 `UserId`, `BookId`로 변환할 수 있다.
+* `ToString()` 메서드를 오버라이딩하여 `Value`의 문자열 표현을 반환한다.
+
+> 최신 C#의 문법(*Primary-Constructor*)을 활용하면 더 간단한게 만들 수도 있다.
+> ```csharp
+> public record UserId(Guid Value)
+> {
+>   public static UserId Create() => new(Guid.NewGuid());
+>   public static UserId Parse(Guid value) => new(value);
+>   public override string ToString() => Value.ToString();    
+> }
+> public record BookId(Guid Value)
+> {
+>   public static BookId Create() => new(Guid.NewGuid());
+>   public static BookId Parse(Guid value) => new(value);
+>   public override string ToString() => Value.ToString();    
+> }
+> ```
+
+### 적용
+{:.no_toc}
+---
+```csharp
+public class Book : EntityBase, IAggregateRoot
+{
+  public BookId Id { get; private set; }
+  public string Title { get; private set; }
+  public string Author { get; private set; }
+  public int Quantity { get; private set; }
+
+  // EF를 위한 Parameterless 생성자
+  private Book() { }
+
+  // 신규 도서의 생성을 위한 생성자
+  private Book(string title, string author, int quantity)
+  {
+    Id = BookId.Create();
+    Title = title;
+    Author = author;
+    Quantity = quantity;
+  }
+
+  // 도서를 신규로 생성할 수 있도록 하는 Factory Method
+  public static Book Create(string title, string author, int quantity)
+  {
+    return new Book(title, author, quantity);
+  }
+}
+```
+```csharp
+public class User : EntityBase, IAggregateRoot
+{
+  public UserId Id { get; private set; }
+  public string Name { get; private set; }
+  public string Email { get; private set; }
+  public UserStatus UserStatus { get; private set; }
+
+  // EF를 위한 Parameterless 생성자
+  private User() { }
+
+  // 신규 유저의 생성을 위한 생성자
+  private User(string name, string email)
+  {
+    Id = UserId.Create();
+    Name = name;
+    Email = email;
+    UserStatus = UserStatus.Active;
+  }
+
+  // 유저를 신규로 생성할 수 있도록 하는 Factory Method
+  public static User Create(string name, string email)
+  {
+    return new User(name, email);
+  }
+}
+```
+
+이로써 `User`, `Book` 엔티티는 모두 ID로 `Guid`를 사용하는지만,
+
+`UserId`, `BookId`의 `ValueObject`를 적용하여 
+
+서로 다른 엔티티의 ID간에 혼동되지 않도록 보장할 수 있게되었다.
+
+또한 필요에 따라 다중키를 사용하게 되는 경우에도
+
+해당하는 *ValueObject*에 다른 프로퍼티를 적용하여 사용할 수 있다.
+
+
+# 요약
+---
+* ***Entity***
+  * 상태(프로퍼티)들을 `private set` 으로 외부에서 수정이 불가능하도록 하도록 합니다.
+  * 엔티티의 상태값들을 변경할 수 있는 메서드를 엔티티 클래스 내부적으로 구현하여 노출하도록 합니다.
+
+* ***ValueObject***
+  * `record` 키워드를 사용하여 Immutable한 ID 객체를 생성합니다.
+  * *Guid*를 ID로 사용하는 엔티티들에 각기 다른 *ValueObject*를 설계하여 사용하여, 혼용을 방지합니다.
+  * *ValueObject*의 생성과 변환을 온전하게 *ValueObject* 클래스 내부적으로 구현된 *static* 메서드를 통해 처리하게합니다.
+
+> 💡 **Encapsulation** 이 핵심!
+
+---
+# [ASP.NET 클린아키텍처 pt.3](/Documents/CleanArchitecture/Aspnet_CleanArchitectrue_pt3.html)

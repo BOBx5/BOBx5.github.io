@@ -98,9 +98,9 @@ order: 901
 ---
 ```plaintext 
 Library
-  └─Library.Shared
-     ├─Helpers
-     └─Extensions
+  └─ Library.Shared
+     ├─ Helpers
+     └─ Extensions
 ```
 솔루션 하위에 `Library.Shared` 프로젝트를 생성한다.
 
@@ -112,8 +112,8 @@ Library
 ---
 ```plaintext
 Library
-  ├─Library.Shared
-  └─Library.Domain
+  ├─ Library.Shared
+  └─ Library.Domain
 ```
 솔루션 하위에 `Library.Domain` 프로젝트를 생성한다.
 
@@ -123,9 +123,9 @@ Library
 ---
 ```plaintext
 Library
-  ├─Library.Shared
-  ├─Library.Domain
-  └─Library.Application
+  ├─ Library.Shared
+  ├─ Library.Domain
+  └─ Library.Application
 ```
 솔루션 하위에 `Library.Application` 프로젝트를 생성한다.
 
@@ -139,10 +139,10 @@ Library
 ---
 ```plaintext
 Library
-  ├─Library.Shared
-  ├─Library.Domain
-  ├─Library.Application
-  └─Library.Infrastructure
+  ├─ Library.Shared
+  ├─ Library.Domain
+  ├─ Library.Application
+  └─ Library.Infrastructure
 ```
 솔루션 하위에 `Library.Infrastructure` 프로젝트를 생성한다.
 
@@ -153,11 +153,11 @@ Library
 ---
 ```plaintext
 Library
-  ├─Library.Shared
-  ├─Library.Domain
-  ├─Library.Application
-  └─Library.Infrastructure
-     └─Library.Infrastructure.Persistence
+  ├─ Library.Shared
+  ├─ Library.Domain
+  ├─ Library.Application
+  └─ Library.Infrastructure
+     └─ Library.Infrastructure.Persistence
 ```
 `Library.Infrastructure.Persistence` 프로젝트는 데이터의 영속성을 담당한다.
 
@@ -180,14 +180,14 @@ Library
 ---
 ```plaintext
 Library
-  ├─Library.Shared
-  ├─Library.Domain
-  ├─Library.Application
-  ├─Library.Infrastructure
-  └─Library.Presentation
-     └─Library.Presentation.WebApi
+  ├─ Library.Shared
+  ├─ Library.Domain
+  ├─ Library.Application
+  ├─ Library.Infrastructure
+  └─ Library.Presentation
+     └─ Library.Presentation.WebApi
      or
-     └─Library.Presentation.MVC
+     └─ Library.Presentation.MVC
 ```
 솔루션 하위에 `Library.Presentation` **디렉토리**를 먼저 생성하고,
 그 아래에는 프로젝트의 필요에 따라 `Library.Presentation.WebApi` 또는 `Library.Presentation.MVC` 프로젝트를 생성한다.

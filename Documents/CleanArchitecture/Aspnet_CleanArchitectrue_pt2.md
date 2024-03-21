@@ -44,15 +44,17 @@ order: 902
 
 이러한 `DomainEvent` 들은 하위 레이어에서 처리되어 다양한 기능들을 수행할 수 있는 먹이(?)가 됩니다.
 
-다음과 같은 예시로 이러한 `DomainEvent`들을 소비할 수 있다.
-* 새로운 유저가 가입이 완료된 경우 => *유저에게 가입을 환영하는 이메일을 보내기*
-  1. Domain: `UserCreatedDomainEvent` 발생
-  2. Application: 환영 이메일을 생성하여 `IEmailService`의 Queue에 등록
-  3. Infrastructure: `EmailService`가 Queue에 등록된 이메일을 전송
-* 유저가 도서를 대여하는 경우 => *유저에게 문자/카카오톡 등을 이용해 반납기한을 안내한다.*
-  1. Domain: `UserRentedBookDomainEvent` 발생
-  2. Application: 반납기한을 안내하는 메시지를 생성하여 `ISmsService`/`IKakaotalkService`의 Queue에 등록
-  3. Infrastructure: `MessageService`가 Queue에 등록된 메시지를 전송
+> 💡 다음과 같은 예시로 `DomainEvent`들을 소비할 수 있다.
+> * 새로운 유저가 가입이 완료된 경우 <br/>
+=> <i>유저에게 가입을 환영하는 이메일을 보내기</i>
+>   1. Domain: `UserCreatedDomainEvent` 발생
+>   2. Application: 환영 이메일을 생성하여 `IEmailService`의 Queue에 등록
+>   3. Infrastructure: `EmailService`가 Queue에 등록된 이메일을 전송
+> * 유저가 도서를 대여하는 경우 <br/>
+=> <i>유저에게 문자/카카오톡 등을 이용해 반납기한을 안내한다.</i>
+>   1. Domain: `UserRentedBookDomainEvent` 발생
+>   2. Application: 반납기한을 안내하는 메시지를 생성하여 `ISmsService`/`IKakaotalkService`의 Queue에 등록
+>   3. Infrastructure: `MessageService`가 Queue에 등록된 메시지를 전송
 
 
 # **실제 설계**
@@ -62,9 +64,9 @@ order: 902
 ## **Primitives**
 ```plaintext
 LibrarySolution
-  ├─LibrarySolution.Shared
-  └─LibrarySolution.Domain
-     └─Primitives
+  ├─ LibrarySolution.Shared
+  └─ LibrarySolution.Domain
+     └─ Primitives
 ```
 
 먼저 `LibrarySolution.Domain` 프로젝트 아래에 *Primitives* 라는 디렉토리를 만듭니다.
@@ -133,13 +135,13 @@ public abstract class DomainEvent
 ### User
 ```plaintext
 LibrarySolution
-  ├─LibrarySolution.Shared
-  └─LibrarySolution.Domain
-     ├─Primitives
-     └─Aggregates
-        └─Users
-          └─Entities*
-            └─User.cs*
+  ├─ LibrarySolution.Shared
+  └─ LibrarySolution.Domain
+     ├─ Primitives
+     └─ Aggregates
+        └─ Users
+          └─ Entities*
+            └─ User.cs*
 ```
 *Aggregates* 디렉토리 아래 *Users* 디렉토리를 생성합니다.
 
@@ -168,14 +170,14 @@ public class User : EntityBase, IAggregateRoot
 
 ```plaintext
 LibrarySolution
-  ├─LibrarySolution.Shared
-  └─LibrarySolution.Domain
-     ├─Primitives
-     └─Aggregates
-        └─Users
-          └─Entities
-          └─Enums*
-            └─UserStaus.cs*
+  ├─ LibrarySolution.Shared
+  └─ LibrarySolution.Domain
+     ├─ Primitives
+     └─ Aggregates
+        └─ Users
+          └─ Entities
+          └─ Enums*
+            └─ UserStaus.cs*
 ```
 *Users* 디렉토리 아래 *Enums* 디렉토리를 생성하고, `UserStatus.cs`를 생성합니다.
 ```csharp
@@ -200,15 +202,15 @@ public enum UserStatus
 유저가 생성되었음을 알리는 도메인 이벤트를 만들어봅시다.
 ```plaintext
 LibrarySolution
-  ├─LibrarySolution.Shared
-  └─LibrarySolution.Domain
-     ├─Primitives
-     └─Aggregates
-        └─Users
-          └─Entities
-          └─Enums
-          └─DomainEvents*
-            └─UserCreatedDomainEvent.cs*
+  ├─ LibrarySolution.Shared
+  └─ LibrarySolution.Domain
+     ├─ Primitives
+     └─ Aggregates
+        └─ Users
+          └─ Entities
+          └─ Enums
+          └─ DomainEvents*
+            └─ UserCreatedDomainEvent.cs*
 ```
 ```csharp
 namespace Library.Domain.Aggregates.Users.DomainEvents;
@@ -230,16 +232,16 @@ public class UserCreatedDomainEvent : DomainEvent
 ### IUserRepository
 ```plaintext
 LibrarySolution
-  ├─LibrarySolution.Shared
-  └─LibrarySolution.Domain
-     ├─Primitives
-     └─Aggregates
-        └─Users
-          └─Entities
-          └─Enums
-          └─DomainEvents
-          └─Repositories
-            └─IUserRepository.cs*
+  ├─ LibrarySolution.Shared
+  └─ LibrarySolution.Domain
+     ├─ Primitives
+     └─ Aggregates
+        └─ Users
+          └─ Entities
+          └─ Enums
+          └─ DomainEvents
+          └─ Repositories
+            └─ IUserRepository.cs*
 ```
 ```csharp
 namespace Library.Domain.Aggregates.Users.Repositories;
@@ -265,6 +267,12 @@ public interface IUserRepository
 ---
 **User Entity**가 가지는 기능들을 정의해봅시다.<br/>
 아래는 현재 상태의 User Entity입니다.
+```plaintext
+LibrarySolution
+  ├─ LibrarySolution.Shared
+  └─ LibrarySolution.Domain
+     └─ Primitives
+```
 ```csharp
 namespace Library.Domain.Aggregates.Users.Entities;
 public class User : EntityBase, IAggregateRoot

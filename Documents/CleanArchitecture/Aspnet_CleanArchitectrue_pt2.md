@@ -111,7 +111,7 @@ public abstract class EntityBase
 ### DomainEvent
 ```csharp
 namespace Library.Domain.Primitives;
-public abstract class DomainEvent
+public abstract class DomainEvent : MediatR.INotification
 {
   public Guid EventId { get; }
   protected DomainEvent()
@@ -120,6 +120,7 @@ public abstract class DomainEvent
   }
 }
 ```
+* *MediatR*의 `INotification`을 상속받아, MediatR를 통해 `INotificationHandler`가 이벤트를 소비할 수 있도록 합니다.
 * `abstract` 클래스로서, 모든 `DomainEvent`들의 기본이 되는 클래스이며 반드시 상속을 통해서만 구현할 수 있도록 제약합니다.
 * `Guid EventId` 프로퍼티를 *protected*된 생성자를 통해 생성하여,
   모든 `DomainEvent`들은 생성되는 시점에 고유한 `EventId`를 부여받도록 합니다.

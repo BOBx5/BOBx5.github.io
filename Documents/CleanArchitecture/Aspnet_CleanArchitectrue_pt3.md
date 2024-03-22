@@ -16,10 +16,9 @@ order: 903
 * 하위 레이어인 Infrastructure Layer을 추상화(*Interface*)하여 만듭니다.
 * [MediatR](https://github.com/jbogard/MediatR)을 활용하여 파이프라인을 구축합니다.
 
----
+
 # **Abstractions 선언**
 ---
-
 ## Commands
 * **`ICommand`**
 
@@ -226,6 +225,87 @@ public interface IUnitOfWork
 `IUnitOfWork`의 `SaveChangesAsync` 메서드를 호출하는 방식으로 트랜잭셔널한 처리를 가능하게 합니다.
 
 
+# **Dependency Injection**
+---
+
+Application Layer의 설계사항을 의존성 주입하기 위한 클래스들을
+
+프로젝트 루트 경로에 생성해봅시다.
+
+```plaintext
+LibrarySolution
+├─ LibrarySolution.Shared
+├─ LibrarySolution.Domain
+└─ LibrarySolution.Application
+    ├─ Abstractions
+    ├─ Interfaces
+    └─ ApplicationAssembly.cs*
+```
+## ApplicationAssembly.cs
+```csharp
+public class ApplicationAssembly
+{
+    internal static readonly Assembly Assembly = typeof(ApplicationAssembly).Assembly;
+}
+```
+* ApplicationLayer의 Assembly를 반환하는 클래스입니다.
+
+## DependencyInjection.cs
+
+```plaintext
+LibrarySolution
+├─ LibrarySolution.Shared
+├─ LibrarySolution.Domain
+└─ LibrarySolution.Application
+    ├─ Abstractions
+    ├─ Interfaces
+    ├─ ApplicationAssembly.cs
+    └─ DependencyInjection.cs*
+```
+```csharp
+using MediatR;
+namespace LibrarySolution.Application;
+public static class DependencyInjection
+{
+    public static IServiceCollection AddApplication(
+        this IServiceCollection services,  
+        Configuration configuration)
+    {
+        services.AddMediatR(config =>
+        {
+        });
+    }
+}
+```
+먼저 ***MediatR***을 사용하도록 선언합니다.
+
+```csharp
+services.AddMediatR(config =>
+{
+    config.RegisterServicesFromAssemblyContaining<ApplicationAssembly>();
+});
+services.AddApplication();
+```
+ApplicationLayer의 어셈블리를 읽어 선언되어있는 아래와 같은 MediatR 관련 객체들을 자동으로 등록합니다.
+* IRequest
+  * IQuery
+  * ICommand
+* IRequestHandler
+  * IQueryHandler
+  * ICommandHandler
+* INotification
+  * DomainEvent
+* INotificationHandler
+  * DomainEventHandler
+
+> 💡 의존성 주입 방법
+> 
+> 이후 Presentation Layer의 *MVC* 또는 *WebApi* 프로젝트의 `program.cs`에서 `AddApplication` 메서드를 호출하여 의존성 주입을 수행합니다.
+> ```csharp
+> var builder = WebApplication.CreateBuilder(args);
+> builder.Services.AddApplication(builder.Configuration);
+> ```
+
 # **Use-Case 구현**
 ---
 지금까지 선언한 인터페이스들을 활용하여 *Use-Case*를 구현해 봅시다.
@@ -342,9 +422,146 @@ public record CreateUserCommandHandler : ICommandHandler<CreateUserCommand, Crea
 * ApplicationLayer에서 선언한 `IUnitOfWork`를 주입(DI) 받습니다.
 * `Task<CreateUserCommandResponse> Handle(CreateRentCommand request, CancellationToken cancellationToken)`
   1. 요청으로 들어온 `request`를 이용하여 `User.Create` 메서드를 이용해 엔티티를 생성합니다.
+     * 내부적으로 `UserCreatedDomainEvent`를 발생시킵니다.
   2. `_userRepository`에 `User` 엔티티를 저장합니다.
   3. `_unitOfWork`의 `SaveChangesAsync` 메서드를 호출하여 저장합니다.
+     * 내부적으로 `User`에 등록되어있는 `UserCreatedDomainEvent`를 발행(*Publish*)합니다.
   4. 저장이 정상적으로 완료되고 나면 `CreateUserCommandResponse`를 생성된 `UserId` 값과 함께 반환합니다.
+
+
+# **Validation 구현**
+---
+`CreateUserCommand`에 대한 유효성 검사를 추가해봅시다.
+
+*FluentValidation* NuGet 패키지의 `AbstractValidator<T>`를 활용하여 유효성 검사를 수행합니다.
+
+## CreateUserCommandValidator
+
+```plaintext
+LibrarySolution
+├─ LibrarySolution.Shared
+├─ LibrarySolution.Domain
+└─ LibrarySolution.Application
+    ├─ Abstractions
+    ├─ Interfaces
+    └─ UseCases
+        └─ Users
+            └─ Commands
+                ├─ CreateUserCommand.cs
+                ├─ CreateUserCommandResponse.cs
+                ├─ CreateUserCommandHandler.cs
+                └─ CreateUserCommandValidator.cs*
+```
+```csharp
+using FluentValidation;
+namespace LibrarySolution.Application.UseCases.Users.Commands;
+internal sealed class CreateUserCommandValidator : AbstractValidator<CreateUserCommand>
+{
+    public CreateUserCommandValidator()
+    {
+
+    }
+}
+```
+* `CreateUserCommandValidator`는 `CreateUserCommand`에 대한 유효성 검사를 수행합니다.
+* `AbstractValidator<CreateUserCommand>`를 상속받아 구현합니다.
+* Validation을 실패하는 경우, `ValidationException`을 발생시킵니다.
+* `ValidationException`은 Presentaion Layer에서 *HTTP 400(Bad Request)*로 처리됩니다.
+
+1. 먼저, 유저의 이름과 관련하여 Validation을 추가해봅시다
+   1. `Name`은 공백일 수 없습니다.
+
+    ```csharp
+    public CreateUserCommandValidator()
+    {
+        RuleFor(x => x.Name)
+            .NotEmpty();
+    }
+    ```
+    2. 공백인 경우, "유저 이름은 공백일 수 없습니다."라는 메시지를 반환합니다.
+
+    ```csharp
+    public CreateUserCommandValidator()
+    {
+        RuleFor(x => x.Name)
+            .NotEmpty()
+            .WithMessage($"유저 이름은 공백일 수 없습니다.");
+    }
+    ```
+    3. `Name`은 50자를 넘을 수 없습니다.
+
+    ```csharp
+    public CreateUserCommandValidator()
+    {
+        RuleFor(x => x.Name)
+            .NotEmpty()
+            .WithMessage($"유저 이름은 공백일 수 없습니다.")
+            .MaximumLength(50);
+    }
+    ```
+
+    4. 50자를 넘을 경우, "유저 이름은 50자를 넘을 수 없습니다."라는 메시지를 반환합니다.
+
+    ```csharp
+    public CreateUserCommandValidator()
+    {
+        RuleFor(x => x.Name)
+            .NotEmpty()
+            .WithMessage($"유저 이름은 공백일 수 없습니다.")
+            .MaximumLength(50)
+            .WithMessage($"유저 이름은 50자를 넘을 수 없습니다.");
+    }
+    ```
+
+2. 같은 방식으로 `Email` Validation을 추가합니다.
+    1. `Email`은 공백일 수 없습니다.
+
+        ```csharp
+        public CreateUserCommandValidator()
+        {
+            RuleFor(x => x.Name)
+                .NotEmpty()
+                .WithMessage($"유저 이름은 공백일 수 없습니다.")
+                .MaximumLength(50)
+                .WithMessage($"유저 이름은 50자를 넘을 수 없습니다.");
+
+            RuleFor(x => x.Email)
+                .NotEmpty()
+                .WithMessage($"유저 이메일은 공백일 수 없습니다.");
+        }
+        ```
+    
+    2. Email 형식의 Regex(정규식)을 추가합니다.
+
+        ```csharp
+        private static Regex EmailRegex = new Regex(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$");
+        public CreateUserCommandValidator()
+        {
+            RuleFor(x => x.Name)
+                .NotEmpty()
+                .WithMessage($"유저 이름은 공백일 수 없습니다.")
+                .MaximumLength(50)
+                .WithMessage($"유저 이름은 50자를 넘을 수 없습니다.");
+
+            RuleFor(x => x.Email)
+                .NotEmpty()
+                .WithMessage($"유저 이메일은 공백일 수 없습니다.")
+                .Must(RegisteredRegex.Email.IsMatch)
+                .WithMessage($"올바른 이메일 형식이 아닙니다.");
+        }
+        ```
+
+> 💡 **FluentValidation.AbstractValidator<T>** 
+>
+> 내부적으로 *override* 가능한 다양한 메서드를 제공합니다.
+> * `Validate`
+> * `ValidateAsync`
+> * `PreValidate`
+> * `RaiseValidationException`
+>
+> 이러한 메서드를 override 하여 유효성 검사 전/중/후 시점에 커스터마이징이 가능하도록 합니다.
+
+
 
 
 > 작성 진행 중...

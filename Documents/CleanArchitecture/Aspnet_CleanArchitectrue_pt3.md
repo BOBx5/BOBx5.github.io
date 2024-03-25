@@ -433,7 +433,82 @@ public record CreateUserCommandHandler : ICommandHandler<CreateUserCommand, Crea
 ---
 `CreateUserCommand`에 대한 유효성 검사를 추가해봅시다.
 
-*FluentValidation* NuGet 패키지의 `AbstractValidator<T>`를 활용하여 유효성 검사를 수행합니다.
+## AbstractValidator&lt;T&gt;
+
+먼저 [*FluentValidation*](https://docs.fluentvalidation.net) NuGet 패키지의 `AbstractValidator<T>`를 알아봅시다.
+
+```csharp
+using FluentValidation;
+
+public class SomeCommmand
+{
+    public string Guid { get; set; }
+}
+public class SomeCommmandValidator : AbstractValidator<SomeCommmand>
+{
+    const int GuidLength = 36;
+    public SomeCommmandValidator()
+    {
+        RuleFor(x => x.Value)
+            .NotEmpty()
+            .Length(GuidLength)
+            .Must(value => Guid.TryParse(value, out _))
+            .Must(GuidFormat)
+            .WithMessage("Guid 형식이 아닙니다.");
+    }
+}
+
+protected bool GuidFormat(string value)
+{
+    return Guid.TryParse(value, out _);
+}
+
+protected override void PreValidate(ValidationContext<CreateUserCommand> context, ValidationResult result)
+{
+    base.PreValidate(context);
+}
+
+public override ValidationResult Validate(ValidationContext<SomeCommmand> context)
+{
+    return base.Validate(context);
+}
+
+public override async Task<ValidationResult> ValidateAsync(ValidationContext<SomeCommmand> context, CancellationToken cancellation)
+{
+    return await base.ValidateAsync(context, cancellation);
+}
+
+protected override void RaiseValidationException(ValidationResult result)
+{
+    base.RaiseValidationException(result);
+}
+```
+
+* `SomeCommmand` 클래스에 대한 유효성 검사를 수행하는 `SomeCommmandValidator` 클래스를 선언합니다.
+* `AbstractValidator<T>`를 상속받아 구현합니다. (`T` = `SomeCommmand`)
+* 생성자에서 `RuleFor` 메서드를 이용하여 `T` 프로퍼티에 대해 유효성 검사를 추가합니다.
+* `RuleFor`
+  * `NotEmpty()`<br/>
+    값이 비어있는지 확인합니다.
+  * `Length(GuidLength)`<br/>
+    값의 길이를 확인합니다.
+  * `Must(value => Guid.TryParse(value, out _))` <br/>
+    람다식 표현으로 사용자 정의 유효성 검사를 수행합니다.
+  * `Must(GuidFormat)` <br/>
+    메서드 참조를 이용하여 사용자 정의 유효성 검사를 수행합니다.
+  * `WithMessage("Guid 형식이 아닙니다.")`<br/>
+    유효성 검사 실패시 반환할 메시지를 지정합니다.
+
+* `PreValidate`
+  * 유효성 검사 이전에 `ValidationContext<T>` 에 대한 커스텀 로직을 수행할 수 있습니다.
+
+* `Validate` & `ValidateAsync`
+  * 유효성 검사 시점을 커스터마이징 할 때 이 메서드를 *override* 하여 사용합니다.
+
+* `RaiseValidationException`
+  * 유효성 검사 실패하는 경우 `ValidationException`을 발생시킵니다.
+  * 이때 *throw* 하기 전 커스텀 로직을 수행할 수 있습니다.
+  * 이후 `ValidationException`은 *Presentation Layer*에서 *HTTP 400(Bad Request)*로 처리됩니다.
 
 ## CreateUserCommandValidator
 
@@ -468,7 +543,7 @@ internal sealed class CreateUserCommandValidator : AbstractValidator<CreateUserC
 * Validation을 실패하는 경우, `ValidationException`을 발생시킵니다.
 * `ValidationException`은 Presentaion Layer에서 *HTTP 400(Bad Request)*로 처리됩니다.
 
-1. 먼저, 유저의 이름과 관련하여 Validation을 추가해봅시다
+1. 먼저, 생성자에 유저의 이름과 관련하여 Validation을 추가해봅시다
    1. `Name`은 공백일 수 없습니다.
 
     ```csharp
@@ -551,17 +626,48 @@ internal sealed class CreateUserCommandValidator : AbstractValidator<CreateUserC
         }
         ```
 
-> 💡 **FluentValidation.AbstractValidator<T>** 
->
-> 내부적으로 *override* 가능한 다양한 메서드를 제공합니다.
-> * `Validate`
-> * `ValidateAsync`
-> * `PreValidate`
-> * `RaiseValidationException`
->
-> 이러한 메서드를 override 하여 유효성 검사 전/중/후 시점에 커스터마이징이 가능하도록 합니다.
+3. 이제 생성한 Validator를 파이프라인에 추가해봅시다.
+
+    1. [FluentValdation.DependencyInjectionExtension](FluentValidation.DependencyInjectionExtensions) NuGet 패키지를 설치합니다.
+    2. Application 프로젝트의 `DependencyInjection.cs` 파일에 아래 라인을 추가합니다.
+
+        `services.AddValidatorsFromAssembly(ApplicationAssembly.Assembly, includeInternalTypes: true);`
+        ```csharp
+        public static class DependencyInjection
+        {
+            public static IServiceCollection AddApplication(
+                this IServiceCollection services,
+                IConfiguration configuration)
+            {
+                services.AddMediatR(config =>
+                {
+                    config.RegisterServicesFromAssemblyContaining<ApplicationAssembly>();
+                });
+                services.AddValidatorsFromAssembly(ApplicationAssembly.Assembly, includeInternalTypes: true);
+                return services;
+            }
+        }
+        ```
+        * `AddValidatorsFromAssembly` 메서드를 이용하여 Application Layer의 Assembly에 선언된 Validator를 자동으로 등록합니다.
+        * `AbstractValidator<T>`를 상속받는 클래스 중 *internal* 로 선언된 클래스도 추가하려면 `includeInternalTypes: true`를 추가합니다.
 
 
 
+# **요약**
+---
+최종적으로 아래와 같은 파이프라인이 형성된다.
 
-> 작성 진행 중...
+[![](https://mermaid.ink/img/pako:eNqVVF1r1EAU_SvDPClk404yuyZBFqoWCiKWNfZB04dpcrXDbiZxZoKty4IPvukvkBb6UKSv-rNk-x-cfO2mZLfQQMh8nHPuzT1zZ4HjLAEcYAWfCxAxvOTsk2RpJJB5WKEzUaQnIJt5rDOJ3ql2njOpecxzJjQ6lKBAaKZ5Jvq7e3k-5_GOzfBFlqZMJEdszhNmQuyGHJh3XoavIWUqaDCZ3IkeoIMwPETT8o-UroHd_YrQSShYqz8Lp6DyTCiY1LQOqmL1Mr2H28OiwWCrgsmtmcEj2378QHZLfdIO9tS5iDdCJxLYDK0urm5_3ay-_0H__n5b_b5Eqx_Xtz9vzOeihj0o5pRx1eZsSrN_FkNeDjZRd8j1nNou0lXpOVd6HqAPlcd0OETPWdJYfVyzQCQ7a9jxsDlKGwfvkprtLTlL0IUUKGRq1jEd1YRNCe5N3DGJv3l1jL5wfYrWIoYVCWzhFGTKeGLaclFqRVifQgoRDswwYXIW4UgsDa7sz7fGbRxoWYCFi7w8AE0L4-Ajm6v16n7CTQVapGkqHCzwGQ4G1LOpNySO53njkUdHDrXwuVknxPaH_th1xh6hHqUjd2nhr1lmhIlNHOpT139Kxq7rE0IsDJX-6_o2qS6VKsr7ilAGXf4HavR_Ig?type=png)](https://mermaid-js.github.io/mermaid-live-editor/edit#pako:eNqVVF1r1EAU_SvDPClk404yuyZBFqoWCiKWNfZB04dpcrXDbiZxZoKty4IPvukvkBb6UKSv-rNk-x-cfO2mZLfQQMh8nHPuzT1zZ4HjLAEcYAWfCxAxvOTsk2RpJJB5WKEzUaQnIJt5rDOJ3ql2njOpecxzJjQ6lKBAaKZ5Jvq7e3k-5_GOzfBFlqZMJEdszhNmQuyGHJh3XoavIWUqaDCZ3IkeoIMwPETT8o-UroHd_YrQSShYqz8Lp6DyTCiY1LQOqmL1Mr2H28OiwWCrgsmtmcEj2378QHZLfdIO9tS5iDdCJxLYDK0urm5_3ay-_0H__n5b_b5Eqx_Xtz9vzOeihj0o5pRx1eZsSrN_FkNeDjZRd8j1nNou0lXpOVd6HqAPlcd0OETPWdJYfVyzQCQ7a9jxsDlKGwfvkprtLTlL0IUUKGRq1jEd1YRNCe5N3DGJv3l1jL5wfYrWIoYVCWzhFGTKeGLaclFqRVifQgoRDswwYXIW4UgsDa7sz7fGbRxoWYCFi7w8AE0L4-Ajm6v16n7CTQVapGkqHCzwGQ4G1LOpNySO53njkUdHDrXwuVknxPaH_th1xh6hHqUjd2nhr1lmhIlNHOpT139Kxq7rE0IsDJX-6_o2qS6VKsr7ilAGXf4HavR_Ig)
+
+1. User가 *HTTP Request*를 요청합니다.
+2. Presentation Layer에서 *HTTP Request*를 `TCommand`로 변환 후 *MediatR*을 이용하여 Application Layer로 전달합니다.
+3. Application Layer에서 `TCommand`에 해당하는 *Validator*로 보냅니다
+4. *Validator*에서 유효성 검사 전 `PreValidate(ValidationContext<TCommand>, ValidationResult result)`메서드를 수행합니다.
+5. *Validator*에서 `Validate(ValidationContext<TCommand>)` 또는 `ValidateAsync(ValidationContext<TCommand>, CancellationToken)` 메서드로 유효성 검사를 수행합니다.
+6. 유효성검증이 실패하면 `RaiseValidationException(ValidationContext<TCommand>, ValidationResult result)` 메서드를 실행하여 `ValidationException`을 *throw*시킵니다.
+7. Application Layer에서 Presentation Layer로 `ValidationException`을 하달합니다.
+8. Presentation Layer에서 *HTTP 400(Bad Request)*을 User에게 반환합니다.
+9. 유효성검증이 성공하면 `TCommand`를 `TCommandHandler`로 전달합니다.
+10. `Handle(TCommand, CancellationToken)` 메서드를 실행하여 비즈니스 로직을 수행 후 `TResponse`를 Presentation Layer로 반환합니다.
+11. 정상적으로 완료되었다면 Presentation Layer는 User에게 *HTTP 200(OK)*을 `TResponse`와 함께 반환합니다.
+    

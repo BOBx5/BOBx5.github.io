@@ -128,7 +128,7 @@ Library
 ├─ Library.Domain
 ├─ Library.Application
 └─ Library.Infrastructure
-    └─ Library.Infrastructure.DateTimeProvider
+    ├─ Library.Infrastructure.DateTimeProvider
     └─ Library.Infrastructure.Persistence*
 ```
 1. *Library.Infrastructure* 솔루션 디렉토리 아래 *Library.Infrastructure.Persistence* 프로젝트를 생성합니다.
@@ -138,7 +138,7 @@ Library
    * [Microsoft.EntityFrameworkCore.Design](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Design)
    * [Microsoft.EntityFrameworkCore.SqlServer](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer)
 
-## ApplicationDbContext.cs
+## ApplicationDbContext
 ---
 ```plaintext
 Library
@@ -146,10 +146,34 @@ Library
 ├─ Library.Domain
 ├─ Library.Application
 └─ Library.Infrastructure
-    └─ Library.Infrastructure.DateTimeProvider
+    ├─ Library.Infrastructure.DateTimeProvider
     └─ Library.Infrastructure.Persistence
         └─ ApplicationDbContext.cs*
 ```
+먼저 *Persistence* 프로젝트 루트 경로에 `ApplicationDbContext.cs` 파일을 생성하고,
+
+생성자를 통해 *ApplicationDbContext*를 사용하기 위한 서비스들을 주입받습니다.
+
+```csharp
+using Microsoft.EntityFrameworkCore;
+
+namespace Library.Infrastructure.Persistence;
+public class ApplicationDbContext 
+{
+    private readonly IPublisher _publisher;
+    private readonly IDateTimeProvider _dateTimeProvider;
+    public ApplicationDbContext(
+        IPublisher publisher,
+        IDateTimeProvider dateTimeProvider)
+    {
+        _publisher = publisher;
+        _dateTimeProvider = dateTimeProvider;
+    }
+}
+```
+
+### DbContext 
+---
 ```csharp
 using Microsoft.EntityFrameworkCore;
 
@@ -157,27 +181,60 @@ namespace Library.Infrastructure.Persistence;
 public class ApplicationDbContext 
     : DbContext
 {
-
+    private readonly IPublisher _publisher;
+    private readonly IDateTimeProvider _dateTimeProvider;
+    public ApplicationDbContext(
+        DbContextOptions<ApplicationDbContext> options,
+        IPublisher publisher,
+        IDateTimeProvider dateTimeProvider) 
+        : base(options)
+    {
+        _publisher = publisher;
+        _dateTimeProvider = dateTimeProvider;
+    }
 }
 ```
-먼저 `ApplicationDbContext.cs` 파일을 생성 후 *Microsoft.EntityFrameworkCore*의 `DbContext`를 상속받습니다.
+*Microsoft.EntityFrameworkCore*의 `DbContext`를 상속합니다.
+
+그 다음 생성자에서 `DbContextOptions`를 주입받고,
+
+`DbContext`의 기본 생성자에 넘겨주어 `DbContext`를 초기화합니다. (`: base(options)`)
 
 ### IApplicationDbContext
+---
 ```csharp
 using Microsoft.EntityFrameworkCore;
-using Library.Application.Interfaces;
 
 namespace Library.Infrastructure.Persistence;
 public class ApplicationDbContext 
-    : DbContext, IApplicationDbContext
+    : DbContext
 {
-    DbSet<User> Users { get; set; }
-    DbSet<Book> Books { get; set; }
-    DbSet<Rent> Rents { get; set; }
-    DatabaseFacade Database { get; }
+    public DbSet<User> Users { get; set; }
+    public DbSet<Book> Books { get; set; }
+    public DbSet<Rent> Rents { get; set; }
+
+    private readonly IPublisher _publisher;
+    private readonly IDateTimeProvider _dateTimeProvider;
+    public ApplicationDbContext(
+        DbContextOptions<ApplicationDbContext> options,
+        IPublisher publisher,
+        IDateTimeProvider dateTimeProvider) 
+        : base(options)
+    {
+        _publisher = publisher;
+        _dateTimeProvider = dateTimeProvider;
+    }
 }
 ```
-> ***IApplicationDbContext***
+Application Layer의 `IApplicationDbContext`를 상속합니다.
+
+`IApplicationDbContext`의 `DbSet<User>`, `DbSet<Book>`, `DbSet<Rent>`와 
+
+EF의 `DbContext`의 `DbSet<T>`간의 다형성을 이용하여, 
+
+`ApplicationDbContext`에 `DbSet<T>`을 선언합니다.
+
+> **IApplicationDbContext**
 > ```csharp
 > public interface IApplicationDbContext
 > {
@@ -187,43 +244,6 @@ public class ApplicationDbContext
 >     DatabaseFacade Database { get; }
 > }
 > ```
-
-Application Layer의 `IApplicationDbContext`를 상속합니다.
-
-이를 통해 `IApplicationDbContext`을 주입받는 객체는 `User`, `Book`, `Rent` Entity에 접근할 수 있습니다.
-
-### Constructor
-```csharp
-using Microsoft.EntityFrameworkCore;
-using Library.Application.Interfaces;
-
-namespace Library.Infrastructure.Persistence;
-public class ApplicationDbContext 
-    : DbContext, IApplicationDbContext
-{
-    DbSet<User> Users { get; set; }
-    DbSet<Book> Books { get; set; }
-    DbSet<Rent> Rents { get; set; }
-    DatabaseFacade Database { get; }
-
-    private readonly IPublisher _publisher;
-    private readonly IDateTimeProvider _dateTimeProvider;
-    public ApplicationDbContext(
-        DbContextOptions<ApplicationDbContext> options,
-        IPublisher publisher,
-        IDateTimeProvider dateTimeProvider)
-        : base(options)
-    {
-        _publisher = publisher;
-        _dateTimeProvider = dateTimeProvider;
-    }
-}
-```
-생성자(*Constructor*)를 통해 *ApplicationDbContext*를 사용하기 위한 서비스들을 주입받습니다.
-
-1. EF 기본 생성 요소인 `DbContextOptions<ApplicationDbContext>`
-2. 파이프라인 형성을 위한 MediatR의 `IPublisher`
-3. 기준시간 제공을 위한 `IDateTimeProvider`
 
 
 ### IUnitOfWork
@@ -341,7 +361,7 @@ public class ApplicationDbContext
 
 > 💡**사실은 잘못된 예제**
 >
-> 이벤트를 발행하는 방식에는 2가지가 있는데 *Optimistic* 방식과 *Pessimistic* 방식이 있습니다.
+> 이벤트를 발행하는 방식 중 *Optimistic* 방식과 *Pessimistic* 방식이 있습니다.
 >
 > **Optimistic** 방식은 **낙관적**의미 그대로 트랜잭션 처리가 정상적으로 처리 될것이라 예상하여, 트랜잭션 처리 후 이벤트를 발행하는 방식입니다.
 >
@@ -349,58 +369,64 @@ public class ApplicationDbContext
 >
 > 위 예제는 **Optimistic** 방식으로 **Pessimistic** 방식으로 구현하기 위해서는 **`2.`**와 **`3.`**의 순서만 변경하면 됩니다.
 >
-> 다만, 두가지 방법 모두 장단점이 극명하여 두 방법을 보완할 수 있는, ***Outbox-Pattern*** 방식으로 구현하는 법을 이후에 소개할 예정입니다.
+> 다만, 두가지 방법 모두 이벤트 발행 중 *Exception* 발생에 대해 매우 취약한 구조를 지니고 있습니다.
+>
+> 이를 보완하여 각각의 이벤트들을 독립적으로 처리할 수 있는 ***Outbox-Pattern*** 에 대해서는 이후에 소개하도록 하겠습니다.
 
 
 ## Repository
 ---
 이제 도메인 레이어에 정의되어있는 Repository를 구현해봅시다.
 
+먼저 UserRepository를 구현해보겠습니다.
 
-```plaintext
-Library
-├─ Library.Shared
-├─ Library.Domain
-├─ Library.Application
-└─ Library.Infrastructure
-    └─ Library.Infrastructure.DateTimeProvider
-    └─ Library.Infrastructure.Persistence
-        └─ ApplicationDbContext.cs
-        └─ Repositories*
-```
-먼저 *Repositories* 디렉토리를 생성합니다.
+### UserRepository
+
+1. 먼저 Persistence 프로젝트 루트 경로에 *Repositories* 디렉토리를 생성합니다.
+
+    ```plaintext
+    Library
+    ├─ Library.Shared
+    ├─ Library.Domain
+    ├─ Library.Application
+    └─ Library.Infrastructure
+        └─ Library.Infrastructure.DateTimeProvider
+        └─ Library.Infrastructure.Persistence
+            └─ ApplicationDbContext.cs
+            └─ Repositories*
+    ```
+2. *Repositories* 디렉토리에 `UserRepository.cs` 를 생성합니다.
     
-```plaintext
-Library
-├─ Library.Shared
-├─ Library.Domain
-├─ Library.Application
-└─ Library.Infrastructure
-    └─ Library.Infrastructure.DateTimeProvider
-    └─ Library.Infrastructure.Persistence
-        └─ ApplicationDbContext.cs
-        └─ Repositories
-            └─ UserRepository.cs*
-```
-```csharp
-using Library.Application.Interfaces;
-using Library.Domain.Aggregates.Users.Entities;
-using Library.Domain.Aggregates.Users.Repositories;
-using Microsoft.EntityFrameworkCore;
+    ```plaintext
+    Library
+    ├─ Library.Shared
+    ├─ Library.Domain
+    ├─ Library.Application
+    └─ Library.Infrastructure
+        ├─ Library.Infrastructure.DateTimeProvider
+        └─ Library.Infrastructure.Persistence
+            ├─ ApplicationDbContext.cs
+            └─ Repositories
+                └─ UserRepository.cs*
+    ```
+3. `IUserRepository`를 상속받습니다.
 
-namespace Library.Infrastructure.Persistence.Repositories;
-public class UserRepository : IUserRepository
-{
-    private readonly IApplicationDbContext _context;
-    public UserRepository(IApplicationDbContext context)
+    ```csharp
+    using Library.Application.Interfaces;
+    using Library.Domain.Aggregates.Users.Entities;
+    using Library.Domain.Aggregates.Users.Repositories;
+    using Microsoft.EntityFrameworkCore;
+
+    namespace Library.Infrastructure.Persistence.Repositories;
+    public class UserRepository : IUserRepository
     {
-        _context = context;
+        private readonly IApplicationDbContext _context;
+        public UserRepository(IApplicationDbContext context)
+        {
+            _context = context;
+        }
     }
-}
-```
-1. `UserRepository.cs` 를 생성합니다.
-2. `IUserRepository`를 상속받습니다.
-
+    ```
     > ***IUserRepository***
     > ```csharp
     > namespace Library.Domain.Aggregates.Users.Repositories;
@@ -414,7 +440,7 @@ public class UserRepository : IUserRepository
     > }
     > ```
     
-3. 생성자를 통해 `IApplicationDbContext`를 주입받습니다.
+4. 생성자에서 통해 `IApplicationDbContext`를 주입받고, `DbSet<User>`을 필드로 선언합니다.
 
     ```csharp
     using Library.Application.Interfaces;
@@ -433,7 +459,7 @@ public class UserRepository : IUserRepository
     }
     ```
 
-4. `IUserRepository`의 메서드를 구현합니다.
+5. `IUserRepository`의 메서드를 구현합니다.
 
     ```csharp
     using Library.Application.Interfaces;
@@ -478,10 +504,249 @@ public class UserRepository : IUserRepository
 
     > 💡 *virtual* 로 하는 이유
     > 
-    > 현재는 단순한 Repository의 1-tier 구현이지만, 
+    > 현재는 단순한 Repository가 Database와 직접 연동되는 1-tier 구현이지만, 
     >
     > `UserRepository`를 상속받아 새로운 기능(캐싱처리 등)을 추가할 수 있도록 확장성을 위해 *virtual*로 선언합니다.
 
+### BookRepository
+동일한 방식으로 '도서'를 다룰 수 있도록 BookRepository 구현합니다.
+
+```plaintext
+Library
+├─ Library.Shared
+├─ Library.Domain
+├─ Library.Application
+└─ Library.Infrastructure
+    ├─ Library.Infrastructure.DateTimeProvider
+    └─ Library.Infrastructure.Persistence
+        ├─ ApplicationDbContext.cs
+        └─ Repositories
+            ├─ UserRepository.cs
+            └─ BookRepository.cs*
+```
+```csharp
+using Library.Application.Interfaces;
+using Library.Domain.Aggregates.Books.Entities;
+using Library.Domain.Aggregates.Books.Repositories;
+using Microsoft.EntityFrameworkCore;
+
+namespace Library.Infrastructure.Persistence.Repositories;
+public class BookRepository : IBookRepository
+{
+    private readonly DbSet<Book> _books;
+    public BookRepository(IApplicationDbContext context)
+    {
+        _books = context.Books;
+    }
+
+    public virtual async Task<Book> GetByIdAsync(BookId bookId)
+    {
+        return await _books.FirstOrDefaultAsync(book => book.Id == bookId);
+    }
+    public virtual async Task AddAsync(Book book)
+    {
+        await _books.AddAsync(book);
+    }
+    public virtual async Task UpdateAsync(Book book)
+    {
+        var entry = _books.Attach(book);
+        entry.State = EntityState.Modified;
+        return Task.CompletedTask;
+    }
+    public virtual async Task RemoveAsync(Book book)
+    {
+        _books.Remove(book);
+        return Task.CompletedTask;
+    }
+}
+```
+
+### RentRepository
+마지막으로 대여를 다룰 수 있도록 RentRepository를 구현합니다.
+
+```plaintext
+Library
+├─ Library.Shared
+├─ Library.Domain
+├─ Library.Application
+└─ Library.Infrastructure
+    ├─ Library.Infrastructure.DateTimeProvider
+    └─ Library.Infrastructure.Persistence
+        ├─ ApplicationDbContext.cs
+        └─ Repositories
+            ├─ UserRepository.cs
+            ├─ BookRepository.cs
+            └─ RentRepository.cs*
+```
+```csharp
+using Library.Application.Interfaces;
+using Library.Domain.Aggregates.Rents.Entities;
+using Library.Domain.Aggregates.Rents.Repositories;
+using Microsoft.EntityFrameworkCore;
+
+namespace Library.Infrastructure.Persistence.Repositories;
+public class RentRepository : IRentRepository
+{
+    private readonly DbSet<Rent> _rents;
+    public RentRepository(IApplicationDbContext context)
+    {
+        _rents = context.Rents;
+    }
+    public virtual async Task<Rent> GetByIdAsync(RentId rentId)
+    {
+        return await _rents.FirstOrDefaultAsync(rent => rent.Id == rentId);
+    }
+    public virtual async Task AddAsync(Rent rent)
+    {
+        await _rents.AddAsync(rent);
+    }
+    public virtual async Task UpdateAsync(Rent rent)
+    {
+        var entry = _rents.Attach(rent);
+        entry.State = EntityState.Modified;
+        return Task.CompletedTask;
+    }
+    public virtual async Task RemoveAsync(Rent rent)
+    {
+        _rents.Remove(rent);
+        return Task.CompletedTask;
+    }
+}
+```
+
+## Dependency Injection
+---
+
+
+1. Persistence 프로젝트를 DI 할 수 있도록 루트 경로에 `DependencyInjection.cs` 파일을 생성합니다.
+
+    ```plaintext
+    Library
+    ├─ Library.Shared
+    ├─ Library.Domain
+    ├─ Library.Application
+    └─ Library.Infrastructure
+        ├─ Library.Infrastructure.DateTimeProvider
+        └─ Library.Infrastructure.Persistence
+            ├─ Repositories
+            ├─ ApplicationDbContext.cs
+            └─ DependencyInjection.cs*
+    ```
+    ```csharp
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+
+    namespace LibrarySolution.Infrastructure.Persistence;
+    public static class DependencyInjection
+    {
+        
+        public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
+        {
+
+        }
+    }
+    ```
+
+2. `AddDbContext`를 통해 `ApplicationDbContext`를 등록합니다.
+
+    ```csharp
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+
+    namespace LibrarySolution.Infrastructure.Persistence;
+    public static class DependencyInjection
+    {
+        public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddDbContext<ApplicationDbContext>((serviceProvider, options) =>
+            {
+                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+            });
+            return services;
+        }
+    }
+    ```
+
+3. `ApplicationDbContext`를 사용할 수 있도록 등록합니다.
+
+    ```csharp
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+
+    namespace LibrarySolution.Infrastructure.Persistence;
+    public static class DependencyInjection
+    {
+        public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddDbContext<ApplicationDbContext>((serviceProvider, options) =>
+            {
+                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+            });
+
+            services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<ApplicationDbContext>());
+            services.AddScoped<IUnitOfWork>(provider => provider.GetRequiredService<ApplicationDbContext>());
+
+            return services;
+        }
+    }
+    ```
+    > 💡 **`IApplicationDbContext`와 `IUnitOfWork`**
+    > 
+    > 위와 같이 등록함으로써 동일한 **`ApplicationDbContext`** 인스턴스에 접근하지만
+    > 
+    > 사용하는 다른 클래스에서 `IApplicationDbContext`를 주입받느냐 `IUnitOfWork`를 주입받느냐에 따라 접근 범위가 달라집니다.
+    > 
+    > `IApplicationDbContext`를 주입받는 경우 `DbSet<T>`에 접근하여, Entity의 상태값을 변형할 수 있도록 기능을 제공하지만 실질적으로 저장할 수 있는 `SaveChangesAsync`에는 접근할 수 없습니다.
+    >
+    > 반대로 `IUnitOfWork`는 Entity에 관해서는 아무런 접근을 할 수 없고 `SaveChangesAsync`를 통해 `DbContext.ChangeTracker`에 조작된것으로 표기된(`EntityStatus.Added`, `EntityStatus.Modified`, `EntityStatus.Deleted`)된 Entitiy에만 접근할 수 있게됩니다.
+    >
+    > 이러한 다형성을 통해 *ReadOnly*인 *IQuery*를 처리하는 *TQueryHandler*에서 `IApplicationDbContext`만을 주입받아 데이터의 조회만을 가능하도록 원천적으로 제한하고,
+    >
+    > *ICommand*를 처리하는 *TCommandHandler*에서는 `IUnitOfWork`를 함께 주입받아 `SaveChangesAsync`를 통해 데이터를 저장할 수 있도록 구현할 수 있도록 합니다.
+
+
+# EntityConfiguration
+---
+* EntityConfiguration은 EntityFrameworkCore의 FluentAPI를 통해 Entity의 구성을 정의하는 클래스입니다.
+* Domain 에서 설계한 Entity들을 실질적으로 어떻게 Database에 매핑하여 저장할지에 대한 방법을 정의합니다.
+
+> **Db-First** 방식의 설계
+> 
+> Configuration을 프로젝트 레벨에서 매우 구체적으로(인덱스 등) 설계하고, Database의 구조를 Entity에 맞추어 설계하는 방식입니다.
+>
+> .NET CLI의 EF 명령어를 통해 migration을 생성한 뒤, 이를 통해 Database를 생성 및 변경이 가능합니다. <br/>
+*(본 예제에서는 다루지 않습니다.)*
+
+## UserConfiguration
+---
+작성 중..
+
+
+## BookConfiguration
+---
+작성 중..
+
+## RentConfiguration
+---
+작성 중..
+
+
+
+# 종합
+---
+
+* [DateTimeProvider](#datetimeproivider) 예제를 통해 Infrastructure Layer의 구현하는 방법을 알아보았습니다.
+* 
+
+
+
+
+
 # 다음 단계
 ---
-[]()
+작성 중..
+<!-- 
+[4. Presentation Layer 설계](/Documents/CleanArchitecture/Aspnet_CleanArchitectrue_pt5.html) 
+-->

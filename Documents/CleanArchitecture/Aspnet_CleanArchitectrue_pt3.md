@@ -656,12 +656,13 @@ internal sealed class CreateUserCommandValidator : AbstractValidator<CreateUserC
 
 # **팁**
 ---
-위와 같은 설계대로 따르면 
-`TRequest` - `TRequestValidator` - `TRequestHandler` - `TResponse` 순으로 파이프 라인이 구성됩니다. 
-개인적인 취향에 따라 갈릴 수는 있으나, 
-디버깅 및 개발 단계에서의 생산성을 위해서 
-사용자 요청의 기본이 되는 `TRequest.cs` 파일 아래 
-4가지를 전부 구성하는 것이 편리할 수 있습니다.
+위와 같은 설계대로 따르면 다음과 같은 순서의 파이프라인이 구성됩니다.
+
+`TRequest` - `TRequestValidator` - `TRequestHandler` - `TResponse`
+
+취향에 따라 각각의 파일을 분리할 수도 있고, 하나의 파일에 모두 구현할 수도 있습니다.
+
+하지만 개발편의성(*디버깅 및 편집*)을 위해 사용자 요청의 기본이 되는 `TRequest.cs` 하나의 파일 아래 전부 구성하는 것을 제안합니다.
 
 ```csharp
 namespace Library.Application.UseCases.Users.Commands;
@@ -726,7 +727,7 @@ public class CreateUserCommandHandler
 
 # **종합**
 ---
-최종적으로 아래와 같은 파이프라인이 형성된다.
+최종적으로 형성된 파이프라인들을 시퀀스다이어그램으로 보면 다음과 같습니다.
 
 [![](https://mermaid.ink/img/pako:eNqVVF1r1EAU_SvDPClk404yuyZBFqoWCiKWNfZB04dpcrXDbiZxZoKty4IPvukvkBb6UKSv-rNk-x-cfO2mZLfQQMh8nHPuzT1zZ4HjLAEcYAWfCxAxvOTsk2RpJJB5WKEzUaQnIJt5rDOJ3ql2njOpecxzJjQ6lKBAaKZ5Jvq7e3k-5_GOzfBFlqZMJEdszhNmQuyGHJh3XoavIWUqaDCZ3IkeoIMwPETT8o-UroHd_YrQSShYqz8Lp6DyTCiY1LQOqmL1Mr2H28OiwWCrgsmtmcEj2378QHZLfdIO9tS5iDdCJxLYDK0urm5_3ay-_0H__n5b_b5Eqx_Xtz9vzOeihj0o5pRx1eZsSrN_FkNeDjZRd8j1nNou0lXpOVd6HqAPlcd0OETPWdJYfVyzQCQ7a9jxsDlKGwfvkprtLTlL0IUUKGRq1jEd1YRNCe5N3DGJv3l1jL5wfYrWIoYVCWzhFGTKeGLaclFqRVifQgoRDswwYXIW4UgsDa7sz7fGbRxoWYCFi7w8AE0L4-Ajm6v16n7CTQVapGkqHCzwGQ4G1LOpNySO53njkUdHDrXwuVknxPaH_th1xh6hHqUjd2nhr1lmhIlNHOpT139Kxq7rE0IsDJX-6_o2qS6VKsr7ilAGXf4HavR_Ig?type=png)](https://mermaid-js.github.io/mermaid-live-editor/edit#pako:eNqVVF1r1EAU_SvDPClk404yuyZBFqoWCiKWNfZB04dpcrXDbiZxZoKty4IPvukvkBb6UKSv-rNk-x-cfO2mZLfQQMh8nHPuzT1zZ4HjLAEcYAWfCxAxvOTsk2RpJJB5WKEzUaQnIJt5rDOJ3ql2njOpecxzJjQ6lKBAaKZ5Jvq7e3k-5_GOzfBFlqZMJEdszhNmQuyGHJh3XoavIWUqaDCZ3IkeoIMwPETT8o-UroHd_YrQSShYqz8Lp6DyTCiY1LQOqmL1Mr2H28OiwWCrgsmtmcEj2378QHZLfdIO9tS5iDdCJxLYDK0urm5_3ay-_0H__n5b_b5Eqx_Xtz9vzOeihj0o5pRx1eZsSrN_FkNeDjZRd8j1nNou0lXpOVd6HqAPlcd0OETPWdJYfVyzQCQ7a9jxsDlKGwfvkprtLTlL0IUUKGRq1jEd1YRNCe5N3DGJv3l1jL5wfYrWIoYVCWzhFGTKeGLaclFqRVifQgoRDswwYXIW4UgsDa7sz7fGbRxoWYCFi7w8AE0L4-Ajm6v16n7CTQVapGkqHCzwGQ4G1LOpNySO53njkUdHDrXwuVknxPaH_th1xh6hHqUjd2nhr1lmhIlNHOpT139Kxq7rE0IsDJX-6_o2qS6VKsr7ilAGXf4HavR_Ig)
 

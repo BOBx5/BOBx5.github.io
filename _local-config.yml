@@ -11,10 +11,10 @@ description: >- # Description of the docs. (>- means to ignore newlines until ne
 # IMPORTANT: on Github Pages deploys, url and baseurl must be commented or set to proper settings, otherwise links and resources URL are wrong
 url: https://bobx5.github.io # the base hostname & protocol for your site, e.g. http://example.com
 # baseurl: /Jekyll-LibDoc/_site # the subpath of your site, e.g. /blog
-#permalink: /:path/:basename/:output_ext
-#destination: ../your/new/path # Build relative path destination. The destination directory e.g. /blog
-#keep_files: [cache]
-markdown: kramdown
+# permalink: /:path/:basename/:output_ext
+# destination: ../your/new/path # Build relative path destination. The destination directory e.g. /blog
+# keep_files: [cache]
+# markdown: kramdown
 defaults:
   -
     values:
@@ -24,8 +24,6 @@ kramdown:
         disable: true
 sass:
     style: compressed
-gems: [jekyll-mermaid]
-mermaid: true
 
 #exclude: ['/misc']
 

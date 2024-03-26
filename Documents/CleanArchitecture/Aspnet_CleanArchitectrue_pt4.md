@@ -1,5 +1,5 @@
 ---
-title: ASP.NET 클린아키텍처 pt.4
+title: "3. Infrastructure Layer 설계하기"
 description: <span>&#x23;ASP.NET &#x23;CleanArchitecture</span>
 layout: libdoc/page
 
@@ -16,11 +16,11 @@ order: 904
 
 ```plaintext
     ```plaintext
-    LibrarySolution
-    ├─ LibrarySolution.Shared
-    ├─ LibrarySolution.Domain
-    ├─ LibrarySolution.Application
-    └─ LibrarySolution.Infrastructure*
+    Library
+    ├─ Library.Shared
+    ├─ Library.Domain
+    ├─ Library.Application
+    └─ Library.Infrastructure*
 ```
 
 먼저, 솔루션에 Infrastructure Layer를 추가할 디렉토리를 만든 후 
@@ -32,32 +32,32 @@ order: 904
 ## 디렉토리 구성
 ```plaintext
     ```plaintext
-    LibrarySolution
-    ├─ LibrarySolution.Shared
-    ├─ LibrarySolution.Domain
-    ├─ LibrarySolution.Application
-    └─ LibrarySolution.Infrastructure
-        └─ LibrarySolution.Infrastructure.DateTimeProvider
+    Library
+    ├─ Library.Shared
+    ├─ Library.Domain
+    ├─ Library.Application
+    └─ Library.Infrastructure
+        └─ Library.Infrastructure.DateTimeProvider
 ```
 
-Infrastructure 디렉토리 아래 `LibrarySolution.Infrastructure.DateTimeProvider` 프로젝트를 생성 후 Application Layer 프로젝트를 참조합니다.
+Infrastructure 디렉토리 아래 `Library.Infrastructure.DateTimeProvider` 프로젝트를 생성 후 Application Layer 프로젝트를 참조합니다.
 
 ## DateTimeProvider.cs
 그 다음 프로젝트 루트 경로에 `DateTimeProvider.cs` 파일을 생성합니다.
 ```plaintext
     ```plaintext
-    LibrarySolution
-    ├─ LibrarySolution.Shared
-    ├─ LibrarySolution.Domain
-    ├─ LibrarySolution.Application
-    └─ LibrarySolution.Infrastructure
-        └─ LibrarySolution.Infrastructure.DateTimeProvider
+    Library
+    ├─ Library.Shared
+    ├─ Library.Domain
+    ├─ Library.Application
+    └─ Library.Infrastructure
+        └─ Library.Infrastructure.DateTimeProvider
             └─ DateTimeProvider.cs*
 ```
 ```csharp
-using LibrarySolution.Application.Interfaces;
+using Library.Application.Interfaces;
 
-namespace LibrarySolution.Infrastructure.DateTimeProvider;
+namespace Library.Infrastructure.DateTimeProvider;
 public class DateTimeProvider : IDateTimeProvider
 {
     public DateTime Now => DateTime.Now;
@@ -69,12 +69,12 @@ public class DateTimeProvider : IDateTimeProvider
 그 다음 DI를 위해 `DependencyInjection.cs` 파일을 생성합니다.
 ```plaintext
     ```plaintext
-    LibrarySolution
-    ├─ LibrarySolution.Shared
-    ├─ LibrarySolution.Domain
-    ├─ LibrarySolution.Application
-    └─ LibrarySolution.Infrastructure
-        └─ LibrarySolution.Infrastructure.DateTimeProvider
+    Library
+    ├─ Library.Shared
+    ├─ Library.Domain
+    ├─ Library.Application
+    └─ Library.Infrastructure
+        └─ Library.Infrastructure.DateTimeProvider
             └─ DateTimeProvider.cs*
 ```
 ```csharp
@@ -128,15 +128,15 @@ builder.Services.AddDateTimeProvider(builder.Configuration);
 ---
 ```plaintext
     ```plaintext
-    LibrarySolution
-    ├─ LibrarySolution.Shared
-    ├─ LibrarySolution.Domain
-    ├─ LibrarySolution.Application
-    └─ LibrarySolution.Infrastructure
-        └─ LibrarySolution.Infrastructure.DateTimeProvider
-        └─ LibrarySolution.Infrastructure.Persistence*
+    Library
+    ├─ Library.Shared
+    ├─ Library.Domain
+    ├─ Library.Application
+    └─ Library.Infrastructure
+        └─ Library.Infrastructure.DateTimeProvider
+        └─ Library.Infrastructure.Persistence*
 ```
-1. *LibrarySolution.Infrastructure* 솔루션 디렉토리 아래 *LibrarySolution.Infrastructure.Persistence* 프로젝트를 생성합니다.
+1. *Library.Infrastructure* 솔루션 디렉토리 아래 *Library.Infrastructure.Persistence* 프로젝트를 생성합니다.
 
 2. *Persistence* 프로젝트에 *EntityFrameworkCore*를 사용하기 위해 다음의 NuGet 패키지들을 설치합니다 
    * [Microsoft.EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore)
@@ -147,19 +147,19 @@ builder.Services.AddDateTimeProvider(builder.Configuration);
 ---
 ```plaintext
     ```plaintext
-    LibrarySolution
-    ├─ LibrarySolution.Shared
-    ├─ LibrarySolution.Domain
-    ├─ LibrarySolution.Application
-    └─ LibrarySolution.Infrastructure
-        └─ LibrarySolution.Infrastructure.DateTimeProvider
-        └─ LibrarySolution.Infrastructure.Persistence
+    Library
+    ├─ Library.Shared
+    ├─ Library.Domain
+    ├─ Library.Application
+    └─ Library.Infrastructure
+        └─ Library.Infrastructure.DateTimeProvider
+        └─ Library.Infrastructure.Persistence
             └─ ApplicationDbContext.cs*
 ```
 ```csharp
 using Microsoft.EntityFrameworkCore;
 
-namespace LibrarySolution.Infrastructure.Persistence;
+namespace Library.Infrastructure.Persistence;
 public class ApplicationDbContext 
     : DbContext
 {
@@ -171,9 +171,9 @@ public class ApplicationDbContext
 ### IApplicationDbContext
 ```csharp
 using Microsoft.EntityFrameworkCore;
-using LibrarySolution.Application.Interfaces;
+using Library.Application.Interfaces;
 
-namespace LibrarySolution.Infrastructure.Persistence;
+namespace Library.Infrastructure.Persistence;
 public class ApplicationDbContext 
     : DbContext, IApplicationDbContext
 {
@@ -201,9 +201,9 @@ Application Layer의 `IApplicationDbContext`를 상속합니다.
 ### Constructor
 ```csharp
 using Microsoft.EntityFrameworkCore;
-using LibrarySolution.Application.Interfaces;
+using Library.Application.Interfaces;
 
-namespace LibrarySolution.Infrastructure.Persistence;
+namespace Library.Infrastructure.Persistence;
 public class ApplicationDbContext 
     : DbContext, IApplicationDbContext
 {
@@ -236,9 +236,9 @@ public class ApplicationDbContext
 ---
 ```csharp
 using Microsoft.EntityFrameworkCore;
-using LibrarySolution.Application.Interfaces;
+using Library.Application.Interfaces;
 
-namespace LibrarySolution.Infrastructure.Persistence;
+namespace Library.Infrastructure.Persistence;
 public class ApplicationDbContext 
     : DbContext, IApplicationDbContext, IUnitOfWork
 {
@@ -272,8 +272,6 @@ public class ApplicationDbContext
 
 `IUnitOfWork`에도 `SaveChangesAsync`가 있기 때문에, `DbContext`의 `SaveChangesAsync`를 `IUnitOfWork`의 `SaveChangesAsync`로 오버라이드하여 구현합니다.
 
-#### SaveChangesAsync
---- 
 이제 실질적으로 데이터를 저장하는 `SaveChangesAsync`를 구현해봅시다.
 
 1. 먼저, 도메인 엔티티에 등록된 도메인 이벤트들을 가져옵니다.
@@ -358,3 +356,138 @@ public class ApplicationDbContext
 > 위 예제는 **Optimistic** 방식으로 **Pessimistic** 방식으로 구현하기 위해서는 **`2.`**와 **`3.`**의 순서만 변경하면 됩니다.
 >
 > 다만, 두가지 방법 모두 장단점이 극명하여 두 방법을 보완할 수 있는, ***Outbox-Pattern*** 방식으로 구현하는 법을 이후에 소개할 예정입니다.
+
+
+## Repository
+---
+이제 도메인 레이어에 정의되어있는 Repository를 구현해봅시다.
+
+
+```plaintext
+Library
+├─ Library.Shared
+├─ Library.Domain
+├─ Library.Application
+└─ Library.Infrastructure
+    └─ Library.Infrastructure.DateTimeProvider
+    └─ Library.Infrastructure.Persistence
+        └─ ApplicationDbContext.cs
+        └─ Repositories*
+```
+먼저 *Repositories* 디렉토리를 생성합니다.
+    
+```plaintext
+Library
+├─ Library.Shared
+├─ Library.Domain
+├─ Library.Application
+└─ Library.Infrastructure
+    └─ Library.Infrastructure.DateTimeProvider
+    └─ Library.Infrastructure.Persistence
+        └─ ApplicationDbContext.cs
+        └─ Repositories
+            └─ UserRepository.cs*
+```
+```csharp
+using Library.Application.Interfaces;
+using Library.Domain.Aggregates.Users.Entities;
+using Library.Domain.Aggregates.Users.Repositories;
+using Microsoft.EntityFrameworkCore;
+
+namespace Library.Infrastructure.Persistence.Repositories;
+public class UserRepository : IUserRepository
+{
+    private readonly IApplicationDbContext _context;
+    public UserRepository(IApplicationDbContext context)
+    {
+        _context = context;
+    }
+}
+```
+1. `UserRepository.cs` 를 생성합니다.
+2. `IUserRepository`를 상속받습니다.
+
+    > ***IUserRepository***
+    > ```csharp
+    > namespace Library.Domain.Aggregates.Users.Repositories;
+    > public interface IUserRepository
+    > {
+    >   Task<User> GetByIdAsync(UserId userId);
+    >   Task<User> GetByEmailAsync(string email);
+    >   Task AddAsync(User user);
+    >   Task UpdateAsync(User user);
+    >   Task RemoveAsync(User user);
+    > }
+    > ```
+    
+3. 생성자를 통해 `IApplicationDbContext`를 주입받습니다.
+
+    ```csharp
+    using Library.Application.Interfaces;
+    using Library.Domain.Aggregates.Users.Entities;
+    using Library.Domain.Aggregates.Users.Repositories;
+    using Microsoft.EntityFrameworkCore;
+
+    namespace Library.Infrastructure.Persistence.Repositories;
+    public class UserRepository : IUserRepository
+    {
+        private readonly DbSet<User> _users;
+        public UserRepository(IApplicationDbContext context)
+        {
+            _users = context.Users;
+        }
+    }
+    ```
+
+4. `IUserRepository`의 메서드를 구현합니다.
+
+    ```csharp
+    using Library.Application.Interfaces;
+    using Library.Domain.Aggregates.Users.Entities;
+    using Library.Domain.Aggregates.Users.Repositories;
+    using Microsoft.EntityFrameworkCore;
+
+    namespace Library.Infrastructure.Persistence.Repositories;
+    public class UserRepository : IUserRepository
+    {
+        private readonly DbSet<User> _users;
+        public UserRepository(IApplicationDbContext context)
+        {
+            _users = context.Users;
+        }
+
+        public virtual async Task<User> GetByIdAsync(UserId userId)
+        {
+            return await _users.FirstOrDefaultAsync(user => user.Id == userId);
+        }
+        public virtual async Task<User> GetByEmailAsync(string email)
+        {
+            return await _users.FirstOrDefaultAsync(user => user.Email == email);
+        }
+        public virtual async Task AddAsync(User user)
+        {
+            await _users.AddAsync(user); // 자동으로 EntityState.Added 인 Entry가 생성됩니다.
+        }
+        public virtual async Task UpdateAsync(User user)
+        {
+            var entry = _users.Attach(user);
+            entry.State = EntityState.Modified;
+            return Task.CompletedTask;
+        }
+        public virtual async Task RemoveAsync(User user)
+        {
+            _users.Remove(user);
+            return Task.CompletedTask;
+        }
+    }
+    ```
+
+    > 💡 *virtual* 로 하는 이유
+    > 
+    > 현재는 단순한 Repository의 1-tier 구현이지만, 
+    >
+    > `UserRepository`를 상속받아 새로운 기능(캐싱처리 등)을 추가할 수 있도록 확장성을 위해 *virtual*로 선언합니다.
+
+# 다음 단계
+---
+[]()

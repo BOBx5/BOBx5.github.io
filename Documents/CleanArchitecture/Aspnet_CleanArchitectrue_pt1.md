@@ -1,5 +1,5 @@
 ---
-title: ASP.NET 클린아키텍처 pt.1
+title: "1. 클린아키텍처의 이해와 솔루션 설계하기"
 description: <span>&#x23;ASP.NET &#x23;CleanArchitecture</span>
 layout: libdoc/page
 
@@ -199,5 +199,6 @@ MVC로 구현하고자 하는 경우 부가적으로 `View`의 설계가 필요�
 대부분의 `Use-Case`들이 Application Layer 에서 구현되는 만큼,
 아주 얇은 `View`의 구현에만 신경 쓸 수 있을 것이다.
 
+# 다음 단계
 ---
-# [ASP.NET 클린아키텍처 pt.2](/Documents/CleanArchitecture/Aspnet_CleanArchitectrue_pt2.html)
+[2. Domain Layer 설계하기](/Documents/CleanArchitecture/Aspnet_CleanArchitectrue_pt2.html)

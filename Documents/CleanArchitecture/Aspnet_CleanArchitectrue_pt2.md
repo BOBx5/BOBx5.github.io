@@ -1,5 +1,5 @@
 ---
-title: ASP.NET 클린아키텍처 pt.2
+title: "2. Domain Layer 설계하기"
 description: <span>&#x23;ASP.NET &#x23;CleanArchitecture</span>
 layout: libdoc/page
 
@@ -63,13 +63,13 @@ order: 902
 
 ## **Primitives**
 ```plaintext
-LibrarySolution
-  ├─ LibrarySolution.Shared
-  └─ LibrarySolution.Domain
+Library
+  ├─ Library.Shared
+  └─ Library.Domain
      └─ Primitives
 ```
 
-먼저 `LibrarySolution.Domain` 프로젝트 아래에 *Primitives* 라는 디렉토리를 만듭니다.
+먼저 `Library.Domain` 프로젝트 아래에 *Primitives* 라는 디렉토리를 만듭니다.
 
 `Primitives` 는 도메인 레이어의 다양한 객체들의 설계를 위한 기본 `class` 또는 `interface`들을 모아놓는 디렉토리입니다.
 
@@ -133,11 +133,11 @@ public abstract class DomainEvent : MediatR.INotification
 
 먼저 Aggregate Pattern을 적용한 `User`를 Aggregate로 정의해봅시다.
 
-### User
+### User.cs
 ```plaintext
-LibrarySolution
-  ├─ LibrarySolution.Shared
-  └─ LibrarySolution.Domain
+Library
+  ├─ Library.Shared
+  └─ Library.Domain
      ├─ Primitives
      └─ Aggregates
         └─ Users
@@ -166,13 +166,13 @@ public class User : EntityBase, IAggregateRoot
   * `UserStatus` `Status`  
 * 프로퍼티들을 `private set`으로 한정하여 엔티티 내부에서만 상태값을 변경할 수 있도록 합니다. <i>~~Encapsulation~~</i>
 
-### UserStatus
+### UserStatus.cs
 유저의 상태값을 나타내는 `UserStatus` Enum을 정의해봅시다.
 
 ```plaintext
-LibrarySolution
-  ├─ LibrarySolution.Shared
-  └─ LibrarySolution.Domain
+Library
+  ├─ Library.Shared
+  └─ Library.Domain
      ├─ Primitives
      └─ Aggregates
         └─ Users
@@ -199,12 +199,12 @@ public enum UserStatus
 위에 언급한 바처럼 도메인 레이어는 **도도한** 레이어이므로 신경쓰지 않고,
 `int`가 아닌 `enum` 형태로만 항상 취급되도록 되어야 합니다.
 
-### UserCreatedDomainEvent
+### UserCreatedDomainEvent.cs
 유저가 생성되었음을 알리는 도메인 이벤트를 만들어봅시다.
 ```plaintext
-LibrarySolution
-  ├─ LibrarySolution.Shared
-  └─ LibrarySolution.Domain
+Library
+  ├─ Library.Shared
+  └─ Library.Domain
      ├─ Primitives
      └─ Aggregates
         └─ Users
@@ -230,11 +230,11 @@ public class UserCreatedDomainEvent : DomainEvent
   (`DomainEvent`의 `protected DomainEvent()` 생성자를 통해 고유의 `EventId`를 부여받습니다.)
 * `Name`과 `Email` 데이터를 포함해 유저가 생성되었을 때 환영하는 이메일을 보낼 수 있도록 합니다.
 
-### IUserRepository
+### IUserRepository.cs
 ```plaintext
-LibrarySolution
-  ├─ LibrarySolution.Shared
-  └─ LibrarySolution.Domain
+Library
+  ├─ Library.Shared
+  └─ Library.Domain
      ├─ Primitives
      └─ Aggregates
         └─ Users
@@ -264,16 +264,10 @@ public interface IUserRepository
   * `RemoveAsync(User user)`: 선택한 유저를 제거합니다.
 * 실질적 구현은 추후에 *Persistence* 에서 이뤄지도록 미뤄두고 인터페이스만 먼저 정의합니다.
 
-## **User Entity**
+### User Entity 기능 정의
 ---
-**User Entity**가 가지는 기능들을 정의해봅시다.<br/>
+`User` 엔티티가 가지는 기능들을 정의해봅시다.<br/>
 아래는 현재 상태의 User Entity입니다.
-```plaintext
-LibrarySolution
-  ├─ LibrarySolution.Shared
-  └─ LibrarySolution.Domain
-     └─ Primitives
-```
 ```csharp
 namespace Library.Domain.Aggregates.Users.Entities;
 public class User : EntityBase, IAggregateRoot
@@ -285,7 +279,7 @@ public class User : EntityBase, IAggregateRoot
 }
 ```
 
-### 신규 유저의 생성
+#### 기능1. 신규 유저의 생성
 ---
 ```csharp
 public User(Guid guid, string name, string email)
@@ -344,7 +338,7 @@ public static User Create(string name, string email)
 > 파라미터가 없는 반드시 기본 생성자가 필요합니다.<br/>
 
 
-### 유저의 이름 변경
+#### 기능2. 유저의 이름 변경
 ---
 ```csharp
 public void ChangeName(string name)
@@ -357,7 +351,7 @@ public void ChangeName(string name)
 외부에서 `User`의 `Name`을 변경할 수 있도록 제공하는 메서드입니다.
 
 
-### 유저의 상태값 변경
+#### 기능3. 유저의 상태값 변경
 ---
 ```csharp
 public void ChangeStatus(UserStatus userStatus)
@@ -369,12 +363,24 @@ public void ChangeStatus(UserStatus userStatus)
 
 따라서 외부에서 `User`의 `UserStatus`를 변경할 수 있도록 제공하는 메서드입니다.
 
-## **Book Entity**
+## **Book Aggregates**
 ---
-이전 파트에서 `User` 엔티티를 만든 경험으로
+`User` *Aggregate* 엔티티를 만든 방법과 유사하게
 
-동일하게 도서를 나타내는 `Book` 엔티티를 만들어보자.
+동일하게 도서를 나타내는 `Book` *Aggregate* 엔티티를 만들어봅시다.
 
+### Book.cs
+```plaintext
+Library
+  ├─ Library.Shared
+  └─ Library.Domain
+     ├─ Primitives
+     └─ Aggregates
+        ├─ Users
+        └─ Books
+          └─ Entities*
+            └─ Book.cs*
+```
 ```csharp
 public class Book : EntityBase, IAggregateRoot
 {
@@ -403,6 +409,32 @@ public class Book : EntityBase, IAggregateRoot
 }
 ```
 
+### IBookRepository.cs
+```plaintext
+Library
+  ├─ Library.Shared
+  └─ Library.Domain
+     ├─ Primitives
+     └─ Aggregates
+        ├─ Users
+        └─ Books
+          └─ Entities
+          └─ Repositories*
+            └─ IBookRepository.cs*
+```
+```csharp
+namespace Library.Domain.Aggregates.Books.Repositories;
+
+public interface IBookRepository
+{
+  Task<Book> GetByIdAsync(Guid id);
+  Task AddAsync(Book book);
+  Task UpdateAsync(Book book);
+  Task RemoveAsync(Book book);
+}
+```
+
+
 `User` 와 유사한 방식으로 `Book` 엔티티를 만들었다.
 
 특징적으로 `User`, `Book` 모두 `Guid`를 고유 식별자(ID)로 사용하고 있다.
@@ -412,76 +444,379 @@ public class Book : EntityBase, IAggregateRoot
 
 이러한 문제를 해결하기 위해 Strongly-Type 객체인 `ValueObject` 개념을 도입해보자.
 
+
+## **Rent Aggregates**
+---
+동일하게 '대여'를 나타내는 `Rent` *Aggregate* 엔티티를 만듭니다
+
+### Rent.cs
+```plaintext
+Library
+  ├─ Library.Shared
+  └─ Library.Domain
+     ├─ Primitives
+     └─ Aggregates
+        ├─ Users
+        ├─ Books
+        └─ Rents
+          └─ Entities*
+            └─ Rent.cs*
+```
+```csharp
+public class Rent : EntityBase, IAggregateRoot
+{
+  public Guid Id { get; private set; }
+  public Guid BookId { get; private set; }
+  public Guid UserId { get; private set; }
+  public DateTime BorrowedAt { get; private set; }
+  public DateTime DueDate { get; private set; }
+  public DateTime? ReturnedAt { get; private set; }
+  public bool IsReturned => ReturnedAt.HasValue;
+
+  // EF를 위한 Parameterless 생성자
+  private Rent() { }
+
+  // 기본 대여 기간 (14일)
+  const int DefaultBorrowPeriod = 14;
+
+  // 신규 대여의 생성을 위한 생성자
+  private Rent(Guid bookId, Guid userId, DateTime borrowedAt)
+  {
+    Id = Guid.NewGuid();
+    BookId = bookId;
+    UserId = userId;
+    BorrowedAt = borrowedAt;
+    DueDate = borrowedAt.AddDays(DefaultBorrowPeriod);
+  }
+
+  // 대여를 신규로 생성할 수 있도록 하는 Factory Method
+  public static Rent Create(Guid bookId, Guid userId, DateTime borrowedAt)
+  {
+    return new Rent(bookId, userId, borrowedAt);
+  }
+
+  // 대여 연장
+  public void Extend(int? days = null)
+  {
+    DueDate = DueDate.AddDays(days ?? DefaultBorrowPeriod);
+  }
+
+  // 반납
+  public void Return(DateTime returnedAt)
+  {
+    ReturnedAt = returnedAt;
+  }
+}
+```
+
+### IRentRepository.cs
+```plaintext
+Library
+  ├─ Library.Shared
+  └─ Library.Domain
+     ├─ Primitives
+     └─ Aggregates
+        ├─ Users
+        └─ Rents
+          └─ Entities
+          └─ Repositories*
+            └─ IRentRepository.cs*
+```
+```csharp
+namespace Library.Domain.Aggregates.Rents.Repositories;
+
+public interface IRentRepository
+{
+  Task<Rent> GetByIdAsync(Guid id);
+  Task AddAsync(Rent book);
+  Task UpdateAsync(Rent book);
+  Task RemoveAsync(Rent book);
+}
+```
+
+## 짚고 넘어가기
+
+자, 이렇게 **유저**, **도서**, **대여** 세가지의 개념이 모두 정의되었습니다.
+
+1. Entity의 생성자를 *private*으로 만들고 생성을 위한 Factory Method를 정의하여, 캡슐화된 인스턴스의 생성에 대해 이해할 수 있었습니다.
+
+2. `UserStatus` Enum을 통해 엔티티에 필요한 상태값을 정의할 수 있는 것을 배웠습니다.
+
+3. `UserCreatedDomainEvent`를 통해 도메인에서 발생하는 이벤트를 정의할 수 있는 것을 배웠습니다.
+
+4. `User`, `Book`, `Rent` 엔티티를 위한 각각의 Repository Interface를 정의할 수 있는 것을 배웠습니다.
+
+5. 마지막으로 `Rent` 엔티티를 통해 각각의 다른 *Aggregate* 간에 서로간의 구현에 대해서는 모른체 ID만을 적용한 얕은 참조관계를 설계하는 방법을 배웠습니다.
+
+> 💡 **Guid의 혼용 문제**
+>
+> 현재 `Rent` 엔티티는 스스로의 ID인 *Guid* 타입의 `Id`와 `BookId`, `UserId`를 프로퍼티로 지니고 있습니다.
+> 
+> 문제는 모두 동일한 *Guid* 타입으로 구현되어 있어, 이후 파라미터의 순서가 변경된다거나 하는 경우에 혼용할 가능성이 발생하거나.
+>
+> `BookId` 또는 `UserId`가 다중키로 변경되거나 하는 것들에 의해 프로퍼티를 추가해야하는 변경사항이 발생할 수 있습니다.
+>
+> 이러한 변화는 `Rent` 엔티티의 변경을 초래하게 되고, 이는 `Rent` 엔티티의 변경이 다른 *Aggregate*에 영향을 미치게 됩니다.
+>
+> 이러한 변화는 캡슐화된 설계에 위배되는 것이며, 이를 해결하기 위해 **ValueObject**를 도입해보도록 합시다.
+
+
+
 ## **ValueObject**
 ---
-이전에는 `ValueObject`를 만들기 위해 `struct`를 사용하거나,
+*ValueObject*는 Immutable한 객체로, 객체의 상태를 변경할 수 없고, 두 객체가 동일한 값을 가지면 동일한 객체로 취급되는 객체입니다.
 
-`IEquatable<T>` 인터페이스를 구현하여 `Equals` 메서드를 오버라이딩하는 등의 방법을 사용했다.
+`Guid`, `int`, `long`, `double` 등이 이에 해당되나 이러한 기본 타입들은 도메인의 의미를 나타내지 못하므로, 이를 랩핑하여 도메인 의미를 지니는 *ValueObject*를 만드는 것이 좋습니다.
 
-C# 9.0 부터는 `record` 키워드를 통해 손쉽게 Immutable한 객체를 만들 수 있다.
+이전에는 *ValueObject*를 만들기 위해 `struct`를 사용하거나,
 
-* 코드 구현
-  * `UserId`
-    
-    ```csharp
-    public record UserId
+class `IEquatable<T>` 인터페이스를 구현하여 `Equals` 메서드를 오버라이딩하는 등의 방법을 사용해야 했는데,
+
+C# 9.0 부터는 생긴 [*record*](https://learn.microsoft.com/ko-kr/dotnet/csharp/fundamentals/types/records) 키워드를 통해 손쉽게 Immutable한 객체를 만들 수 있게 되었습니다.
+
+먼저 유저의 ID를 나타내는 `UserId`를 만들어봅시다.
+
+### UserId
+---
+* UserId.cs
+
+  ```plaintext
+  Library
+    ├─ Library.Shared
+    └─ Library.Domain
+      ├─ Primitives
+      └─ Aggregates
+          ├─ Books
+          ├─ Rents
+          └─ Users
+            ├─ Entities
+            ├─ Enums
+            ├─ Repositories
+            └─ ValueObjects*
+              └─ UserId.cs*
+  ```
+  ```csharp
+  public record UserId
+  {
+    public Guid Value { get; init; }
+    private UserId(Guid value)
     {
-      public Guid Value { get; init; }
-      private UserId(Guid value)
-      {
-        Value = value;
-      }
-      public override string ToString()
-      {
-        return Value.ToString();
-      }
-
-      public static UserId Create()
-      {
-        var newId = Guid.NewGuid();
-        return new UserId(newId);
-      }
-      public static UserId Parse(Guid value)
-      {
-        return new UserId(value);
-      }
+      Value = value;
     }
-    ```
-
-  * `BookId`
-    
-    ```csharp
-    public record BookId
+    public override string ToString()
     {
-      public Guid Value { get; init; }
-      private BookId(Guid value)
-      {
-        Value = value;
-      }
-      public override string ToString()
-      {
-        return Value.ToString();
-      }
-
-      public static BookId Create()
-      {
-        var newId = Guid.NewGuid();
-        return new BookId(newId);
-      }
-      public static BookId Parse(Guid value)
-      {
-        return new BookId(value);
-      }
+      return Value.ToString();
     }
-    ```
 
-* `UserId`, `BookId`는 내부적으로 `Guid Value`를 가지고 있으며, 이를 통해 고유 식별자를 나타낸다.
-* ***record*** 키워드를 사용하여 `Guid Value`의 값이 동일한 두 객체는 동일한 객체로 취급된다.
-* `Create()` 메서드를 통해 새로운 `UserId`, `BookId`를 생성할 수 있다.
-* `Parse(Guid guid)` 메서드를 통해 기존의 `Guid`를 가지고 있는 `UserId`, `BookId`로 변환할 수 있다.
-* `ToString()` 메서드를 오버라이딩하여 `Value`의 문자열 표현을 반환한다.
+    public static UserId Create()
+    {
+      var newId = Guid.NewGuid();
+      return new UserId(newId);
+    }
+    public static UserId Parse(Guid value)
+    {
+      return new UserId(value);
+    }
+  }
+  ```
 
-> 최신 C#의 문법(*Primary-Constructor*)을 활용하면 더 간단한게 만들 수도 있다.
+* `User`에 적용
+
+  ```csharp
+  public class User : EntityBase, IAggregateRoot
+  {
+    public UserId Id { get; private set; }
+    public string Name { get; private set; }
+    public string Email { get; private set; }
+    public UserStatus UserStatus { get; private set; }
+
+    // EF를 위한 Parameterless 생성자
+    private User() { }
+
+    // 신규 유저의 생성을 위한 생성자
+    private User(string name, string email)
+    {
+      Id = UserId.Create();
+      Name = name;
+      Email = email;
+      UserStatus = UserStatus.Active;
+      Raise(new UserCreatedDomainEvent(name, email));
+    }
+
+    // 유저를 신규로 생성할 수 있도록 하는 Factory Method
+    public static User Create(string name, string email)
+    {
+      return new User(name, email);
+    }
+  }
+  ```
+
+### BookId
+---
+* BookId.cs
+
+  ```plaintext
+  Library
+    ├─ Library.Shared
+    └─ Library.Domain
+      ├─ Primitives
+      └─ Aggregates
+          ├─ Users
+          ├─ Rents
+          └─ Books
+            ├─ Entities
+            ├─ Repositories
+            └─ ValueObjects*
+              └─ BookId.cs*
+  ```
+  ```csharp
+  public record BookId
+  {
+    public Guid Value { get; init; }
+    private BookId(Guid value)
+    {
+      Value = value;
+    }
+    public override string ToString()
+    {
+      return Value.ToString();
+    }
+
+    public static BookId Create()
+    {
+      var newId = Guid.NewGuid();
+      return new BookId(newId);
+    }
+    public static BookId Parse(Guid value)
+    {
+      return new BookId(value);
+    }
+  }
+  ```
+* `Book`에 적용
+
+  ```csharp
+  public class Book : EntityBase, IAggregateRoot
+  {
+    public BookId Id { get; private set; }
+    public string Title { get; private set; }
+    public string Author { get; private set; }
+    public int Quantity { get; private set; }
+
+    // EF를 위한 Parameterless 생성자
+    private Book() { }
+
+    // 신규 도서의 생성을 위한 생성자
+    private Book(string title, string author, int quantity)
+    {
+      Id = BookId.Create();
+      Title = title;
+      Author = author;
+      Quantity = quantity;
+    }
+
+    // 도서를 신규로 생성할 수 있도록 하는 Factory Method
+    public static Book Create(string title, string author, int quantity)
+    {
+      return new Book(title, author, quantity);
+    }
+  }
+  ```
+
+### RentId
+---
+* RentId.cs  
+
+  ```plaintext
+  Library
+    ├─ Library.Shared
+    └─ Library.Domain
+      ├─ Primitives
+      └─ Aggregates
+          ├─ Users
+          ├─ Books
+          └─ Rents
+            ├─ Entities
+            ├─ Repositories
+            └─ ValueObjects*
+              └─ RentId.cs*
+  ```
+  ```csharp
+  public record RentId
+  {
+    public Guid Value { get; init; }
+    private RentId(Guid value)
+    {
+      Value = value;
+    }
+    public override string ToString()
+    {
+      return Value.ToString();
+    }
+
+    public static RentId Create()
+    {
+      var newId = Guid.NewGuid();
+      return new RentId(newId);
+    }
+    public static RentId Parse(Guid value)
+    {
+      return new RentId(value);
+    }
+  }
+  ```
+* `Rent`에 적용
+
+  ```csharp
+  public class Rent : EntityBase, IAggregateRoot
+  {
+    public RentId Id { get; private set; }
+    public BookId BookId { get; private set; }
+    public UserId UserId { get; private set; }
+    public DateTime BorrowedAt { get; private set; }
+    public DateTime DueDate { get; private set; }
+    public DateTime? ReturnedAt { get; private set; }
+    public bool IsReturned => ReturnedAt.HasValue;
+
+    // EF를 위한 Parameterless 생성자
+    private Rent() { }
+
+    // 기본 대여 기간 (14일)
+    const int DefaultBorrowPeriod = 14;
+
+    // 신규 대여의 생성을 위한 생성자
+    private Rent(BookId bookId, UserId userId, DateTime borrowedAt)
+    {
+      Id = RentId.Create();
+      BookId = bookId;
+      UserId = userId;
+      BorrowedAt = borrowedAt;
+      DueDate = borrowedAt.AddDays(DefaultBorrowPeriod);
+    }
+
+    // 대여를 신규로 생성할 수 있도록 하는 Factory Method
+    public static Rent Create(BookId bookId, UserId userId, DateTime borrowedAt)
+    {
+      return new Rent(bookId, userId, borrowedAt);
+    }
+
+    // 대여 연장
+    public void Extend(int? days = null)
+    {
+      DueDate = DueDate.AddDays(days ?? DefaultBorrowPeriod);
+    }
+
+    // 반납
+    public void Return(DateTime returnedAt)
+    {
+      ReturnedAt = returnedAt;
+    }
+  }
+  ```
+
+### 팁
+---
+> C# 12.0의 최신 문법 중 [*Primary-Constructor*](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/proposals/csharp-12.0/primary-constructors)를 활용하면 더욱 간단한게 만들 수도 있습니다.
 > ```csharp
 > public record UserId(Guid Value)
 > {
@@ -495,78 +830,34 @@ C# 9.0 부터는 `record` 키워드를 통해 손쉽게 Immutable한 객체를 �
 >   public static BookId Parse(Guid value) => new(value);
 >   public override string ToString() => Value.ToString();    
 > }
+> public record RentId(Guid Value)
+> {
+>   public static RentId Create() => new(Guid.NewGuid());
+>   public static RentId Parse(Guid value) => new(value);
+>   public override string ToString() => Value.ToString();    
+> }
 > ```
 
-### 적용
-{:.no_toc}
+### 요약
 ---
+이로써 `User`, `Book`, `Rent` 엔티티는 모두 내부적으로 *Guid*를 ID로 사용하는지만,
+
+`UserId`, `BookId`, `RentId` *record class* 로 랩핑된 *ValueObject*가 되어
+
+서로 다른 엔티티의 ID간에는 다른 타입으로 취급되므로 개발과정에서 혼용을 방지할 수 있게 되었습니다.
+
 ```csharp
-public class Book : EntityBase, IAggregateRoot
-{
-  public BookId Id { get; private set; }
-  public string Title { get; private set; }
-  public string Author { get; private set; }
-  public int Quantity { get; private set; }
-
-  // EF를 위한 Parameterless 생성자
-  private Book() { }
-
-  // 신규 도서의 생성을 위한 생성자
-  private Book(string title, string author, int quantity)
-  {
-    Id = BookId.Create();
-    Title = title;
-    Author = author;
-    Quantity = quantity;
-  }
-
-  // 도서를 신규로 생성할 수 있도록 하는 Factory Method
-  public static Book Create(string title, string author, int quantity)
-  {
-    return new Book(title, author, quantity);
-  }
-}
-```
-```csharp
-public class User : EntityBase, IAggregateRoot
-{
-  public UserId Id { get; private set; }
-  public string Name { get; private set; }
-  public string Email { get; private set; }
-  public UserStatus UserStatus { get; private set; }
-
-  // EF를 위한 Parameterless 생성자
-  private User() { }
-
-  // 신규 유저의 생성을 위한 생성자
-  private User(string name, string email)
-  {
-    Id = UserId.Create();
-    Name = name;
-    Email = email;
-    UserStatus = UserStatus.Active;
-  }
-
-  // 유저를 신규로 생성할 수 있도록 하는 Factory Method
-  public static User Create(string name, string email)
-  {
-    return new User(name, email);
-  }
-}
+var userId = UserId.Create();
+var bookId = BookId.Create();
+Console.WriteLine(userId == bookId); // 컴파일 에러 발생
 ```
 
-이로써 `User`, `Book` 엔티티는 모두 ID로 `Guid`를 사용하는지만,
+또한 필요에 따라 특정 엔티티의 ID가 다중키를 사용해야하도록 변경이 필요한 경우에도
 
-`UserId`, `BookId`의 `ValueObject`를 적용하여 
-
-서로 다른 엔티티의 ID간에 혼동되지 않도록 보장할 수 있게되었다.
-
-또한 필요에 따라 다중키를 사용하게 되는 경우에도
-
-해당하는 *ValueObject*에 다른 프로퍼티를 적용하여 사용할 수 있다.
+해당하는 *ValueObject* 내부적으로만 변경사항이 한정되어, 다른 엔티티에 영향을 미치지 않도록 할 수 있습니다. ***(Propagate 방지)***
 
 
-# 요약
+# **종합**
 ---
 * ***Entity***
   * 상태(프로퍼티)들을 `private set` 으로 외부에서 수정이 불가능하도록 하도록 합니다.
@@ -575,9 +866,10 @@ public class User : EntityBase, IAggregateRoot
 * ***ValueObject***
   * `record` 키워드를 사용하여 Immutable한 ID 객체를 생성합니다.
   * *Guid*를 ID로 사용하는 엔티티들에 각기 다른 *ValueObject*를 설계하여 사용하여, 혼용을 방지합니다.
-  * *ValueObject*의 생성과 변환을 온전하게 *ValueObject* 클래스 내부적으로 구현된 *static* 메서드를 통해 처리하게합니다.
+  * *ValueObject*의 생성과 변환을 온전하게 *ValueObject* 클래스 내부적으로 구현된 *static* 메서드(`Create()`, `Parse()`)를 통해 캡슐화될 수 있도록 합니다.
 
-> 💡 **Encapsulation** 이 핵심!
+> 💡 **Encapsulation** 을 통한 변경의 전파(*Propagate*)를 방지하는것이 핵심!
 
+# 다음 단계
 ---
-# [ASP.NET 클린아키텍처 pt.3](/Documents/CleanArchitecture/Aspnet_CleanArchitectrue_pt3.html)
+[3. Application Layer 설계하기](/Documents/CleanArchitecture/Aspnet_CleanArchitectrue_pt3.html)

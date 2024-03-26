@@ -1,5 +1,5 @@
 ---
-title: ASP.NET 클린아키텍처 pt.3
+title: "3. Application Layer 설계하기"
 description: <span>&#x23;ASP.NET &#x23;CleanArchitecture</span>
 layout: libdoc/page
 
@@ -23,16 +23,16 @@ order: 903
 * **`ICommand`**
 
     ```plaintext
-    LibrarySolution
-    ├─ LibrarySolution.Shared
-    ├─ LibrarySolution.Domain
-    └─ LibrarySolution.Application
+    Library
+    ├─ Library.Shared
+    ├─ Library.Domain
+    └─ Library.Application
         └─ Abstractions
             └─ Commands
                 └─ ICommand.cs*
     ```
     ```csharp
-    namespace LibrarySolution.Application.Abstractions.Commands;
+    namespace Library.Application.Abstractions.Commands;
     public interface ICommand : MediatR.IRequest<MediatR.Unit>
     {
 
@@ -49,10 +49,10 @@ order: 903
 * **`ICommandHandler`**
 
     ```plaintext
-    LibrarySolution
-    ├─ LibrarySolution.Shared
-    ├─ LibrarySolution.Domain
-    └─ LibrarySolution.Application
+    Library
+    ├─ Library.Shared
+    ├─ Library.Domain
+    └─ Library.Application
         ├─ Primitives
         └─ Abstractions
             └─ Commands
@@ -60,7 +60,7 @@ order: 903
                 └─ ICommandHandler.cs*
     ```
     ```csharp
-    namespace LibrarySolution.Application.Abstractions.Commands;
+    namespace Library.Application.Abstractions.Commands;
     public interface ICommandHandler<TCommand>
         : MediatR.IRequestHandler<TCommand, MediatR.Unit> where TCommand : ICommand
     {
@@ -80,17 +80,17 @@ order: 903
 * **`IQuery`**
 
     ```plaintext
-    LibrarySolution
-    ├─ LibrarySolution.Shared
-    ├─ LibrarySolution.Domain
-    └─ LibrarySolution.Application
+    Library
+    ├─ Library.Shared
+    ├─ Library.Domain
+    └─ Library.Application
         └─ Abstractions
             ├─ Commands
             └─ Queries
                 └─ IQuery.cs*
     ```
     ```csharp
-    namespace LibrarySolution.Application.Abstractions.Queries;
+    namespace Library.Application.Abstractions.Queries;
     public interface IQuery<out TResponse> : MediatR.IRequest<TResponse>
     {
 
@@ -102,10 +102,10 @@ order: 903
 * **`IQueryHandler`**
 
     ```plaintext
-    LibrarySolution
-    ├─ LibrarySolution.Shared
-    ├─ LibrarySolution.Domain
-    └─ LibrarySolution.Application
+    Library
+    ├─ Library.Shared
+    ├─ Library.Domain
+    └─ Library.Application
         ├─ Primitives
         └─ Abstractions
             ├─ Commands
@@ -114,7 +114,7 @@ order: 903
                 └─ IQueryHandler.cs*
     ```
     ```csharp
-    namespace LibrarySolution.Application.Abstractions.Queries;
+    namespace Library.Application.Abstractions.Queries;
     public interface IQueryHandler<TQuery, TResponse>
         : MediatR.IRequestHandler<TQuery, TResponse> where TQuery : IQuery<TResponse>
     {
@@ -137,10 +137,10 @@ order: 903
 * **`IDomainEventHandler`**
 
     ```plaintext
-    LibrarySolution
-    ├─ LibrarySolution.Shared
-    ├─ LibrarySolution.Domain
-    └─ LibrarySolution.Application
+    Library
+    ├─ Library.Shared
+    ├─ Library.Domain
+    └─ Library.Application
         └─ Abstractions
             ├─ Commands
             ├─ Queries
@@ -172,10 +172,10 @@ order: 903
 ## IApplicationDbContext
 
 ```plaintext
-LibrarySolution
-├─ LibrarySolution.Shared
-├─ LibrarySolution.Domain
-└─ LibrarySolution.Application
+Library
+├─ Library.Shared
+├─ Library.Domain
+└─ Library.Application
     ├─ Abstractions
     └─ Interfaces
         └─ IApplicationDbContext.cs*
@@ -183,7 +183,7 @@ LibrarySolution
 ```csharp
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-namespace LibrarySolution.Application.Abstractions.Interfaces;
+namespace Library.Application.Abstractions.Interfaces;
 public interface IApplicationDbContext
 {
     DbSet<User> Users { get; set; }
@@ -203,17 +203,17 @@ public interface IApplicationDbContext
 ## IUnitOfWork
 
 ```plaintext
-LibrarySolution
-├─ LibrarySolution.Shared
-├─ LibrarySolution.Domain
-└─ LibrarySolution.Application
+Library
+├─ Library.Shared
+├─ Library.Domain
+└─ Library.Application
     ├─ Abstractions
     └─ Interfaces
         ├─ IApplicationDbContext.cs
         └─ IUnitOfWork.cs*
 ```
 ```csharp
-namespace LibrarySolution.Application.Abstractions.Interfaces;
+namespace Library.Application.Abstractions.Interfaces;
 public interface IUnitOfWork
 {
     public Task<int> SaveChangesAsync(CancellationToken cancellationToken);
@@ -233,10 +233,10 @@ Application Layer의 설계사항을 의존성 주입하기 위한 클래스들�
 프로젝트 루트 경로에 생성해봅시다.
 
 ```plaintext
-LibrarySolution
-├─ LibrarySolution.Shared
-├─ LibrarySolution.Domain
-└─ LibrarySolution.Application
+Library
+├─ Library.Shared
+├─ Library.Domain
+└─ Library.Application
     ├─ Abstractions
     ├─ Interfaces
     └─ ApplicationAssembly.cs*
@@ -253,10 +253,10 @@ public class ApplicationAssembly
 ## DependencyInjection.cs
 
 ```plaintext
-LibrarySolution
-├─ LibrarySolution.Shared
-├─ LibrarySolution.Domain
-└─ LibrarySolution.Application
+Library
+├─ Library.Shared
+├─ Library.Domain
+└─ Library.Application
     ├─ Abstractions
     ├─ Interfaces
     ├─ ApplicationAssembly.cs
@@ -264,7 +264,7 @@ LibrarySolution
 ```
 ```csharp
 using MediatR;
-namespace LibrarySolution.Application;
+namespace Library.Application;
 public static class DependencyInjection
 {
     public static IServiceCollection AddApplication(
@@ -315,10 +315,10 @@ ApplicationLayer의 어셈블리를 읽어 선언되어있는 아래와 같은 M
 먼저 디렉토리를 생성합니다
 
 ```plaintext
-LibrarySolution
-├─ LibrarySolution.Shared
-├─ LibrarySolution.Domain
-└─ LibrarySolution.Application
+Library
+├─ Library.Shared
+├─ Library.Domain
+└─ Library.Application
     ├─ Abstractions
     ├─ Interfaces
     └─ UseCases*
@@ -326,13 +326,15 @@ LibrarySolution
             └─ Commands*
 ```
 
-## CreateUserCommand
+## Users
+
+### CreateUserCommand
 
 ```plaintext
-LibrarySolution
-├─ LibrarySolution.Shared
-├─ LibrarySolution.Domain
-└─ LibrarySolution.Application
+Library
+├─ Library.Shared
+├─ Library.Domain
+└─ Library.Application
     ├─ Abstractions
     ├─ Interfaces
     └─ UseCases
@@ -341,7 +343,7 @@ LibrarySolution
                 └─ CreateUserCommand.cs*
 ```
 ```csharp
-namespace LibrarySolution.Application.UseCases.Users.Commands;
+namespace Library.Application.UseCases.Users.Commands;
 public record CreateUserCommand : ICommand<CreateUserCommandResponse>
 {
     public string Name { get; init; }
@@ -350,13 +352,13 @@ public record CreateUserCommand : ICommand<CreateUserCommandResponse>
 ```
 * `CreateUserCommand`는 `CreateUserCommandResponse`를 반환하도록 하는 요청합니다.
 
-## CreateUserCommandResponse
+### CreateUserCommandResponse
 
 ```plaintext
-LibrarySolution
-├─ LibrarySolution.Shared
-├─ LibrarySolution.Domain
-└─ LibrarySolution.Application
+Library
+├─ Library.Shared
+├─ Library.Domain
+└─ Library.Application
     ├─ Abstractions
     ├─ Interfaces
     └─ UseCases
@@ -366,7 +368,7 @@ LibrarySolution
                 └─ CreateUserCommandResponse.cs*
 ```
 ```csharp
-namespace LibrarySolution.Application.UseCases.Users.Commands;
+namespace Library.Application.UseCases.Users.Commands;
 public record CreateUserCommandResponse
 {
   public string Id { get; init; }
@@ -374,13 +376,13 @@ public record CreateUserCommandResponse
 ```
 * `CreateUserCommandResponse`는 신규로 생성된 유저의 Id(`UserId`)를 반환합니다.
 
-## CreateUserCommandHandler
+### CreateUserCommandHandler
 
 ```plaintext
-LibrarySolution
-├─ LibrarySolution.Shared
-├─ LibrarySolution.Domain
-└─ LibrarySolution.Application
+Library
+├─ Library.Shared
+├─ Library.Domain
+└─ Library.Application
     ├─ Abstractions
     ├─ Interfaces
     └─ UseCases
@@ -391,7 +393,7 @@ LibrarySolution
                 └─ CreateUserCommandHandler.cs*
 ```
 ```csharp
-namespace LibrarySolution.Application.UseCases.Users.Commands;
+namespace Library.Application.UseCases.Users.Commands;
 public record CreateUserCommandHandler : ICommandHandler<CreateUserCommand, CreateUserCommandResponse>
 {
     private readonly IUserRepository _userRepository;
@@ -513,10 +515,10 @@ protected override void RaiseValidationException(ValidationResult result)
 ## CreateUserCommandValidator
 
 ```plaintext
-LibrarySolution
-├─ LibrarySolution.Shared
-├─ LibrarySolution.Domain
-└─ LibrarySolution.Application
+Library
+├─ Library.Shared
+├─ Library.Domain
+└─ Library.Application
     ├─ Abstractions
     ├─ Interfaces
     └─ UseCases
@@ -529,7 +531,7 @@ LibrarySolution
 ```
 ```csharp
 using FluentValidation;
-namespace LibrarySolution.Application.UseCases.Users.Commands;
+namespace Library.Application.UseCases.Users.Commands;
 internal sealed class CreateUserCommandValidator : AbstractValidator<CreateUserCommand>
 {
     public CreateUserCommandValidator()
@@ -652,8 +654,77 @@ internal sealed class CreateUserCommandValidator : AbstractValidator<CreateUserC
         * `AbstractValidator<T>`를 상속받는 클래스 중 *internal* 로 선언된 클래스도 추가하려면 `includeInternalTypes: true`를 추가합니다.
 
 
+# **팁**
+---
+위와 같은 설계대로 따르면 
+`TRequest` - `TRequestValidator` - `TRequestHandler` - `TResponse` 순으로 파이프 라인이 구성됩니다. 
+개인적인 취향에 따라 갈릴 수는 있으나, 
+디버깅 및 개발 단계에서의 생산성을 위해서 
+사용자 요청의 기본이 되는 `TRequest.cs` 파일 아래 
+4가지를 전부 구성하는 것이 편리할 수 있습니다.
 
-# **요약**
+```csharp
+namespace Library.Application.UseCases.Users.Commands;
+public record CreateUserCommand : ICommand<CreateUserCommandResponse>
+{
+    public string Name { get; init; }
+    public string Email { get; init; }
+}
+
+public record CreateUserCommandResponse
+{
+    public string Id { get; init; }
+}
+
+public class CreateUserCommandValidator 
+    : AbstractValidator<CreateUserCommand>
+{
+    private static Regex EmailRegex = new Regex(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$");
+    public CreateUserCommandValidator()
+    {
+        RuleFor(x => x.Name)
+            .NotEmpty()
+            .WithMessage($"유저 이름은 공백일 수 없습니다.")
+            .MaximumLength(50)
+            .WithMessage($"유저 이름은 50자를 넘을 수 없습니다.");
+
+        RuleFor(x => x.Email)
+            .NotEmpty()
+            .WithMessage($"유저 이메일은 공백일 수 없습니다.")
+            .Must(RegisteredRegex.Email.IsMatch)
+            .WithMessage($"올바른 이메일 형식이 아닙니다.");
+    }
+}
+
+public class CreateUserCommandHandler 
+    : ICommandHandler<CreateUserCommand, CreateUserCommandResponse>
+{
+    private readonly IUserRepository _userRepository;
+    private readonly IUnitOfWork _unitOfWork;
+    public CreateUserCommandHandler(
+        IUserRepository userRepository,
+        IUnitOfWork unitOfWork)
+    {
+        _userRepository = userRepository;
+        _unitOfWork = unitOfWork;
+    }
+
+    public async Task<CreateUserCommandResponse> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+    {
+        User newUser = User.Create(request.Name, request.Email);
+        await _userRepository.AddAsync(newUser, cancellationToken);
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
+        UserId createdUserId = newUser.Id;
+        return new CreateUserCommandResponse
+        {
+            Id = createdUserId.ToString()
+        };
+    }
+}
+```
+
+
+# **종합**
 ---
 최종적으로 아래와 같은 파이프라인이 형성된다.
 
@@ -672,5 +743,6 @@ internal sealed class CreateUserCommandValidator : AbstractValidator<CreateUserC
 11. 정상적으로 완료되었다면 Presentation Layer는 User에게 *HTTP 200(OK)*을 `TResponse`와 함께 반환합니다.
     
 
+# 다음 단계
 ---
-# [ASP.NET 클린아키텍처 pt.4](/Documents/CleanArchitecture/Aspnet_CleanArchitectrue_pt4.html)
+[3. Infrastructure Layer 설계하기](/Documents/CleanArchitecture/Aspnet_CleanArchitectrue_pt4.html)

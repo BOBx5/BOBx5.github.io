@@ -15,12 +15,11 @@ order: 904
 하위 레이어인 Application Layer을 추상화(*Interface*)한 정의들을 실질적으로 작동할 수 있도록 구현(*Impelment*)하는 단계입니다.
 
 ```plaintext
-    ```plaintext
-    Library
-    ├─ Library.Shared
-    ├─ Library.Domain
-    ├─ Library.Application
-    └─ Library.Infrastructure*
+Library
+├─ Library.Shared
+├─ Library.Domain
+├─ Library.Application
+└─ Library.Infrastructure*
 ```
 
 먼저, 솔루션에 Infrastructure Layer를 추가할 디렉토리를 만든 후 
@@ -31,13 +30,12 @@ order: 904
 
 ## 디렉토리 구성
 ```plaintext
-    ```plaintext
-    Library
-    ├─ Library.Shared
-    ├─ Library.Domain
-    ├─ Library.Application
-    └─ Library.Infrastructure
-        └─ Library.Infrastructure.DateTimeProvider
+Library
+├─ Library.Shared
+├─ Library.Domain
+├─ Library.Application
+└─ Library.Infrastructure
+    └─ Library.Infrastructure.DateTimeProvider
 ```
 
 Infrastructure 디렉토리 아래 `Library.Infrastructure.DateTimeProvider` 프로젝트를 생성 후 Application Layer 프로젝트를 참조합니다.
@@ -45,14 +43,13 @@ Infrastructure 디렉토리 아래 `Library.Infrastructure.DateTimeProvider` 프
 ## DateTimeProvider.cs
 그 다음 프로젝트 루트 경로에 `DateTimeProvider.cs` 파일을 생성합니다.
 ```plaintext
-    ```plaintext
-    Library
-    ├─ Library.Shared
-    ├─ Library.Domain
-    ├─ Library.Application
-    └─ Library.Infrastructure
-        └─ Library.Infrastructure.DateTimeProvider
-            └─ DateTimeProvider.cs*
+Library
+├─ Library.Shared
+├─ Library.Domain
+├─ Library.Application
+└─ Library.Infrastructure
+    └─ Library.Infrastructure.DateTimeProvider
+        └─ DateTimeProvider.cs*
 ```
 ```csharp
 using Library.Application.Interfaces;
@@ -68,14 +65,13 @@ public class DateTimeProvider : IDateTimeProvider
 ## DependencyInjection.cs
 그 다음 DI를 위해 `DependencyInjection.cs` 파일을 생성합니다.
 ```plaintext
-    ```plaintext
-    Library
-    ├─ Library.Shared
-    ├─ Library.Domain
-    ├─ Library.Application
-    └─ Library.Infrastructure
-        └─ Library.Infrastructure.DateTimeProvider
-            └─ DateTimeProvider.cs*
+Library
+├─ Library.Shared
+├─ Library.Domain
+├─ Library.Application
+└─ Library.Infrastructure
+    └─ Library.Infrastructure.DateTimeProvider
+        └─ DateTimeProvider.cs*
 ```
 ```csharp
 using Microsoft.Extensions.Configuration;
@@ -127,14 +123,13 @@ builder.Services.AddDateTimeProvider(builder.Configuration);
 ## 디렉토리 및 프로젝트 구성
 ---
 ```plaintext
-    ```plaintext
-    Library
-    ├─ Library.Shared
-    ├─ Library.Domain
-    ├─ Library.Application
-    └─ Library.Infrastructure
-        └─ Library.Infrastructure.DateTimeProvider
-        └─ Library.Infrastructure.Persistence*
+Library
+├─ Library.Shared
+├─ Library.Domain
+├─ Library.Application
+└─ Library.Infrastructure
+    └─ Library.Infrastructure.DateTimeProvider
+    └─ Library.Infrastructure.Persistence*
 ```
 1. *Library.Infrastructure* 솔루션 디렉토리 아래 *Library.Infrastructure.Persistence* 프로젝트를 생성합니다.
 
@@ -146,15 +141,14 @@ builder.Services.AddDateTimeProvider(builder.Configuration);
 ## ApplicationDbContext.cs
 ---
 ```plaintext
-    ```plaintext
-    Library
-    ├─ Library.Shared
-    ├─ Library.Domain
-    ├─ Library.Application
-    └─ Library.Infrastructure
-        └─ Library.Infrastructure.DateTimeProvider
-        └─ Library.Infrastructure.Persistence
-            └─ ApplicationDbContext.cs*
+Library
+├─ Library.Shared
+├─ Library.Domain
+├─ Library.Application
+└─ Library.Infrastructure
+    └─ Library.Infrastructure.DateTimeProvider
+    └─ Library.Infrastructure.Persistence
+        └─ ApplicationDbContext.cs*
 ```
 ```csharp
 using Microsoft.EntityFrameworkCore;

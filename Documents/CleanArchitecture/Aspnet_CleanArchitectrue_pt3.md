@@ -671,3 +671,6 @@ internal sealed class CreateUserCommandValidator : AbstractValidator<CreateUserC
 10. `Handle(TCommand, CancellationToken)` 메서드를 실행하여 비즈니스 로직을 수행 후 `TResponse`를 Presentation Layer로 반환합니다.
 11. 정상적으로 완료되었다면 Presentation Layer는 User에게 *HTTP 200(OK)*을 `TResponse`와 함께 반환합니다.
     
+
+---
+# [ASP.NET 클린아키텍처 pt.4](/Documents/CleanArchitecture/Aspnet_CleanArchitectrue_pt4.html)

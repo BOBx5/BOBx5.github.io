@@ -138,7 +138,7 @@ Library
    * [Microsoft.EntityFrameworkCore.Design](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Design)
    * [Microsoft.EntityFrameworkCore.SqlServer](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer)
 
-## ApplicationDbContext
+## **ApplicationDbContext**
 ---
 ```plaintext
 Library
@@ -373,8 +373,7 @@ public class ApplicationDbContext
 >
 > 이를 보완하여 각각의 이벤트들을 독립적으로 처리할 수 있는 ***Outbox-Pattern*** 에 대해서는 이후에 소개하도록 하겠습니다.
 
-
-## Repository
+## **Repository**
 ---
 이제 도메인 레이어에 정의되어있는 Repository를 구현해봅시다.
 
@@ -614,40 +613,353 @@ public class RentRepository : IRentRepository
 }
 ```
 
-## Dependency Injection
+## **EntityConfiguration**
+---
+* EntityConfiguration은 EntityFrameworkCore의 FluentAPI를 통해 Entity의 구성을 정의하는 클래스입니다.
+* Domain 에서 설계한 Entity들을 실질적으로 어떻게 Database에 매핑하여 저장할지에 대한 방법을 정의합니다.
+
+> **Code-First** 방식의 설계도 가능합니다.
+> 
+> Configuration을 프로젝트의 코드로 매우 구체적으로(인덱스 등) 설계하고, Database의 구조를 Entity에 맞추어 설계하는 방식입니다.
+> 
+> .NET CLI의 EF 명령어를 통해 migration을 생성한 뒤, 이를 통해 Database를 생성 및 변경이 가능합니다. <br/>
+> *(본 예제에서는 다루지 않습니다.)*
+
+먼저 Persistence 루트경로에 *EntityConfiguration* 디렉토리를 생성해 줍니다.
+```plaintext
+Library
+├─ Library.Shared
+├─ Library.Domain
+├─ Library.Application
+└─ Library.Infrastructure
+    ├─ Library.Infrastructure.DateTimeProvider
+    └─ Library.Infrastructure.Persistence
+        ├─ ApplicationDbContext.cs
+        ├─ DependencyInjection.cs
+        ├─ Repositories
+        └─ EntityConfiguration*
+```
+
+이제 EF의 FluentAPI를 통해 Entity의 구성을 정의하는 `UserConfiguration`을 작성해봅시다.
+
+### UserConfiguration
+---
+```plaintext
+Library
+├─ Library.Shared
+├─ Library.Domain
+├─ Library.Application
+└─ Library.Infrastructure
+    ├─ Library.Infrastructure.DateTimeProvider
+    └─ Library.Infrastructure.Persistence
+        ├─ ApplicationDbContext.cs
+        ├─ DependencyInjection.cs
+        ├─ Repositories
+        └─ EntityConfiguration*
+            └─ UserConfiguration.cs*
+```
+*EntityConfiguration* 디렉토리에 `UserConfiguration.cs` 파일을 생성하고
+
+이제 Domain에서 정의한 `User` 엔티티를 DB에 맵핑하는 과정이 필요합니다.
+
+```csharp
+using Library.Domain.Aggregates.Users.Entities;
+using Library.Domain.Aggregates.Users.Enums;
+using Library.Domain.Aggregates.Users.ValueObjects;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace Library.Infrastructure.Persistence.EntityConfiguration;
+internal sealed class UserConfiguration : IEntityTypeConfiguration<User>
+{
+    public void Configure(EntityTypeBuilder<User> builder)
+    {
+        ...
+    }
+}
+```
+
+`...` 에 해당하는 부분에 `User` 엔티티의 구성을 정의합니다.
+
+1. 먼저 **테이블**을 설정해줍니다.
+
+    ```csharp
+    // 기본 Schema 인 경우 (e.g. [dbo].[User])
+    builder.ToTable("User");
+
+    // 다른 Schema 인 경우 (e.g. [Library].[User])
+    builder.ToTable("User", "Library");
+    ```
+
+2. 그 다음, **Primary Key**를 설정해줍니다.
+
+    ```csharp
+    builder.HasKey(user => user.Id);
+    ```
+
+3. 그리고 각각의 **Property**들을 설정합니다.
+
+    1. *ValueObject*로 정의한 `UserId` 타입의 `Id`를 설정해야합니다.
+
+        UserId의 특성들을 살펴보고, 특성에 맞는 설정 방법을 알아보겠습니다.
+
+        * 필수값입니다. = `NOT NULL` Column 
+            
+            ```csharp
+            builder.Property(user => user.Id)
+                .IsRequired(); // Not Null
+            ```
+        * 고정길이입니다. = `CHAR(36)` Column
+
+            ```csharp
+            builder.Property(user => user.Id)
+                .HasMaxLength(36) // GUID의 길이
+                .IsFixedLength(); // 고정길이
+            ```
+
+        * 내부적으로는 Guid 타입이나 C#에서는 `UserId`로 랩핑되어 있습니다.
+
+            ```csharp
+            builder.Property(user => user.Id)
+                .HasConversion( // C# Type ↔ DB Type간의 상호변환
+                    userId => userId.ToString(),
+                    dbValue => UserId.Parse(dbValue));
+            ```
+    2. 동일한 방식으로 `UserStatus` enum 값인 `Status`의 특성을 보면
+
+        * 필수값입니다.
+        * DB에는 `INT`로 저장됩니다.
+        * C#에서는 `UserStatus` enum으로 사용됩니다.
+
+        위 특성들을 적용하면 아래와 같습니다.
+
+        ```csharp
+        builder.Property(user => user.Status)
+            .IsRequired()
+            .HasConversion(
+                userStatus => (int)userStatus,
+                dbValue => (UserStatus)dbValue);
+        ```
+
+같은 방식으로 나머지 프로퍼티들에 대해서도 적용하면 다음과 같습니다.
+
+```csharp
+using Library.Domain.Aggregates.Users.Entities;
+using Library.Domain.Aggregates.Users.Enums;
+using Library.Domain.Aggregates.Users.ValueObjects;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace Library.Infrastructure.Persistence.EntityConfiguration;
+internal sealed class UserConfiguration : IEntityTypeConfiguration<User>
+{
+    public void Configure(EntityTypeBuilder<User> builder)
+    {
+        builder.ToTable("User");    
+        builder.HasKey(user => user.Id);
+
+        builder.Property(user => user.Id)
+            .IsRequired()
+            .HasMaxLength(36)
+            .IsFixedLength()
+            .HasConversion(
+                userId  => userId.ToString(),
+                dbValue => UserId.Parse(dbValue));
+
+        builder.Property(user => user.Name)
+            .IsRequired()
+            .HasMaxLength(50);
+
+        builder.Property(user => user.Status)
+            .IsRequired()
+            .HasConversion(
+                userStatus => (int)userStatus,
+                dbValue    => (UserStatus)dbValue);
+
+        builder.Property(user => user.Email)
+            .IsRequired(false)
+            .HasMaxLength(50);
+    }
+}
+```
+
+
+### BookConfiguration
+---
+```plaintext
+Library
+├─ Library.Shared
+├─ Library.Domain
+├─ Library.Application
+└─ Library.Infrastructure
+    ├─ Library.Infrastructure.DateTimeProvider
+    └─ Library.Infrastructure.Persistence
+        ├─ ApplicationDbContext.cs
+        ├─ DependencyInjection.cs
+        ├─ Repositories
+        └─ EntityConfiguration
+            ├─ UserConfiguration.cs
+            └─ BookConfiguration.cs*
+```
+```csharp
+using Library.Domain.Aggregates.Books.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace Library.Infrastructure.Persistence.EntityConfiguration;
+internal sealed class BookConfiguration : IEntityTypeConfiguration<Book>
+{
+    public void Configure(EntityTypeBuilder<Book> builder)
+    {
+        builder.ToTable("Book");
+        builder.HasKey(book => book.Id);
+
+        builder.Property(book => book.Id)
+            .IsRequired()
+            .HasMaxLength(36)
+            .IsFixedLength()
+            .HasConversion(
+                bookId  => bookId.ToString(),
+                dbValue => BookId.Parse(dbValue));
+
+        builder.Property(book => book.Title)
+            .IsRequired()
+            .HasMaxLength(50);
+
+        builder.Property(book => book.Author)
+            .IsRequired()
+            .HasMaxLength(50);
+
+        builder.Property(book => book.Quantity)
+            .IsRequired();
+    }
+}
+```
+
+
+
+### RentConfiguration
+---
+```plaintext
+Library
+├─ Library.Shared
+├─ Library.Domain
+├─ Library.Application
+└─ Library.Infrastructure
+    ├─ Library.Infrastructure.DateTimeProvider
+    └─ Library.Infrastructure.Persistence
+        ├─ ApplicationDbContext.cs
+        ├─ DependencyInjection.cs
+        ├─ Repositories
+        └─ EntityConfiguration
+            ├─ UserConfiguration.cs
+            ├─ BookConfiguration.cs
+            └─ RentConfiguration.cs*
+```
+```csharp
+using Library.Domain.Aggregates.Books.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace Library.Infrastructure.Persistence.EntityConfiguration;
+internal sealed class RentConfiguration : IEntityTypeConfiguration<Rent>
+{
+    public void Configure(EntityTypeBuilder<Rent> builder)
+    {
+        builder.ToTable("Rent");
+        builder.HasKey(rent => rent.Id);
+
+        builder.Property(rent => rent.Id)
+            .IsRequired()
+            .HasMaxLength(36)
+            .IsFixedLength()
+            .HasConversion(
+                rentId  => rentId.ToString(),
+                dbValue => RentId.Parse(dbValue));
+
+        builder.Property(rent => rent.UserId)
+            .IsRequired()
+            .HasMaxLength(36)
+            .IsFixedLength()
+            .HasConversion(
+                userId  => userId.ToString(),
+                dbValue => UserId.Parse(dbValue));
+
+        builder.Property(rent => rent.BookId)
+            .IsRequired()
+            .HasMaxLength(36)
+            .IsFixedLength()
+            .HasConversion(
+                bookId  => bookId.ToString(),
+                dbValue => BookId.Parse(dbValue));
+
+        builder.Property(rent => rent.BorrowedAt)
+            .IsRequired();
+
+        builder.Property(rent => rent.DueDate)
+            .IsRequired();
+
+        builder.Property(rent => rent.ReturnDate);
+    }
+}
+```
+
+### ApplicationDbContext
+---
+**ApplicationDbContext.cs**
+```csharp
+public class ApplicationDbContext 
+    : DbContext, IApplicationDbContext, IUnitOfWork
+{
+    ...
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+    }
+}
+```
+
+마지막으로 `IEntityTypeConfiguration<T>` 를 상속받는 class를 프로그램에서 어셈블리에서 자동으로 DbContext를 생성할 때 설정할 수 있도록 `OnModelCreating` 메서드를 오버라이드하여 설정합니다.
+
+## **Dependency Injection**
 ---
 
+```plaintext
+Library
+├─ Library.Shared
+├─ Library.Domain
+├─ Library.Application
+└─ Library.Infrastructure
+    ├─ Library.Infrastructure.DateTimeProvider
+    └─ Library.Infrastructure.Persistence
+        ├─ Repositories
+        ├─ ApplicationDbContext.cs
+        └─ DependencyInjection.cs*
+```
+```csharp
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
-1. Persistence 프로젝트를 DI 할 수 있도록 루트 경로에 `DependencyInjection.cs` 파일을 생성합니다.
-
-    ```plaintext
-    Library
-    ├─ Library.Shared
-    ├─ Library.Domain
-    ├─ Library.Application
-    └─ Library.Infrastructure
-        ├─ Library.Infrastructure.DateTimeProvider
-        └─ Library.Infrastructure.Persistence
-            ├─ Repositories
-            ├─ ApplicationDbContext.cs
-            └─ DependencyInjection.cs*
-    ```
-    ```csharp
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.DependencyInjection;
-
-    namespace LibrarySolution.Infrastructure.Persistence;
-    public static class DependencyInjection
+namespace LibrarySolution.Infrastructure.Persistence;
+public static class DependencyInjection
+{
+    
+    public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
     {
-        
-        public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
-        {
 
-        }
     }
-    ```
+}
+```
 
-2. `AddDbContext`를 통해 `ApplicationDbContext`를 등록합니다.
+1. 먼저, Persistence 프로젝트를 DI 할 수 있도록 루트 경로에 `DependencyInjection.cs` 파일을 생성합니다.
+
+2. `program.cs` 에서 간단한 메서드를 통해 Persistence를 DI 할 수 있도록 <br/> 
+`AddPersistence(this IServiceCollection services, IConfiguration configuration)` 메서드를 생성합니다.
+
+### IApplicationDbContext & IUnitOfWork
+---
+1. 먼저 EF가 DbContext를 사용할 수 있도록 등록합니다.
 
     ```csharp
     using Microsoft.EntityFrameworkCore;
@@ -668,7 +980,7 @@ public class RentRepository : IRentRepository
     }
     ```
 
-3. `ApplicationDbContext`를 사용할 수 있도록 등록합니다.
+2. `ApplicationDbContext`를 사용할 수 있도록 등록합니다.
 
     ```csharp
     using Microsoft.EntityFrameworkCore;
@@ -694,54 +1006,56 @@ public class RentRepository : IRentRepository
     ```
     > 💡 **`IApplicationDbContext`와 `IUnitOfWork`**
     > 
-    > 위와 같이 등록함으로써 동일한 **`ApplicationDbContext`** 인스턴스에 접근하지만
+    > `IApplicationDbContext`과 `IUnitOfWork` 모두 **`ApplicationDbContext`** 를 바라보도록 설정하여, 사실상 어느 인터페이스를 주입받든 동일한 인스턴스이지만,
     > 
-    > 사용하는 다른 클래스에서 `IApplicationDbContext`를 주입받느냐 `IUnitOfWork`를 주입받느냐에 따라 접근 범위가 달라집니다.
+    > *Injection* 받는 다른 클래스에서 `IApplicationDbContext`를 주입받느냐 `IUnitOfWork`를 주입받느냐에 따라 사용가능한 접근 범위가 달라집니다.
     > 
-    > `IApplicationDbContext`를 주입받는 경우 `DbSet<T>`에 접근하여, Entity의 상태값을 변형할 수 있도록 기능을 제공하지만 실질적으로 저장할 수 있는 `SaveChangesAsync`에는 접근할 수 없습니다.
+    > **`IApplicationDbContext`**를 주입받는 경우 `DbSet<T>`에 접근하여, Entity의 상태값을 변형할 수 있도록 기능을 제공하지만 실질적으로 저장할 수 있는 `SaveChangesAsync`에는 접근할 수 없습니다.
     >
-    > 반대로 `IUnitOfWork`는 Entity에 관해서는 아무런 접근을 할 수 없고 `SaveChangesAsync`를 통해 `DbContext.ChangeTracker`에 조작된것으로 표기된(`EntityStatus.Added`, `EntityStatus.Modified`, `EntityStatus.Deleted`)된 Entitiy에만 접근할 수 있게됩니다.
+    > 반대로 **`IUnitOfWork`**는 Entity에 관해서는 아무런 접근을 할 수 없고 `SaveChangesAsync`를 통해 `DbContext.ChangeTracker`에 조작된것으로 표기된(`EntityStatus.Added`, `EntityStatus.Modified`, `EntityStatus.Deleted`)된 Entitiy에만 접근할 수 있게됩니다.
     >
-    > 이러한 다형성을 통해 *ReadOnly*인 *IQuery*를 처리하는 *TQueryHandler*에서 `IApplicationDbContext`만을 주입받아 데이터의 조회만을 가능하도록 원천적으로 제한하고,
+    > 이러한 다형성을 통해 *ReadOnly*인 *IQuery*를 처리하는 *TQueryHandler*에서 `IApplicationDbContext`만을 주입받아 데이터의 조회만 가능하도록 원천적으로 제한하고,
     >
-    > *ICommand*를 처리하는 *TCommandHandler*에서는 `IUnitOfWork`를 함께 주입받아 `SaveChangesAsync`를 통해 데이터를 저장할 수 있도록 구현할 수 있도록 합니다.
+    > *ICommand*를 처리하는 *TCommandHandler*에서는 `IUnitOfWork`를 함께 주입받아 `SaveChangesAsync`를 통해 데이터를 저장도 할 수 있도록 구현할 수 있도록 합니다.
 
-
-# EntityConfiguration
+### Repository
 ---
-* EntityConfiguration은 EntityFrameworkCore의 FluentAPI를 통해 Entity의 구성을 정의하는 클래스입니다.
-* Domain 에서 설계한 Entity들을 실질적으로 어떻게 Database에 매핑하여 저장할지에 대한 방법을 정의합니다.
+```csharp
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
-> **Db-First** 방식의 설계
-> 
-> Configuration을 프로젝트 레벨에서 매우 구체적으로(인덱스 등) 설계하고, Database의 구조를 Entity에 맞추어 설계하는 방식입니다.
->
-> .NET CLI의 EF 명령어를 통해 migration을 생성한 뒤, 이를 통해 Database를 생성 및 변경이 가능합니다. <br/>
-*(본 예제에서는 다루지 않습니다.)*
+namespace LibrarySolution.Infrastructure.Persistence;
+public static class DependencyInjection
+{
+    public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddDbContext<ApplicationDbContext>((serviceProvider, options) =>
+        {
+            options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+        });
 
-## UserConfiguration
+        services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<ApplicationDbContext>());
+        services.AddScoped<IUnitOfWork>(provider => provider.GetRequiredService<ApplicationDbContext>());
+
+        services.AddScoped<IBookRepository, BookRepository>();
+        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IRentRepository, RentRepository>();            
+
+        return services;
+    }
+}
+```
+
+# **종합**
 ---
-작성 중..
 
-
-## BookConfiguration
----
-작성 중..
-
-## RentConfiguration
----
-작성 중..
-
-
-
-# 종합
----
-
-* [DateTimeProvider](#datetimeproivider) 예제를 통해 Infrastructure Layer의 구현하는 방법을 알아보았습니다.
-* 
-
-
-
+* [DateTimeProvider](#datetimeproivider) 예제를 통해 Infrastructure Layer의 구현하는 통상적인 방법을 알아보았습니다.
+* 데이터의 영속성을 담당하는 *Persistence* 프로젝트의 설계 방법을 알아보았습니다.
+  * [ApplicationDbContext](#applicationdbcontext)를 통해 Persistence Layer의 구현하는 방법을 알아보았습니다.
+  * [Repository](#repository)를 통해 Domain Layer의 Repository를 구현하는 방법을 알아보았습니다.
+  * [EntityConfiguration](#entityconfiguration)을 통해 Domain Layer의 Entity를 DB에 맵핑하는 방법을 알아보았습니다.
+  * 
 
 
 # 다음 단계

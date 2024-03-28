@@ -419,10 +419,10 @@ public class ApplicationDbContext
     namespace Library.Infrastructure.Persistence.Repositories;
     public class UserRepository : IUserRepository
     {
-        private readonly IApplicationDbContext _context;
+        private readonly DbSet<User> _users;
         public UserRepository(IApplicationDbContext context)
         {
-            _context = context;
+            _users = context.Users;
         }
     }
     ```
@@ -1050,17 +1050,23 @@ public static class DependencyInjection
 # **종합**
 ---
 
-* [DateTimeProvider](#datetimeproivider) 예제를 통해 Infrastructure Layer의 구현하는 통상적인 방법을 알아보았습니다.
-* 데이터의 영속성을 담당하는 *Persistence* 프로젝트의 설계 방법을 알아보았습니다.
-  * [ApplicationDbContext](#applicationdbcontext)를 통해 Persistence Layer의 구현하는 방법을 알아보았습니다.
-  * [Repository](#repository)를 통해 Domain Layer의 Repository를 구현하는 방법을 알아보았습니다.
-  * [EntityConfiguration](#entityconfiguration)을 통해 Domain Layer의 Entity를 DB에 맵핑하는 방법을 알아보았습니다.
-  * 
+* [DateTimeProvider](#datetimeproivider) 
+  * Application Layer에 정의(*Define*)된 *interface*를 <br/>
+    Infrastructure Layer에서 구현(*Implement*)하는 방법
+* [Persistence](#persistence-설계)
+  * [ApplicationDbContext](#applicationdbcontext)
+    * [IApplicationDbContext](#iapplicationdbcontext)
+      * DbContext를 *ReadOnly*하게 접근하는 방법
+    * [IUnitOfWork](#iunitofwork)
+      * Entity의 변경사항을 저장하는 방법
+      * Entity에 등록된 DomainEvent를 발행하는 방법
+      * 서로 분리되어 서로를 알 수 없는 *Aggreagte*들의 변경사항을 트랜잭셔널하게 처리하는 방법
+  * [Repository](#repository)
+    * Domain Layer에 정의된 *I...Repository*를 EF를 통해 테이블과 연동하여 구현하는 방법
+  * [EntityConfiguration](#entityconfiguration)
+    * Domain Layer의 Entity를 DB스키마에 맞게 맵핑하는 방법
 
 
 # 다음 단계
 ---
-작성 중..
-<!-- 
-[4. Presentation Layer 설계](/Documents/CleanArchitecture/Aspnet_CleanArchitectrue_pt5.html) 
--->
+[4. Presentation Layer 설계](/Documents/CleanArchitecture/Aspnet_CleanArchitectrue_pt5.html)

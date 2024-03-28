@@ -201,4 +201,4 @@ MVC로 구현하고자 하는 경우 부가적으로 `View`의 설계가 필요�
 
 # 다음 단계
 ---
-[2. Domain Layer 설계하기](/Documents/CleanArchitecture/Aspnet_CleanArchitectrue_pt2.html)
+[2. Domain Layer](/Documents/CleanArchitecture/Aspnet_CleanArchitectrue_pt2.html)

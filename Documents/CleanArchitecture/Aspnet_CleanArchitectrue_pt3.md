@@ -1,5 +1,5 @@
 ---
-title: "3. Application Layer 설계하기"
+title: "3. Application Layer"
 description: <span>&#x23;ASP.NET &#x23;CleanArchitecture</span>
 layout: libdoc/page
 
@@ -664,4 +664,4 @@ public class CreateUserCommandHandler
 
 # 다음 단계
 ---
-[3. Infrastructure Layer 설계하기](/Documents/CleanArchitecture/Aspnet_CleanArchitectrue_pt4.html)
+[3. Infrastructure Layer](/Documents/CleanArchitecture/Aspnet_CleanArchitectrue_pt4.html)

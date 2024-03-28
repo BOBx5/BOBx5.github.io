@@ -1,5 +1,5 @@
 ---
-title: "4. Infrastructure Layer 설계하기"
+title: "4. Infrastructure Layer"
 description: <span>&#x23;ASP.NET &#x23;CleanArchitecture</span>
 layout: libdoc/page
 
@@ -1069,4 +1069,4 @@ public static class DependencyInjection
 
 # 다음 단계
 ---
-[4. Presentation Layer 설계](/Documents/CleanArchitecture/Aspnet_CleanArchitectrue_pt5.html)
+[4. Presentation Layer](/Documents/CleanArchitecture/Aspnet_CleanArchitectrue_pt5.html)

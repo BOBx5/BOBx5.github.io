@@ -1,5 +1,5 @@
 ---
-title: "2. Domain Layer 설계하기"
+title: "2. Domain Layer"
 description: <span>&#x23;ASP.NET &#x23;CleanArchitecture</span>
 layout: libdoc/page
 
@@ -872,4 +872,4 @@ Console.WriteLine(userId == bookId); // 컴파일 에러 발생
 
 # 다음 단계
 ---
-[3. Application Layer 설계하기](/Documents/CleanArchitecture/Aspnet_CleanArchitectrue_pt3.html)
+[3. Application Layer](/Documents/CleanArchitecture/Aspnet_CleanArchitectrue_pt3.html)

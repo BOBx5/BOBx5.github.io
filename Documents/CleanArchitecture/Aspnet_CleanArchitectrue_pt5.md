@@ -1,5 +1,5 @@
 ---
-title: "4. Presentation Layer 설계하기"
+title: "4. Presentation Layer"
 description: <span>&#x23;ASP.NET &#x23;CleanArchitecture</span>
 layout: libdoc/page
 
@@ -270,7 +270,7 @@ app.Run();
 
     > 💡 참조
     >
-    > [3. Application Layer 설계하기 - DependencyInjection](/Documents/CleanArchitecture/Aspnet_CleanArchitectrue_pt3.html#dependency-injection)
+    > [3. Application Layer - DependencyInjection](/Documents/CleanArchitecture/Aspnet_CleanArchitectrue_pt3.html#dependency-injection)
 
 2. **`builder.Services.AddPersistence(builder.Configuration);`**
 
@@ -278,7 +278,7 @@ app.Run();
 
     > 💡 참조
     >
-    > [4. Infrastructure Layer 설계하기 - Persistence - DependencyInjection](/Documents/CleanArchitecture/Aspnet_CleanArchitectrue_pt4.html#dependency-injection-1)
+    > [4. Infrastructure Layer - Persistence - DependencyInjection](/Documents/CleanArchitecture/Aspnet_CleanArchitectrue_pt4.html#dependency-injection-1)
 
 3. **`builder.Services.AddDateTimeService(builder.Configuration);`**
 
@@ -286,7 +286,7 @@ app.Run();
 
     > 💡 참조
     >
-    > [4. Infrastructure Layer 설계하기 - DateTimeProvider - DependencyInjection](/Documents/CleanArchitecture/Aspnet_CleanArchitectrue_pt4.html#dependency-injection)
+    > [4. Infrastructure Layer - DateTimeProvider - DependencyInjection](/Documents/CleanArchitecture/Aspnet_CleanArchitectrue_pt4.html#dependency-injection)
     
 4. **`app.UseValidationExceptionMiddleware();`**
 
@@ -294,7 +294,7 @@ app.Run();
 
     > 💡 참조
     >
-    > [5. Presentation Layer 설계하기 - Middlewares](/Documents/CleanArchitecture/Aspnet_CleanArchitectrue_pt5.html#middlewares)
+    > [5. Presentation Layer - Middlewares](/Documents/CleanArchitecture/Aspnet_CleanArchitectrue_pt5.html#middlewares)
 
 
 

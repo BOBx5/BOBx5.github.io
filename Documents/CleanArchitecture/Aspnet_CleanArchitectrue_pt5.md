@@ -91,12 +91,138 @@ public class UsersController : ControllerBase
 4. 비즈니스 로직에서 모든 작업이 정상적으로 완료되면 **`CreateUserCommandResponse`**를 반환합니다.
 5. Presentation Layer에서는 **HTTP 200 (OK)**와 함께 **`CreateUserCommandResponse`**를 *Response*합니다.
 
+
+# **Middlewares**
+---
+
+## ValidationExceptionMiddleware
+
+자, 이제 `ValidationException`이 *throw* 되는 경우 **HTTP 400 (BadRequest)** 형태로 말아 *HTTP Response*를 생성하는 미들웨어를 만들어봅시다.
+
+```plaintext
+Library
+├─ Library.Shared
+├─ Library.Domain
+├─ Library.Application
+├─ Library.Infrastructure
+└─ Library.Presentaion
+    └─ Library.Presentaion.Api
+        ├─ Controllers
+        └─ Middlewares*
+            └─ ValidationExceptionMiddleware.cs*
+```
+```csharp
+public class ValidationExceptionMiddleware : IMiddleware
+{
+    public async Task InvokeAsync(HttpContext context, RequestDelegate next)
+    {
+        ...
+    }
+}
+```
+
+`IMiddleware`를 상속받게 되면 `Task InvokeAsync(HttpContext context, RequestDelegate next)` 메서드를 구현해야 합니다.
+
+```csharp
+public async Task InvokeAsync(HttpContext context, RequestDelegate next)
+{
+    try
+    {
+        await next(context);
+    }
+    catch (ValidationException ex)
+    {
+        ...
+    }
+}
+```
+
+기본적인 처리 방식은 `await next(context)`를 호출함으로써 다음 미들웨어로 요청을 전달하는 방식입니다.
+
+하지만 `ValidationException`이 `await next(context)`를 실행하던 중 *throw* 된 Exception이므로
+
+이제 여러분은 `ValidationException`이 발생하는 경우의 *catch*에 대한 처리를 아래와 같이 구현하면 됩니다.
+
+```csharp
+catch (ValidationException ex)
+{
+    // 1. 이미 다른 미들웨어 등에 의해 Response가 시작된 경우 예외 처리
+    if (context.Response.HasStarted)
+        throw;
+
+    // 2. HTTP 표준 ProblemDetails 형태로 변환 (참조: https://datatracker.ietf.org/doc/html/rfc7807)
+    ProblemDetails problemDetails = new()
+    {
+        Type = "https://datatracker.ietf.org/doc/html/rfc7807", // 에러 관련 자체 도큐먼트가 있는 경우 URL로 변경
+        Title = "Validation error",
+        Detail = "One or more validation errors has occurred",
+        Status = StatusCodes.Status400BadRequest,
+        Instance = context.Request.Path,
+    };
+
+    // 3. 오류를 추적하기 위한 TraceId 추가
+    problemDetails.Extensions["traceId"] = context.TraceIdentifier;
+
+    // 4. ValidationException의 Errors를 ProblemDetails에 추가
+    if (ex.Errors is not null)
+    {
+        problemDetails.Extensions["invalid-params"] = ex.Errors
+            .GroupBy(failure => failure.PropertyName,
+                     failure => failure.ErrorMessage,
+            (propertyName, errorMessages) => new
+            {
+                Key = propertyName,
+                Values = errorMessages.Distinct().ToArray() // 중복 제거
+            })
+            .ToDictionary(x => x.Key, x => x.Values);
+    }
+
+    // 5. HTTP Status Code 설정
+    context.Response.StatusCode = problemDetails.Status.Value;
+
+    // 6. Content-Type 설정
+    context.Response.ContentType = MediaTypeNames.Application.ProblemJson;
+
+    // 7. ProblemDetails를 JSON으로 변환하여 Response Body에 추가
+    await context.Response.WriteAsync(result);
+}
+```
+
+이제 생성한 `ValidationExceptionMiddleware`를 사용하기 편리하도록 Extension Method를 생성합니다.
+
+```csharp
+namespace Library.Presentaion.Api.Middlewares
+
+public class ValidationExceptionMiddleware : IMiddleware
+{
+    public async Task InvokeAsync(HttpContext context, RequestDelegate next)
+    {
+        try
+        {
+            ...
+        }
+        catch (ValidationException ex)
+        {
+            ...
+        }
+    }
+}
+public static class ValidationExceptionMiddlewareExtensions
+{
+    public static IApplicationBuilder UseValidationExceptionMiddleware(this IApplicationBuilder builder)
+    {
+        return builder.UseMiddleware<ValidationExceptionMiddleware>();
+    }
+}
+```
+
+이제 `ValidationExceptionMiddleware`를 사용하기 위한 준비가 완료되었습니다.
+
+
 # **Dependency Injection**
 ---
-API를 운영하기 위한 모든 준비가 끝났습니다.
 
-이제 남은건 `program.cs` 파일에 DI를 설정하는 것입니다.
-
+{% include codeHeader.html %}
 ```csharp
 using LibrarySolution.Application;
 using LibrarySolution.Controller.Api.Middlewares;
@@ -131,6 +257,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// 4. Middleware - ValidationException
+app.UseValidationExceptionMiddleware();
+
 app.UseAuthorization();
 app.MapControllers();
 app.Run();
@@ -160,6 +290,18 @@ app.Run();
     >
     > [4. Infrastructure Layer 설계하기 - DateTimeProvider - DependencyInjection](/Documents/CleanArchitecture/Aspnet_CleanArchitectrue_pt4.html#dependency-injection)
     
+4. **`app.UseValidationExceptionMiddleware();`**
+
+    Middleware를 사용하기 위한 DI 설정을 추가합니다.
+
+    > 💡 참조
+    >
+    > [5. Presentation Layer 설계하기 - Middlewares](/Documents/CleanArchitecture/Aspnet_CleanArchitectrue_pt5.html#middlewares)
+
+
+
+API를 운영하기 위한 모든 준비가 끝났습니다.
+
 
 
 # 다음 단계

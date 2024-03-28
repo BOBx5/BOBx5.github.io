@@ -221,8 +221,6 @@ public static class ValidationExceptionMiddlewareExtensions
 
 # **Dependency Injection**
 ---
-
-{% include codeHeader.html %}
 ```csharp
 using LibrarySolution.Application;
 using LibrarySolution.Controller.Api.Middlewares;

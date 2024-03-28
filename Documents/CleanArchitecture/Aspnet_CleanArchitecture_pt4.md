@@ -1069,4 +1069,4 @@ public static class DependencyInjection
 
 # 다음 단계
 ---
-[4. Presentation Layer](/Documents/CleanArchitecture/Aspnet_CleanArchitectrue_pt5.html)
+[4. Presentation Layer](/Documents/CleanArchitecture/Aspnet_CleanArchitecture_pt5.html)

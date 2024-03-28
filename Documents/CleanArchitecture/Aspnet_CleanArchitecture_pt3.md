@@ -664,4 +664,4 @@ public class CreateUserCommandHandler
 
 # 다음 단계
 ---
-[3. Infrastructure Layer](/Documents/CleanArchitecture/Aspnet_CleanArchitectrue_pt4.html)
+[3. Infrastructure Layer](/Documents/CleanArchitecture/Aspnet_CleanArchitecture_pt4.html)

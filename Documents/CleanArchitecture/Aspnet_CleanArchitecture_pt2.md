@@ -872,4 +872,4 @@ Console.WriteLine(userId == bookId); // 컴파일 에러 발생
 
 # 다음 단계
 ---
-[3. Application Layer](/Documents/CleanArchitecture/Aspnet_CleanArchitectrue_pt3.html)
+[3. Application Layer](/Documents/CleanArchitecture/Aspnet_CleanArchitecture_pt3.html)

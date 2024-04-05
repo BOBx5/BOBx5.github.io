@@ -33,13 +33,16 @@ order: 903
     ```
     ```csharp
     namespace Library.Application.Abstractions.Commands;
-    public interface ICommand : MediatR.IRequest<MediatR.Unit>
+    public interface ICommandHandler<in TCommand> 
+        where TCommand : ICommand
     {
 
     }
-    public interface ICommand<out TResponse> : MediatR.IRequest<TResponse>
+    public interface ICommandHandler<in TCommand, TResponse> 
+        where TCommand : ICommand<TResponse>
+        where TResponse : class
     {
-
+        
     }
     ```
     * [MediatR](https://github.com/jbogard/MediatR)의 `IRequest` 인터페이스를 상속는 `ICommand` 인터페이스를 선언합니다.
@@ -61,13 +64,14 @@ order: 903
     ```
     ```csharp
     namespace Library.Application.Abstractions.Commands;
-    public interface ICommandHandler<TCommand>
-        : MediatR.IRequestHandler<TCommand, MediatR.Unit> where TCommand : ICommand
+    public interface ICommandHandler<in TCommand>
+        : MediatR.IRequestHandler<TCommand> where TCommand : ICommand
     {
 
     }
     public interface ICommandHandler<in TCommand, TResponse>
-        : MediatR.IRequestHandler<TCommand, TResponse> where TCommand : ICommand<TResponse>
+        : MediatR.IRequestHandler<TCommand, TResponse> 
+        where TCommand : ICommand<TResponse>
     {
 
     }
@@ -91,7 +95,10 @@ order: 903
     ```
     ```csharp
     namespace Library.Application.Abstractions.Queries;
-    public interface IQuery<out TResponse> : MediatR.IRequest<TResponse>
+    public interface IQueryHandler<TQuery, TResponse> 
+        : MediatR.IRequestHandler<TQuery, TResponse> 
+        where TQuery : IQuery<TResponse>
+        where TResponse : class
     {
 
     }
